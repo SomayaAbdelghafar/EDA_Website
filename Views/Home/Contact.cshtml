@@ -5,6 +5,8 @@
     ViewData["Description"] = "تواصل مع شركة إيدا للتكييف والتبريد في جدة: الهاتف، الواتساب، البريد الإلكتروني، والعنوان – تقاطع شارع صاري مع طريق المدينة.";
     ViewData["HeaderImage"] = "/images/site/chillers.jpg";
     var success = TempData["ContactSuccess"] as string;
+    // Static preview on GitHub Pages has no server to receive the form (see tools/export_static.py)
+    var staticPreview = Configuration.GetValue<bool>("StaticPreview");
 }
 <partial name="_PageHeader" />
 
@@ -54,6 +56,14 @@
                         <div class="alert alert-success d-flex gap-2 align-items-start" role="alert">
                             <i class="bi bi-check-circle-fill fs-5"></i>
                             <div>شكرًا لك يا @success، تم استلام طلبك بنجاح وسنتواصل معك قريبًا. للحالات العاجلة يمكنك الاتصال بنا مباشرة.</div>
+                        </div>
+                    }
+
+                    @if (staticPreview)
+                    {
+                        <div class="alert alert-info d-none gap-2 align-items-start" role="alert" id="previewNotice">
+                            <i class="bi bi-info-circle-fill fs-5"></i>
+                            <div>هذه نسخة عرض تجريبية من الموقع، لذلك لا يتم إرسال النموذج حاليًا وسيعمل بعد إطلاق الموقع رسميًا. يمكنك إرسال طلبك الآن عبر زر واتساب.</div>
                         </div>
                     }
 

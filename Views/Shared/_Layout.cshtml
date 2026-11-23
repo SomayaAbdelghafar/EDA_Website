@@ -13,6 +13,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#062E6C" />
+    @if (Configuration.GetValue<bool>("StaticPreview"))
+    {
+        @* Static preview copy on GitHub Pages: keep it out of search results until the real site launches *@
+        <meta name="robots" content="noindex, nofollow" />
+    }
     <meta name="description" content="@description" />
     <meta property="og:title" content="@ViewData["Title"] | @CompanyData.NameAr" />
     <meta property="og:description" content="@description" />

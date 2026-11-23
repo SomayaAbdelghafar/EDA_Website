@@ -1,0 +1,67 @@
+# Publishes a static preview of the site to GitHub Pages on every push to master.
+# GitHub Pages cannot run ASP.NET, so the site is started here and saved as static
+# HTML by tools/export_static.py. The contact form does not submit in this preview.
+#
+# One-time setup: repo Settings -> Pages -> Build and deployment -> Source: "GitHub Actions".
+name: Deploy preview to GitHub Pages
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '10.0.x'
+
+      - id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Publish site
+        run: dotnet publish EDA_Website.csproj -c Release -o publish
+
+      - name: Start site
+        working-directory: publish
+        env:
+          ASPNETCORE_ENVIRONMENT: Production
+          StaticPreview: 'true'
+        run: |
+          nohup dotnet EDA_Website.dll --urls http://127.0.0.1:5080 > ../server.log 2>&1 &
+          for i in $(seq 1 30); do
+            curl -sf -o /dev/null http://127.0.0.1:5080/ && exit 0
+            sleep 1
+          done
+          cat ../server.log
+          exit 1
+
+      - name: Export static pages
+        run: python3 tools/export_static.py --source http://127.0.0.1:5080 --out _site --base-path "${{ steps.pages.outputs.base_path }}"
+
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -79,4 +79,19 @@
             window.open("https://wa.me/" + waButton.dataset.wa + "?text=" + encodeURIComponent(lines.join("\n")), "_blank", "noopener");
         });
     }
+
+    // ---------- Static preview (GitHub Pages): no server to post the form to ----------
+    // #previewNotice is only rendered when the site runs with StaticPreview=true
+    var previewNotice = document.getElementById("previewNotice");
+    var previewForm = document.getElementById("contactForm");
+    if (previewNotice && previewForm) {
+        previewForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            var $ = window.jQuery;
+            if ($ && $.fn.valid && !$(previewForm).valid()) return;
+            previewNotice.classList.remove("d-none");
+            previewNotice.classList.add("d-flex");
+            previewNotice.scrollIntoView({ behavior: "smooth", block: "center" });
+        });
+    }
 })();
