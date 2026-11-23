@@ -1,0 +1,94 @@
+@{
+    ViewData["Title"] = "خدماتنا";
+    ViewData["Subtitle"] = "حلول تكييف وتبريد متكاملة: تصميم، توريد، تركيب، تشغيل وصيانة.";
+    ViewData["Description"] = "خدمات شركة إيدا للتكييف والتبريد: أنظمة التهوية المركزية، المكيفات الشباك والسبليت، التكييف المركزي والباكدج، صناعة مجاري الهواء، تشغيل الأنظمة العملاقة، وعقود الصيانة.";
+    ViewData["HeaderImage"] = "/images/site/technician.jpg";
+    var images = new[] { "/images/site/rooftop.jpg", "/images/site/about-unit.jpg", "/images/site/hero.jpg",
+                         "/images/projects/al-hijrain-village/4.jpg", "/images/site/chillers.jpg", "/images/site/technician.jpg" };
+}
+<partial name="_PageHeader" />
+
+<!-- Quick index -->
+<section class="eda-section pb-0">
+    <div class="container">
+        <div class="eda-service-index">
+            @foreach (var s in CompanyData.Services)
+            {
+                <a href="#@s.Slug"><i class="bi @s.Icon"></i><span>@s.Title</span></a>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- Service details -->
+<section class="eda-section">
+    <div class="container">
+        @for (var i = 0; i < CompanyData.Services.Count; i++)
+        {
+            var s = CompanyData.Services[i];
+            <article class="eda-service-row" id="@s.Slug">
+                <div class="row g-4 g-lg-5 align-items-center">
+                    <div class="col-lg-5 @(i % 2 == 1 ? "order-lg-2" : "")">
+                        <img src="@images[i % images.Length]" alt="@s.Title" class="img-fluid rounded-4 shadow-sm eda-cover" loading="lazy" />
+                    </div>
+                    <div class="col-lg-7">
+                        <span class="eda-service-num">0@(i + 1)</span>
+                        <h2 class="eda-title"><i class="bi @s.Icon text-success"></i> @s.Title</h2>
+                        <p>@s.Description</p>
+                        <ul class="eda-checklist">
+                            @foreach (var point in s.Points)
+                            {
+                                <li>@point</li>
+                            }
+                        </ul>
+                        <a class="btn btn-outline-primary" asp-controller="Home" asp-action="Contact" asp-route-service="@s.Title">اطلب هذه الخدمة <i class="bi bi-arrow-left"></i></a>
+                    </div>
+                </div>
+            </article>
+        }
+    </div>
+</section>
+
+<!-- Process -->
+<section class="eda-section eda-section-alt">
+    <div class="container">
+        <div class="eda-section-head">
+            <span class="eda-eyebrow">آلية العمل</span>
+            <h2>كيف ننفذ مشروعك؟</h2>
+            <p>منهجية علمية واضحة من أول زيارة حتى ما بعد التسليم.</p>
+        </div>
+        <ol class="eda-process">
+            @for (var i = 0; i < CompanyData.Process.Count; i++)
+            {
+                var step = CompanyData.Process[i];
+                <li>
+                    <span class="eda-process-icon"><i class="bi @step.Icon"></i><b>@(i + 1)</b></span>
+                    <h3>@step.Title</h3>
+                    <p>@step.Description</p>
+                </li>
+            }
+        </ol>
+    </div>
+</section>
+
+<!-- Sectors -->
+<section class="eda-section">
+    <div class="container">
+        <div class="eda-section-head">
+            <span class="eda-eyebrow">القطاعات</span>
+            <h2>نخدم مختلف أنواع المنشآت</h2>
+        </div>
+        <div class="eda-sectors">
+            <div><i class="bi bi-house-door"></i>الفلل والقصور</div>
+            <div><i class="bi bi-buildings"></i>الأبراج السكنية</div>
+            <div><i class="bi bi-moon-stars"></i>المساجد</div>
+            <div><i class="bi bi-shop"></i>المولات والمحلات</div>
+            <div><i class="bi bi-bank"></i>البنوك والمكاتب</div>
+            <div><i class="bi bi-cup-hot"></i>المطاعم</div>
+            <div><i class="bi bi-film"></i>دور السينما والقاعات</div>
+            <div><i class="bi bi-building-gear"></i>الجهات الحكومية والمصانع</div>
+        </div>
+    </div>
+</section>
+
+<partial name="_CtaBand" />

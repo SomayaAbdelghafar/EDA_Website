@@ -1,0 +1,17 @@
+<section class="eda-section eda-section-alt">
+    <div class="container">
+        <div class="eda-section-head">
+            <span class="eda-eyebrow">شركاء النجاح</span>
+            <h2>عملاء نفتخر بثقتهم بنا</h2>
+            <p>نخدم كبرى العلامات التجارية والمجمعات والجهات الحكومية في المملكة.</p>
+        </div>
+        <div class="eda-clients">
+            @foreach (var c in CompanyData.Clients)
+            {
+                <div class="eda-client" title="@c.Name">
+                    <img src="@c.Logo" alt="@c.Name" loading="lazy" />
+                </div>
+            }
+        </div>
+    </div>
+</section>

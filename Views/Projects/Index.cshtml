@@ -1,0 +1,57 @@
+@model IReadOnlyList<Project>
+@{
+    var selected = ViewData["Category"] as ProjectCategory?;
+    ViewData["Title"] = "سابقة الأعمال";
+    ViewData["Subtitle"] = selected is null
+        ? "مشاريع التكييف والتبريد وأعمال الصيانة التي نفذناها في مختلف مدن المملكة."
+        : CompanyData.CategoryDescription(selected.Value);
+    ViewData["Description"] = "سابقة أعمال شركة إيدا للتكييف والتبريد: مشاريع تكييف مركزي، صيانة بضمان TRANE، وأعمال صيانة للمولات والمحلات في جدة ومكة والمدينة وجازان والطائف.";
+    ViewData["HeaderImage"] = "/images/site/services-bg.jpg";
+}
+<partial name="_PageHeader" />
+
+<section class="eda-section">
+    <div class="container">
+        <nav class="eda-filter" aria-label="تصنيف المشاريع">
+            <a class="@(selected is null ? "active" : "")" asp-action="Index">الكل <span>@CompanyData.Projects.Count</span></a>
+            @foreach (var c in Enum.GetValues<ProjectCategory>())
+            {
+                <a class="@(selected == c ? "active" : "")" asp-action="Index" asp-route-category="@CompanyData.CategorySlug(c)">
+                    @CompanyData.CategoryTitle(c) <span>@CompanyData.Projects.Count(p => p.Category == c)</span>
+                </a>
+            }
+        </nav>
+
+        @if (selected is null)
+        {
+            @foreach (var c in Enum.GetValues<ProjectCategory>())
+            {
+                var group = Model.Where(p => p.Category == c).ToList();
+                <div class="eda-project-group">
+                    <div class="eda-group-head">
+                        <h2><span>@((int)c + 1)</span> @CompanyData.CategoryTitle(c)</h2>
+                        <p>@CompanyData.CategoryDescription(c)</p>
+                    </div>
+                    <div class="row g-4">
+                        @foreach (var p in group)
+                        {
+                            <div class="col-sm-6 col-lg-4"><partial name="_ProjectCard" model="p" /></div>
+                        }
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="row g-4">
+                @foreach (var p in Model)
+                {
+                    <div class="col-sm-6 col-lg-4"><partial name="_ProjectCard" model="p" /></div>
+                }
+            </div>
+        }
+    </div>
+</section>
+
+<partial name="_Clients" />
+<partial name="_CtaBand" />

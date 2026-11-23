@@ -1,0 +1,30 @@
+@*
+    Page banner. Pass ViewData:
+      "Title"        – heading (already set by every page)
+      "Subtitle"     – optional lead text
+      "HeaderImage"  – optional background image URL
+      "Breadcrumb"   – optional (string label, string url) parent crumb
+*@
+@{
+    var image = ViewData["HeaderImage"] as string ?? "/images/site/rooftop.jpg";
+    var parent = ViewData["Breadcrumb"] as (string Label, string Url)?;
+}
+<section class="eda-page-header" style="--bg:url('@image')">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">الرئيسية</a></li>
+                @if (parent is not null)
+                {
+                    <li class="breadcrumb-item"><a href="@parent.Value.Url">@parent.Value.Label</a></li>
+                }
+                <li class="breadcrumb-item active" aria-current="page">@ViewData["Title"]</li>
+            </ol>
+        </nav>
+        <h1>@ViewData["Title"]</h1>
+        @if (ViewData["Subtitle"] is string subtitle)
+        {
+            <p class="lead mb-0">@subtitle</p>
+        }
+    </div>
+</section>

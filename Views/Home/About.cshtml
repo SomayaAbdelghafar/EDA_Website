@@ -1,0 +1,139 @@
+@{
+    ViewData["Title"] = "من نحن";
+    ViewData["Subtitle"] = "نقدم أفضل تكنولوجيا التكييف والتبريد لعملائنا في جميع أنحاء المملكة العربية السعودية.";
+    ViewData["Description"] = "تعرف على شركة إيدا للتكييف والتبريد: من نحن، قيمنا، الهيكل التنظيمي، والسجل التجاري وشهادة التسجيل الضريبي.";
+    ViewData["HeaderImage"] = "/images/site/rooftop.jpg";
+}
+<partial name="_PageHeader" />
+
+<!-- Who we are -->
+<section class="eda-section">
+    <div class="container">
+        <div class="row g-4 g-lg-5 align-items-center">
+            <div class="col-lg-6 order-lg-2">
+                <img src="~/images/site/about-unit.jpg" alt="وحدة تكييف" class="img-fluid rounded-4 shadow eda-cover" loading="lazy" />
+            </div>
+            <div class="col-lg-6">
+                <span class="eda-eyebrow">من نحن؟</span>
+                <h2 class="eda-title">@CompanyData.NameAr</h2>
+                <p>@CompanyData.AboutIntro</p>
+                <p>@CompanyData.AboutDesign</p>
+                <p class="mb-0">@CompanyData.AboutSupply</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Market position -->
+<section class="eda-section eda-section-alt">
+    <div class="container">
+        <div class="row g-4 g-lg-5 align-items-center">
+            <div class="col-lg-5">
+                <div class="eda-gallery-duo">
+                    <img src="~/images/site/van.jpg" alt="سيارة خدمة إيدا" loading="lazy" />
+                    <img src="~/images/site/truck.jpg" alt="فريق إيدا في موقع العمل" loading="lazy" />
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <span class="eda-eyebrow">مكانتنا</span>
+                <h2 class="eda-title">موقع متقدم في سوق التكييف بالمملكة</h2>
+                <p>@CompanyData.AboutPosition</p>
+                <div class="row g-3 mt-2">
+                    <div class="col-6 col-md-3"><div class="eda-mini-stat"><strong>+@CompanyData.Projects.Count</strong><span>مشروع</span></div></div>
+                    <div class="col-6 col-md-3"><div class="eda-mini-stat"><strong>+@CompanyData.Clients.Count</strong><span>عميل</span></div></div>
+                    <div class="col-6 col-md-3"><div class="eda-mini-stat"><strong>@CompanyData.CitiesServed.Length</strong><span>مدن</span></div></div>
+                    <div class="col-6 col-md-3"><div class="eda-mini-stat"><strong>@CompanyData.Services.Count</strong><span>خدمات</span></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Values -->
+<section class="eda-section">
+    <div class="container">
+        <div class="eda-section-head">
+            <span class="eda-eyebrow">قيمنا</span>
+            <h2>المبادئ التي نعمل بها</h2>
+            <p>نتعامل مع كل عميل باعتباره شريك نجاح، ونبني علاقة مستمرة قائمة على الثقة المتبادلة.</p>
+        </div>
+        <div class="row g-4">
+            @foreach (var v in CompanyData.Values)
+            {
+                <div class="col-md-6 col-lg-4">
+                    <div class="eda-value eda-value-card">
+                        <i class="bi @v.Icon"></i>
+                        <div>
+                            <h3>@v.Title</h3>
+                            <p>@v.Description</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- Org chart -->
+<section class="eda-section eda-section-alt">
+    <div class="container">
+        <div class="eda-section-head">
+            <span class="eda-eyebrow">فريق العمل</span>
+            <h2>الهيكل الهرمي للشركة</h2>
+            <p>هيكل تنظيمي واضح يضمن جودة التنفيذ والإشراف الهندسي على كل مشروع.</p>
+        </div>
+        <div class="eda-org">
+            <div class="eda-org-row"><div class="eda-org-node eda-org-top"><i class="bi bi-person-badge"></i> @CompanyData.OrgTop</div></div>
+            <div class="eda-org-row eda-org-branch">
+                @foreach (var m in CompanyData.OrgManagers)
+                {
+                    <div class="eda-org-node @(m == "مدير المشروع" ? "eda-org-pm" : "")">@m</div>
+                }
+            </div>
+            <div class="eda-org-row eda-org-branch eda-org-team">
+                @foreach (var t in CompanyData.OrgProjectTeam)
+                {
+                    <div class="eda-org-node eda-org-leaf">@t</div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Licenses -->
+<section class="eda-section">
+    <div class="container">
+        <div class="eda-section-head">
+            <span class="eda-eyebrow">الموثوقية</span>
+            <h2>السجل التجاري وشهادة التسجيل الضريبي</h2>
+            <p>شركة مسجلة رسميًا لدى وزارة التجارة وهيئة الزكاة والضريبة والجمارك.</p>
+        </div>
+        <div class="row g-4 align-items-stretch">
+            <div class="col-lg-4">
+                <ul class="eda-license-list">
+                    <li><span>الاسم التجاري</span><strong>@CompanyData.NameAr</strong></li>
+                    <li><span>الرقم الوطني الموحد</span><strong>@CompanyData.UnifiedNumber</strong></li>
+                    <li><span>رقم السجل التجاري</span><strong>@CompanyData.CrNumber</strong></li>
+                    <li><span>رقم التسجيل الضريبي</span><strong>@CompanyData.VatNumber</strong></li>
+                    <li><span>تاريخ الإصدار</span><strong>@CompanyData.CrIssueDate</strong></li>
+                </ul>
+            </div>
+            <div class="col-sm-6 col-lg-4">
+                <a class="eda-cert" href="~/images/site/cert-cr.jpg" data-eda-lightbox data-caption="شهادة السجل التجاري">
+                    <img src="~/images/site/cert-cr.jpg" alt="شهادة السجل التجاري" loading="lazy" />
+                    <span>شهادة السجل التجاري</span>
+                </a>
+            </div>
+            <div class="col-sm-6 col-lg-4">
+                <a class="eda-cert" href="~/images/site/cert-vat.jpg" data-eda-lightbox data-caption="شهادة التسجيل في ضريبة القيمة المضافة">
+                    <img src="~/images/site/cert-vat.jpg" alt="شهادة التسجيل في ضريبة القيمة المضافة" loading="lazy" />
+                    <span>شهادة التسجيل الضريبي</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<partial name="_Clients" />
+<partial name="_CtaBand" />
+<partial name="_Lightbox" />

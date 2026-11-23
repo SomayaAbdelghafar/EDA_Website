@@ -1,0 +1,1090 @@
+/* ==========================================================
+   EDA brand theme — colors sampled directly from the logo
+   Dark blue: #062E6C   Green: #038B46
+   ========================================================== */
+:root {
+  --eda-blue: #062E6C;
+  --eda-blue-rgb: 6, 46, 108;
+  --eda-green: #038B46;
+  --eda-green-rgb: 3, 139, 70;
+
+  /* Interaction shades (hover/active states only; brand colors stay unchanged) */
+  --eda-blue-dark: #04234F;
+  --eda-green-dark: #026E37;
+
+  /* Bootstrap 5.3 variable overrides */
+  --bs-primary: var(--eda-blue);
+  --bs-primary-rgb: var(--eda-blue-rgb);
+  --bs-success: var(--eda-green);
+  --bs-success-rgb: var(--eda-green-rgb);
+  --bs-primary-text-emphasis: var(--eda-blue);
+  --bs-success-text-emphasis: var(--eda-green-dark);
+  --bs-primary-bg-subtle: #E6EBF3;
+  --bs-success-bg-subtle: #E6F4EC;
+  --bs-primary-border-subtle: #9BADC8;
+  --bs-success-border-subtle: #9AD1B5;
+  --bs-link-color: var(--eda-blue);
+  --bs-link-color-rgb: var(--eda-blue-rgb);
+  --bs-link-hover-color: var(--eda-green);
+  --bs-link-hover-color-rgb: var(--eda-green-rgb);
+  --bs-heading-color: var(--eda-blue);
+  --bs-focus-ring-color: rgba(var(--eda-green-rgb), .35);
+}
+
+html {
+  font-size: 15px;
+  scroll-behavior: smooth;
+  scroll-padding-top: 110px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+/* Sticky footer: the footer sits at the bottom on short pages */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: "Cairo", system-ui, -apple-system, "Segoe UI", Tahoma, sans-serif;
+  color: #2b3445;
+  background: #fff;
+  line-height: 1.85;
+}
+
+body > main {
+  flex: 1 0 auto;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+/* ---------- Focus states ---------- */
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-select:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem rgba(var(--eda-green-rgb), .6);
+}
+
+.form-control:focus, .form-select:focus, .form-check-input:focus {
+  border-color: var(--eda-green);
+}
+
+.form-check-input:checked {
+  background-color: var(--eda-green);
+  border-color: var(--eda-green);
+}
+
+.form-range::-webkit-slider-thumb { background-color: var(--eda-green); }
+.form-range::-moz-range-thumb { background-color: var(--eda-green); }
+
+/* ---------- Buttons ---------- */
+.btn-primary {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: var(--eda-blue);
+  --bs-btn-border-color: var(--eda-blue);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: var(--eda-blue-dark);
+  --bs-btn-hover-border-color: var(--eda-blue-dark);
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: var(--eda-blue-dark);
+  --bs-btn-active-border-color: var(--eda-blue-dark);
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: var(--eda-blue);
+  --bs-btn-disabled-border-color: var(--eda-blue);
+}
+
+.btn-success {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: var(--eda-green);
+  --bs-btn-border-color: var(--eda-green);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: var(--eda-green-dark);
+  --bs-btn-hover-border-color: var(--eda-green-dark);
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: var(--eda-green-dark);
+  --bs-btn-active-border-color: var(--eda-green-dark);
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: var(--eda-green);
+  --bs-btn-disabled-border-color: var(--eda-green);
+}
+
+.btn-outline-primary {
+  --bs-btn-color: var(--eda-blue);
+  --bs-btn-border-color: var(--eda-blue);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: var(--eda-blue);
+  --bs-btn-hover-border-color: var(--eda-blue);
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: var(--eda-blue);
+  --bs-btn-active-border-color: var(--eda-blue);
+  --bs-btn-disabled-color: var(--eda-blue);
+  --bs-btn-disabled-border-color: var(--eda-blue);
+}
+
+.btn-outline-success {
+  --bs-btn-color: var(--eda-green);
+  --bs-btn-border-color: var(--eda-green);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: var(--eda-green);
+  --bs-btn-hover-border-color: var(--eda-green);
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: var(--eda-green);
+  --bs-btn-active-border-color: var(--eda-green);
+  --bs-btn-disabled-color: var(--eda-green);
+  --bs-btn-disabled-border-color: var(--eda-green);
+}
+
+/* ---------- Other Bootstrap components with hard-coded blue ---------- */
+.nav-pills {
+  --bs-nav-pills-link-active-bg: var(--eda-blue);
+}
+
+.pagination {
+  --bs-pagination-color: var(--eda-blue);
+  --bs-pagination-hover-color: var(--eda-green);
+  --bs-pagination-focus-color: var(--eda-green);
+  --bs-pagination-focus-box-shadow: 0 0 0 .25rem rgba(var(--eda-green-rgb), .35);
+  --bs-pagination-active-bg: var(--eda-blue);
+  --bs-pagination-active-border-color: var(--eda-blue);
+}
+
+.dropdown-menu {
+  --bs-dropdown-link-active-bg: var(--eda-blue);
+}
+
+.list-group {
+  --bs-list-group-active-bg: var(--eda-blue);
+  --bs-list-group-active-border-color: var(--eda-blue);
+}
+
+.progress, .progress-stacked {
+  --bs-progress-bar-bg: var(--eda-green);
+}
+
+.accordion {
+  --bs-accordion-active-color: var(--eda-blue);
+  --bs-accordion-active-bg: var(--bs-primary-bg-subtle);
+  --bs-accordion-btn-focus-box-shadow: 0 0 0 .25rem rgba(var(--eda-green-rgb), .35);
+}
+
+
+/* ==========================================================
+   Layout: top bar, navbar, footer
+   ========================================================== */
+.eda-skip {
+  position: absolute;
+  z-index: 2000;
+  inset-inline-start: 1rem;
+  top: .5rem;
+  padding: .5rem 1rem;
+  background: var(--eda-green);
+  color: #fff;
+  border-radius: .5rem;
+}
+
+.eda-topbar {
+  background: var(--eda-blue);
+  color: rgba(255, 255, 255, .85);
+  font-size: .85rem;
+  padding: .4rem 0;
+}
+
+.eda-topbar a {
+  color: rgba(255, 255, 255, .9);
+  text-decoration: none;
+}
+
+.eda-topbar a:hover { color: #fff; }
+.eda-topbar i { color: #5fd08f; margin-inline-end: .25rem; }
+
+.navbar.eda-navbar {
+  --bs-navbar-color: var(--eda-blue);
+  --bs-navbar-hover-color: var(--eda-green);
+  --bs-navbar-active-color: var(--eda-green);
+  --bs-navbar-toggler-border-color: rgba(var(--eda-blue-rgb), .35);
+  --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23062E6C' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+  border-bottom: 3px solid var(--eda-green);
+  box-shadow: 0 .25rem 1rem rgba(var(--eda-blue-rgb), .08);
+  padding: .4rem 0;
+}
+
+.eda-navbar .navbar-brand { padding: 0; margin: 0; }
+
+.eda-logo {
+  display: block;
+  height: 64px;
+  width: auto;
+}
+
+@media (max-width: 575.98px) {
+  .eda-logo { height: 50px; }
+}
+
+.eda-navbar .nav-link {
+  font-weight: 700;
+  padding-inline: .9rem !important;
+  position: relative;
+}
+
+@media (min-width: 992px) {
+  .eda-navbar .nav-link::after {
+    content: "";
+    position: absolute;
+    inset-inline: .9rem;
+    bottom: .15rem;
+    height: 3px;
+    border-radius: 3px;
+    background: var(--eda-green);
+    transform: scaleX(0);
+    transition: transform .2s ease;
+  }
+  .eda-navbar .nav-link:hover::after,
+  .eda-navbar .nav-link.active::after { transform: scaleX(1); }
+}
+
+.eda-nav-cta { font-weight: 700; border-radius: 2rem; padding-inline: 1.25rem; }
+
+@media (max-width: 991.98px) {
+  .eda-navbar .navbar-collapse { padding: .75rem 0 1rem; }
+  .eda-nav-cta { width: 100%; margin-top: .5rem; }
+}
+
+.eda-navbar .navbar-toggler:focus { box-shadow: 0 0 0 .2rem rgba(var(--eda-green-rgb), .35); }
+
+.eda-footer {
+  flex-shrink: 0;
+  padding: 3.5rem 0 0;
+  background: var(--eda-blue);
+  border-top: 4px solid var(--eda-green);
+  color: rgba(255, 255, 255, .78);
+  font-size: .95rem;
+}
+
+.eda-footer a { color: rgba(255, 255, 255, .9); text-decoration: none; }
+.eda-footer a:hover { color: #fff; text-decoration: underline; text-decoration-color: var(--eda-green); text-underline-offset: 4px; }
+
+.eda-footer a.eda-footer-logo {
+  display: inline-block;
+  padding: .5rem .75rem;
+  background: #fff;
+  border-radius: .75rem;
+  line-height: 0;
+}
+
+.eda-footer-logo img { height: 64px; width: auto; }
+
+.eda-footer-title {
+  color: #fff;
+  font-size: 1.05rem;
+  margin-bottom: 1rem;
+  padding-bottom: .5rem;
+  position: relative;
+}
+
+.eda-footer-title::after {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  bottom: 0;
+  width: 40px;
+  height: 3px;
+  background: var(--eda-green);
+  border-radius: 3px;
+}
+
+.eda-footer-links li, .eda-footer-contact li { margin-bottom: .5rem; }
+.eda-footer-contact i { color: #5fd08f; margin-inline-end: .4rem; }
+
+.eda-footer-bottom {
+  margin-top: 2.5rem;
+  padding: 1.1rem 0;
+  border-top: 1px solid rgba(255, 255, 255, .12);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: .5rem;
+  font-size: .85rem;
+}
+
+.eda-whatsapp {
+  position: fixed;
+  z-index: 1030;
+  inset-inline-start: 1.25rem;
+  bottom: 1.25rem;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #25d366;
+  color: #fff;
+  font-size: 1.75rem;
+  box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .25);
+  transition: transform .2s ease;
+}
+
+.eda-whatsapp:hover { color: #fff; transform: scale(1.08); }
+
+/* ==========================================================
+   Generic sections
+   ========================================================== */
+.eda-section { padding: 5rem 0; }
+.eda-section-alt { background: #f4f7fb; }
+
+@media (max-width: 767.98px) {
+  .eda-section { padding: 3.5rem 0; }
+}
+
+.eda-section-head {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 3rem;
+}
+
+.eda-section-head h2 { font-size: clamp(1.6rem, 3vw, 2.25rem); margin-bottom: .5rem; }
+.eda-section-head p { color: #5d6778; margin: 0; }
+
+.eda-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  color: var(--eda-green);
+  font-weight: 700;
+  font-size: .95rem;
+  margin-bottom: .5rem;
+}
+
+.eda-eyebrow::before {
+  content: "";
+  width: 28px;
+  height: 3px;
+  border-radius: 3px;
+  background: currentColor;
+}
+
+.eda-eyebrow-light { color: #8ff0b9; }
+
+.eda-title { font-size: clamp(1.5rem, 2.6vw, 2rem); margin-bottom: 1rem; }
+
+.eda-checklist { list-style: none; padding: 0; margin: 0 0 1.25rem; }
+
+.eda-checklist li {
+  position: relative;
+  padding-inline-start: 1.9rem;
+  margin-bottom: .55rem;
+  font-weight: 600;
+}
+
+.eda-checklist li::before {
+  content: "\f26a"; /* bi-check-circle-fill */
+  font-family: "bootstrap-icons";
+  position: absolute;
+  inset-inline-start: 0;
+  top: .05rem;
+  color: var(--eda-green);
+}
+
+.eda-cover { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+
+.eda-link { color: var(--eda-green); font-weight: 700; }
+
+.eda-prose { max-width: 820px; }
+.eda-prose h2 { font-size: 1.35rem; margin-top: 2rem; }
+
+/* ==========================================================
+   Hero
+   ========================================================== */
+.eda-hero {
+  position: relative;
+  color: #fff;
+  padding: 7rem 0 9rem;
+  background:
+    linear-gradient(270deg, rgba(4, 35, 79, .95) 0%, rgba(6, 46, 108, .82) 45%, rgba(6, 46, 108, .35) 100%),
+    url("/images/site/hero.jpg") center / cover no-repeat;
+}
+
+.eda-hero h1 { font-size: clamp(2rem, 5vw, 3.4rem); color: #fff; margin: 1rem 0; }
+.eda-hero h1 span { color: #6fe0a0; }
+.eda-hero .lead { color: rgba(255, 255, 255, .88); font-size: 1.15rem; }
+
+.eda-hero-eyebrow {
+  display: inline-flex;
+  gap: .5rem;
+  align-items: center;
+  padding: .35rem 1rem;
+  border-radius: 2rem;
+  background: rgba(255, 255, 255, .12);
+  border: 1px solid rgba(255, 255, 255, .25);
+  font-weight: 700;
+}
+
+.eda-hero .btn-lg { padding-inline: 1.75rem; border-radius: 2rem; font-weight: 700; }
+
+/* ---------- Stats ---------- */
+.eda-stats-wrap { margin-top: -4.5rem; position: relative; z-index: 2; }
+
+.eda-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background: #fff;
+  border-radius: 1.25rem;
+  box-shadow: 0 1rem 2.5rem rgba(var(--eda-blue-rgb), .12);
+  overflow: hidden;
+}
+
+.eda-stat {
+  padding: 1.75rem 1rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .15rem;
+}
+
+.eda-stat + .eda-stat { border-inline-start: 1px solid #e8edf4; }
+.eda-stat i { font-size: 2rem; color: var(--eda-green); }
+.eda-stat strong { font-size: 2rem; color: var(--eda-blue); font-weight: 800; line-height: 1.3; }
+.eda-stat span { color: #5d6778; font-weight: 600; font-size: .95rem; }
+
+@media (max-width: 767.98px) {
+  .eda-stats { grid-template-columns: repeat(2, 1fr); }
+  .eda-stat:nth-child(3) { border-inline-start: 0; }
+  .eda-stat:nth-child(n+3) { border-top: 1px solid #e8edf4; }
+  .eda-stat strong { font-size: 1.6rem; }
+}
+
+/* ---------- About media ---------- */
+.eda-about-media { position: relative; padding-bottom: 3rem; padding-inline-end: 3rem; }
+
+.eda-about-main {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 1.25rem;
+  box-shadow: 0 1rem 2rem rgba(var(--eda-blue-rgb), .15);
+}
+
+.eda-about-small {
+  position: absolute;
+  inset-inline-end: 0;
+  bottom: 0;
+  width: 45%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 1rem;
+  border: 6px solid #fff;
+  box-shadow: 0 1rem 2rem rgba(var(--eda-blue-rgb), .2);
+}
+
+.eda-why-img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; }
+
+/* ---------- Service cards ---------- */
+.eda-service-card {
+  display: block;
+  height: 100%;
+  padding: 2rem 1.75rem;
+  background: #fff;
+  border-radius: 1.25rem;
+  border: 1px solid #e6ebf3;
+  color: inherit;
+  text-decoration: none;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+.eda-service-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(var(--eda-green-rgb), .4);
+  box-shadow: 0 1rem 2rem rgba(var(--eda-blue-rgb), .1);
+  color: inherit;
+}
+
+.eda-service-card h3 { font-size: 1.2rem; margin: 1.1rem 0 .5rem; }
+.eda-service-card p { color: #5d6778; margin-bottom: 1rem; }
+
+.eda-service-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 1rem;
+  background: var(--bs-success-bg-subtle);
+  color: var(--eda-green);
+  font-size: 1.8rem;
+  transition: background .2s ease, color .2s ease;
+}
+
+.eda-service-card:hover .eda-service-icon { background: var(--eda-green); color: #fff; }
+
+/* ---------- Values ---------- */
+.eda-value { display: flex; gap: 1rem; align-items: flex-start; height: 100%; }
+
+.eda-value > i {
+  flex: 0 0 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border-radius: .9rem;
+  background: var(--eda-blue);
+  color: #fff;
+  font-size: 1.4rem;
+}
+
+.eda-value h3 { font-size: 1.05rem; margin-bottom: .25rem; }
+.eda-value p { color: #5d6778; margin: 0; font-size: .95rem; }
+
+.eda-value-card {
+  padding: 1.5rem;
+  background: #fff;
+  border-radius: 1rem;
+  border: 1px solid #e6ebf3;
+}
+
+/* ---------- Project cards ---------- */
+.eda-project-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #fff;
+  border-radius: 1.1rem;
+  overflow: hidden;
+  border: 1px solid #e6ebf3;
+  color: inherit;
+  text-decoration: none;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.eda-project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 1rem 2rem rgba(var(--eda-blue-rgb), .12);
+  color: inherit;
+}
+
+.eda-project-img { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: #e6ebf3; }
+
+.eda-project-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .4s ease;
+}
+
+.eda-project-card:hover .eda-project-img img { transform: scale(1.06); }
+
+.eda-project-badge {
+  position: absolute;
+  top: .85rem;
+  inset-inline-start: .85rem;
+  padding: .2rem .75rem;
+  border-radius: 2rem;
+  background: rgba(6, 46, 108, .88);
+  color: #fff;
+  font-size: .78rem;
+  font-weight: 700;
+}
+
+.eda-project-body { padding: 1.25rem 1.35rem 1.4rem; display: flex; flex-direction: column; flex: 1; }
+.eda-project-body h3 { font-size: 1.08rem; margin-bottom: .35rem; }
+.eda-project-city { color: #5d6778; font-size: .92rem; margin-bottom: .75rem; }
+.eda-project-city i { color: var(--eda-green); }
+.eda-project-more { margin-top: auto; color: var(--eda-green); font-weight: 700; font-size: .92rem; }
+
+/* ---------- TRANE band & CTA ---------- */
+.eda-trane {
+  padding: 4rem 0;
+  color: rgba(255, 255, 255, .88);
+  background:
+    linear-gradient(270deg, rgba(3, 110, 55, .95), rgba(3, 139, 70, .85)),
+    url("/images/site/chillers.jpg") center / cover no-repeat;
+}
+
+.eda-trane h2, .eda-cta h2 { color: #fff; font-size: clamp(1.4rem, 2.6vw, 2rem); }
+
+.eda-cta {
+  padding: 3.5rem 0;
+  background: linear-gradient(135deg, var(--eda-blue) 0%, #0a3f8f 100%);
+  color: rgba(255, 255, 255, .85);
+}
+
+.eda-cta .btn-lg, .eda-trane .btn-lg { border-radius: 2rem; font-weight: 700; padding-inline: 1.5rem; }
+.eda-cta .btn-light, .eda-trane .btn-light { color: var(--eda-blue); }
+
+/* ---------- Clients ---------- */
+.eda-clients {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.25rem;
+}
+
+.eda-client {
+  aspect-ratio: 1;
+  background: #fff;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 .35rem 1rem rgba(var(--eda-blue-rgb), .08);
+  transition: transform .2s ease;
+}
+
+.eda-client:hover { transform: translateY(-4px); }
+
+.eda-client img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.04); /* hides the thin slide border left from cropping */
+}
+
+@media (max-width: 991.98px) { .eda-clients { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 575.98px) { .eda-clients { grid-template-columns: repeat(3, 1fr); gap: .75rem; } }
+
+/* ==========================================================
+   Inner pages
+   ========================================================== */
+.eda-page-header {
+  position: relative;
+  padding: 4.5rem 0 4rem;
+  color: #fff;
+  background:
+    linear-gradient(270deg, rgba(4, 35, 79, .94), rgba(6, 46, 108, .72)),
+    var(--bg) center / cover no-repeat;
+}
+
+.eda-page-header h1 { color: #fff; font-size: clamp(1.7rem, 4vw, 2.6rem); margin-bottom: .5rem; }
+.eda-page-header .lead { color: rgba(255, 255, 255, .85); max-width: 760px; font-size: 1.1rem; }
+
+.eda-page-header .breadcrumb { --bs-breadcrumb-divider-color: rgba(255, 255, 255, .6); --bs-breadcrumb-divider: "‹"; margin-bottom: .75rem; }
+.eda-page-header .breadcrumb a { color: #8ff0b9; text-decoration: none; }
+.eda-page-header .breadcrumb-item.active { color: rgba(255, 255, 255, .8); }
+
+.eda-gallery-duo { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.eda-gallery-duo img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 1rem; box-shadow: 0 .5rem 1.5rem rgba(var(--eda-blue-rgb), .12); }
+.eda-gallery-duo img:last-child { margin-top: 2.5rem; }
+
+.eda-mini-stat {
+  background: #fff;
+  border-radius: 1rem;
+  padding: 1rem;
+  text-align: center;
+  border: 1px solid #e6ebf3;
+}
+
+.eda-mini-stat strong { display: block; font-size: 1.6rem; color: var(--eda-green); font-weight: 800; }
+.eda-mini-stat span { color: #5d6778; font-weight: 600; }
+
+/* ---------- Org chart ---------- */
+.eda-org { max-width: 900px; margin: 0 auto; }
+.eda-org-row { display: flex; justify-content: center; gap: 1.5rem; position: relative; }
+.eda-org-row + .eda-org-row { margin-top: 3rem; }
+
+.eda-org-node {
+  position: relative;
+  flex: 1;
+  max-width: 260px;
+  padding: 1rem;
+  text-align: center;
+  font-weight: 800;
+  border-radius: 1rem;
+  background: #fff;
+  color: var(--eda-blue);
+  border: 2px solid var(--eda-green);
+  box-shadow: 0 .5rem 1.25rem rgba(var(--eda-blue-rgb), .08);
+}
+
+.eda-org-top { background: var(--eda-blue); color: #fff; border-color: var(--eda-blue); font-size: 1.15rem; }
+.eda-org-leaf { background: var(--bs-success-bg-subtle); }
+
+/* connectors: horizontal bar over each branch row + vertical stubs into each node */
+.eda-org-branch::before {
+  content: "";
+  position: absolute;
+  top: -1.5rem;
+  left: 16.66%;
+  right: 16.66%;
+  height: 2px;
+  background: var(--eda-green);
+}
+
+.eda-org-branch .eda-org-node::before,
+.eda-org-pm::after,
+.eda-org-top::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  width: 2px;
+  background: var(--eda-green);
+}
+
+.eda-org-branch .eda-org-node::before { top: calc(-1.5rem - 2px); height: calc(1.5rem + 2px); }
+.eda-org-pm::after, .eda-org-top::after { bottom: calc(-1.5rem - 2px); height: calc(1.5rem + 2px); }
+
+@media (max-width: 575.98px) {
+  .eda-org-row { gap: .5rem; }
+  .eda-org-node { padding: .75rem .4rem; font-size: .85rem; }
+}
+
+/* ---------- Licenses ---------- */
+.eda-license-list {
+  list-style: none;
+  margin: 0;
+  padding: 1.5rem;
+  height: 100%;
+  background: var(--eda-blue);
+  color: #fff;
+  border-radius: 1.25rem;
+}
+
+.eda-license-list li { padding: .75rem 0; border-bottom: 1px solid rgba(255, 255, 255, .12); }
+.eda-license-list li:last-child { border-bottom: 0; }
+.eda-license-list span { display: block; color: #8ff0b9; font-size: .85rem; font-weight: 600; }
+.eda-license-list strong { font-size: 1.1rem; letter-spacing: .02em; }
+
+.eda-cert {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #fff;
+  border: 1px solid #e6ebf3;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  text-decoration: none;
+  transition: box-shadow .2s ease;
+}
+
+.eda-cert:hover { box-shadow: 0 1rem 2rem rgba(var(--eda-blue-rgb), .12); }
+.eda-cert img { flex: 1 1 auto; width: 100%; height: 0; min-height: 280px; object-fit: contain; background: #f4f7fb; padding: 1rem; }
+.eda-cert span { padding: .9rem; text-align: center; font-weight: 700; color: var(--eda-blue); }
+
+/* ---------- Services page ---------- */
+.eda-service-index { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1rem; }
+
+.eda-service-index a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .5rem;
+  padding: 1.25rem .75rem;
+  text-align: center;
+  border-radius: 1rem;
+  background: #f4f7fb;
+  color: var(--eda-blue);
+  font-weight: 700;
+  font-size: .92rem;
+  line-height: 1.5;
+  text-decoration: none;
+  transition: background .2s ease, color .2s ease;
+}
+
+.eda-service-index i { font-size: 1.8rem; color: var(--eda-green); }
+.eda-service-index a:hover { background: var(--eda-blue); color: #fff; }
+.eda-service-index a:hover i { color: #8ff0b9; }
+
+@media (max-width: 991.98px) { .eda-service-index { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 575.98px) { .eda-service-index { grid-template-columns: repeat(2, 1fr); } }
+
+.eda-service-row + .eda-service-row { margin-top: 4.5rem; padding-top: 4.5rem; border-top: 1px dashed #d6deea; }
+
+.eda-service-num {
+  display: block;
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1;
+  color: rgba(var(--eda-green-rgb), .18);
+  margin-bottom: .25rem;
+}
+
+.eda-process {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.5rem;
+}
+
+.eda-process li { text-align: center; position: relative; }
+
+.eda-process li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 38px;
+  inset-inline-start: calc(50% + 46px);
+  width: calc(100% - 92px + 1.5rem);
+  border-top: 2px dashed rgba(var(--eda-green-rgb), .5);
+}
+
+.eda-process-icon {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--eda-blue);
+  font-size: 1.9rem;
+  box-shadow: 0 .5rem 1.25rem rgba(var(--eda-blue-rgb), .12);
+  margin-bottom: 1rem;
+}
+
+.eda-process-icon b {
+  position: absolute;
+  top: -4px;
+  inset-inline-end: -4px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--eda-green);
+  color: #fff;
+  font-size: .85rem;
+  display: grid;
+  place-items: center;
+}
+
+.eda-process h3 { font-size: 1.05rem; margin-bottom: .25rem; }
+.eda-process p { color: #5d6778; font-size: .92rem; margin: 0; }
+
+@media (max-width: 991.98px) {
+  .eda-process { grid-template-columns: repeat(2, 1fr); }
+  .eda-process li::after { display: none; }
+}
+
+@media (max-width: 575.98px) { .eda-process { grid-template-columns: 1fr; } }
+
+.eda-sectors { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+
+.eda-sectors div {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: 1.1rem 1.25rem;
+  border-radius: 1rem;
+  border: 1px solid #e6ebf3;
+  font-weight: 700;
+  color: var(--eda-blue);
+}
+
+.eda-sectors i { font-size: 1.5rem; color: var(--eda-green); }
+
+@media (max-width: 991.98px) { .eda-sectors { grid-template-columns: repeat(2, 1fr); } }
+
+/* ---------- Projects ---------- */
+.eda-filter {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .6rem;
+  margin-bottom: 3rem;
+}
+
+.eda-filter a {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .55rem 1.2rem;
+  border-radius: 2rem;
+  border: 1px solid #d6deea;
+  color: var(--eda-blue);
+  font-weight: 700;
+  text-decoration: none;
+  transition: all .2s ease;
+}
+
+.eda-filter a span {
+  min-width: 26px;
+  padding: 0 .4rem;
+  border-radius: 1rem;
+  background: #eef2f8;
+  font-size: .8rem;
+  text-align: center;
+}
+
+.eda-filter a:hover { border-color: var(--eda-green); color: var(--eda-green); }
+.eda-filter a.active { background: var(--eda-blue); border-color: var(--eda-blue); color: #fff; }
+.eda-filter a.active span { background: var(--eda-green); color: #fff; }
+
+.eda-project-group + .eda-project-group { margin-top: 4.5rem; }
+
+.eda-group-head { margin-bottom: 2rem; max-width: 900px; }
+.eda-group-head h2 { font-size: 1.5rem; display: flex; align-items: center; gap: .75rem; }
+
+.eda-group-head h2 span {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 44px;
+  height: 44px;
+  border-radius: .8rem;
+  background: var(--eda-green);
+  color: #fff;
+  font-size: 1.2rem;
+}
+
+.eda-group-head p { color: #5d6778; margin: 0; }
+
+/* 6-column grid: thumbnails span 2 (3 per row) or 3 (2 per row); see Projects/Details.cshtml */
+.eda-gallery { display: grid; grid-template-columns: repeat(6, 1fr); gap: .75rem; }
+
+.eda-gallery a {
+  display: block;
+  border-radius: .9rem;
+  overflow: hidden;
+  aspect-ratio: 1;
+  background: #e6ebf3;
+}
+
+.eda-gallery a.eda-gallery-main,
+.eda-gallery a.g-span-6 { grid-column: 1 / -1; aspect-ratio: 16 / 9; }
+.eda-gallery a.g-span-2 { grid-column: span 2; }
+.eda-gallery a.g-span-3 { grid-column: span 3; aspect-ratio: 4 / 3; }
+.eda-gallery img { width: 100%; height: 100%; object-fit: cover; transition: transform .35s ease; }
+.eda-gallery a:hover img { transform: scale(1.05); }
+
+.eda-project-info {
+  position: sticky;
+  top: 110px;
+  padding: 1.75rem;
+  border-radius: 1.25rem;
+  background: #f4f7fb;
+  border: 1px solid #e6ebf3;
+}
+
+.eda-project-info h2 { font-size: 1.3rem; }
+.eda-project-info ul { list-style: none; padding: 0; margin: 1.25rem 0 1.5rem; }
+
+.eda-project-info li {
+  display: grid;
+  grid-template-columns: 28px auto 1fr;
+  align-items: center;
+  gap: .5rem;
+  padding: .65rem 0;
+  border-bottom: 1px solid #e1e7f0;
+}
+
+.eda-project-info li i { color: var(--eda-green); font-size: 1.1rem; }
+.eda-project-info li span { color: #5d6778; }
+.eda-project-info li strong { text-align: end; color: var(--eda-blue); font-size: .95rem; }
+
+.eda-prevnext {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid #e6ebf3;
+}
+
+.eda-prevnext a {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  max-width: 48%;
+  color: var(--eda-blue);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.eda-prevnext a:hover { color: var(--eda-green); }
+.eda-prevnext small { display: block; color: #8a93a3; font-weight: 600; }
+.eda-prevnext i { font-size: 1.4rem; color: var(--eda-green); }
+
+/* ---------- Lightbox ---------- */
+.eda-lightbox .modal-content { background: transparent; border: 0; position: relative; align-items: center; }
+.eda-lightbox-img { max-width: 100%; max-height: 82vh; border-radius: .75rem; object-fit: contain; }
+.eda-lightbox-caption { color: #fff; margin: .75rem 0 0; font-weight: 600; }
+.eda-lightbox .btn-close { position: absolute; top: -2.25rem; inset-inline-end: 0; opacity: 1; }
+
+.eda-lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .9);
+  color: var(--eda-blue);
+  font-size: 1.4rem;
+  display: grid;
+  place-items: center;
+}
+
+.eda-lightbox-prev { right: .75rem; }
+.eda-lightbox-next { left: .75rem; }
+.eda-lightbox.is-single .eda-lightbox-nav { display: none; }
+.modal-backdrop.show { opacity: .85; }
+
+/* ---------- Contact ---------- */
+.eda-contact-card {
+  height: 100%;
+  padding: 1.75rem 1.25rem;
+  text-align: center;
+  border-radius: 1.25rem;
+  background: #f4f7fb;
+  border: 1px solid #e6ebf3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .2rem;
+}
+
+.eda-contact-card > i {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--eda-green);
+  color: #fff;
+  font-size: 1.5rem;
+  margin-bottom: .6rem;
+}
+
+.eda-contact-card h3 { font-size: 1.1rem; margin-bottom: .25rem; }
+.eda-contact-card a { color: var(--eda-blue); font-weight: 700; text-decoration: none; }
+.eda-contact-card a:hover { color: var(--eda-green); }
+.eda-contact-card small { color: #8a93a3; }
+
+.eda-form-card {
+  padding: 2rem;
+  border-radius: 1.25rem;
+  background: #fff;
+  border: 1px solid #e6ebf3;
+  box-shadow: 0 1rem 2rem rgba(var(--eda-blue-rgb), .06);
+}
+
+@media (max-width: 575.98px) { .eda-form-card { padding: 1.25rem; } }
+
+.eda-form-card .form-label { font-weight: 700; color: var(--eda-blue); }
+.eda-form-card .form-control, .eda-form-card .form-select { padding: .7rem .9rem; border-radius: .7rem; }
+.eda-form-card .btn-lg { border-radius: 2rem; font-weight: 700; }
+.input-validation-error { border-color: var(--bs-danger) !important; }
+
+.eda-map {
+  border-radius: 1.25rem;
+  overflow: hidden;
+  border: 1px solid #e6ebf3;
+  aspect-ratio: 4 / 3;
+}
+
+.eda-map iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+.eda-hours { padding: 1.5rem; border-radius: 1.25rem; background: var(--eda-blue); color: rgba(255, 255, 255, .88); }
+.eda-hours h3 { color: #fff; font-size: 1.1rem; }
+.eda-hours i { color: #8ff0b9; }
+.eda-hours .eda-checklist li::before { color: #8ff0b9; }
+
+/* ---------- Error pages ---------- */
+.eda-error { max-width: 640px; }
+.eda-error > i { font-size: 4rem; color: var(--eda-green); }
+.eda-404 { display: block; font-size: 6rem; font-weight: 800; line-height: 1; color: rgba(var(--eda-green-rgb), .25); }
+
+/* ---------- Reveal on scroll (only when JS is running) ---------- */
+.js .eda-reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+.js .eda-reveal.is-visible { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js .eda-reveal { opacity: 1; transform: none; transition: none; }
+  .eda-project-card, .eda-service-card, .eda-project-img img, .eda-gallery img { transition: none; }
+}

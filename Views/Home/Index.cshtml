@@ -1,0 +1,156 @@
+﻿@{
+    ViewData["Title"] = "الرئيسية";
+    var featured = CompanyData.Projects.Where(p => p.Featured).Take(6).ToList();
+}
+
+<!-- ===== Hero ===== -->
+<section class="eda-hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-xl-7">
+                <span class="eda-hero-eyebrow"><i class="bi bi-snow"></i> للتكييف والتبريد</span>
+                <h1>حلول تكييف متكاملة<br /><span>بخبرة واحترافية في كل مشروع</span></h1>
+                <p class="lead">نصمم ونورد ونركب ونصون أنظمة التكييف المركزي والسبليت والباكدج للفلل والأبراج والمساجد والمجمعات التجارية والجهات الحكومية في جميع أنحاء المملكة العربية السعودية.</p>
+                <div class="d-flex flex-wrap gap-3 mt-4">
+                    <a class="btn btn-success btn-lg" asp-controller="Home" asp-action="Contact"><i class="bi bi-send"></i> اطلب عرض سعر</a>
+                    <a class="btn btn-outline-light btn-lg" asp-controller="Projects" asp-action="Index"><i class="bi bi-grid"></i> شاهد أعمالنا</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Stats ===== -->
+<section class="eda-stats-wrap">
+    <div class="container">
+        <div class="eda-stats">
+            <div class="eda-stat"><i class="bi bi-building-check"></i><strong>+@CompanyData.Projects.Count</strong><span>مشروع منفذ</span></div>
+            <div class="eda-stat"><i class="bi bi-people"></i><strong>+@CompanyData.Clients.Count</strong><span>عميل من كبرى العلامات</span></div>
+            <div class="eda-stat"><i class="bi bi-geo-alt"></i><strong>@CompanyData.CitiesServed.Length</strong><span>مدن في المملكة</span></div>
+            <div class="eda-stat"><i class="bi bi-patch-check"></i><strong>TRANE</strong><span>صيانة بضمان معتمد</span></div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== About ===== -->
+<section class="eda-section">
+    <div class="container">
+        <div class="row g-4 g-lg-5 align-items-center">
+            <div class="col-lg-6">
+                <div class="eda-about-media">
+                    <img src="~/images/site/about-unit.jpg" alt="وحدة تكييف خارجية" class="eda-about-main" loading="lazy" />
+                    <img src="~/images/site/van.jpg" alt="سيارة خدمة إيدا للتكييف" class="eda-about-small" loading="lazy" />
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <span class="eda-eyebrow">من نحن</span>
+                <h2 class="eda-title">شريكك الموثوق في عالم التكييف والتبريد</h2>
+                <p>@CompanyData.AboutIntro</p>
+                <p>@CompanyData.AboutDesign</p>
+                <ul class="eda-checklist">
+                    <li>حساب الأحمال الحرارية بأسلوب علمي</li>
+                    <li>تكنولوجيا موفرة للطاقة وعالية الكفاءة</li>
+                    <li>كادر فني مدرب داخل المملكة وخارجها</li>
+                    <li>عقود صيانة سنوية بأسعار مناسبة</li>
+                </ul>
+                <a class="btn btn-primary mt-2" asp-controller="Home" asp-action="About">اعرف المزيد عنا <i class="bi bi-arrow-left"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Services ===== -->
+<section class="eda-section eda-section-alt">
+    <div class="container">
+        <div class="eda-section-head">
+            <span class="eda-eyebrow">خدماتنا</span>
+            <h2>حلول شاملة لكل احتياجات التكييف</h2>
+            <p>من الدراسة والتصميم حتى التشغيل والصيانة الدورية.</p>
+        </div>
+        <div class="row g-4">
+            @foreach (var s in CompanyData.Services)
+            {
+                <div class="col-md-6 col-lg-4">
+                    <a class="eda-service-card" asp-controller="Home" asp-action="Services" asp-fragment="@s.Slug">
+                        <span class="eda-service-icon"><i class="bi @s.Icon"></i></span>
+                        <h3>@s.Title</h3>
+                        <p>@s.ShortDescription</p>
+                        <span class="eda-link">التفاصيل <i class="bi bi-arrow-left"></i></span>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- ===== Why us ===== -->
+<section class="eda-section">
+    <div class="container">
+        <div class="row g-4 g-lg-5 align-items-center">
+            <div class="col-lg-5">
+                <span class="eda-eyebrow">قيمنا</span>
+                <h2 class="eda-title">لماذا تختار إيدا؟</h2>
+                <p>نلتزم في شركتنا بأعلى معايير المهنية والنمو المستمر، ونضع رضا العميل وخدمته ما بعد البيع في مقدمة أولوياتنا، إيمانًا منا بأن النجاح الحقيقي هو بناء علاقة مستمرة قائمة على الثقة المتبادلة.</p>
+                <img src="~/images/site/team.jpg" alt="فريق إيدا أثناء أعمال الصيانة" class="img-fluid rounded-4 shadow-sm mt-2 eda-why-img" loading="lazy" />
+            </div>
+            <div class="col-lg-7">
+                <div class="row g-3">
+                    @foreach (var v in CompanyData.Values)
+                    {
+                        <div class="col-sm-6">
+                            <div class="eda-value">
+                                <i class="bi @v.Icon"></i>
+                                <div>
+                                    <h3>@v.Title</h3>
+                                    <p>@v.Description</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Featured projects ===== -->
+<section class="eda-section eda-section-alt">
+    <div class="container">
+        <div class="eda-section-head">
+            <span class="eda-eyebrow">سابقة الأعمال</span>
+            <h2>مشاريع نفخر بتنفيذها</h2>
+            <p>نماذج من مشاريع التكييف والصيانة التي نفذناها لعملائنا في مختلف مدن المملكة.</p>
+        </div>
+        <div class="row g-4">
+            @foreach (var p in featured)
+            {
+                <div class="col-md-6 col-lg-4">
+                    <partial name="_ProjectCard" model="p" />
+                </div>
+            }
+        </div>
+        <div class="text-center mt-5">
+            <a class="btn btn-primary btn-lg" asp-controller="Projects" asp-action="Index">جميع المشاريع (@CompanyData.Projects.Count) <i class="bi bi-arrow-left"></i></a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== TRANE band ===== -->
+<section class="eda-trane">
+    <div class="container">
+        <div class="row g-4 align-items-center">
+            <div class="col-lg-8">
+                <span class="eda-eyebrow eda-eyebrow-light">أعمال الصيانة بضمان شركة TRANE</span>
+                <h2>صيانة معتمدة وفق مواصفات TRANE</h2>
+                <p class="mb-0">ننفذ أعمال الصيانة والإصلاح لأنظمة التكييف المركزية وفق المواصفات الفنية المعتمدة من شركة TRANE، لعملاء مثل إيكيا ومكتبة جرير وموڤي سينما والمتحف بالمدينة المنورة ومحطة التحلية بالليث.</p>
+            </div>
+            <div class="col-lg-4 text-lg-end">
+                <a class="btn btn-light btn-lg" asp-controller="Projects" asp-action="Index" asp-route-category="@CompanyData.CategorySlug(ProjectCategory.TraneMaintenance)">مشاريع الصيانة <i class="bi bi-arrow-left"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<partial name="_Clients" />
+
+<partial name="_CtaBand" />

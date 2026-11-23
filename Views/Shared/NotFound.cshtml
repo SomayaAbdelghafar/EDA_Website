@@ -1,0 +1,14 @@
+@{
+    ViewData["Title"] = "الصفحة غير موجودة";
+}
+<section class="eda-section">
+    <div class="container text-center eda-error">
+        <strong class="eda-404">404</strong>
+        <h1>الصفحة غير موجودة</h1>
+        <p class="lead">ربما تم نقل الصفحة أو أن الرابط غير صحيح.</p>
+        <div class="d-flex justify-content-center flex-wrap gap-3 mt-4">
+            <a class="btn btn-primary" asp-controller="Home" asp-action="Index">العودة للرئيسية</a>
+            <a class="btn btn-outline-primary" asp-controller="Projects" asp-action="Index">تصفح مشاريعنا</a>
+        </div>
+    </div>
+</section>

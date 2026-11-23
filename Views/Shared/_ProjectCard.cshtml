@@ -1,0 +1,12 @@
+@model Project
+<a class="eda-project-card" asp-controller="Projects" asp-action="Details" asp-route-slug="@Model.Slug">
+    <div class="eda-project-img">
+        <img src="@Model.ThumbUrl" alt="@Model.Title" loading="lazy" />
+        <span class="eda-project-badge">@CompanyData.CategoryTitle(Model.Category)</span>
+    </div>
+    <div class="eda-project-body">
+        <h3>@Model.Title</h3>
+        <p class="eda-project-city"><i class="bi bi-geo-alt"></i> @Model.City</p>
+        <span class="eda-project-more">عرض المشروع <i class="bi bi-arrow-left"></i></span>
+    </div>
+</a>
