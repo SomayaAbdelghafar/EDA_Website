@@ -1,11 +1,16 @@
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using Microsoft.Extensions.WebEncoders;
+using EDA_Website.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Contact form emails (SMTP settings in the "Email" section; the password comes from user-secrets / environment)
+builder.Services.Configure<EmailOptions>(builder.Configuration.GetSection(EmailOptions.SectionName));
+builder.Services.AddTransient<ContactEmailSender>();
 
 // Render Arabic text as-is instead of HTML entities (&#x...;), which keeps pages smaller and readable.
 builder.Services.Configure<WebEncoderOptions>(o => o.TextEncoderSettings = new TextEncoderSettings(UnicodeRanges.All));

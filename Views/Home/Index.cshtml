@@ -1,6 +1,8 @@
 ﻿@{
     ViewData["Title"] = "الرئيسية";
     var featured = CompanyData.Projects.Where(p => p.Featured).Take(6).ToList();
+    var traneProjects = CompanyData.Projects.Where(p => p.Category == ProjectCategory.TraneMaintenance).ToList();
+    var traneCities = traneProjects.Select(p => p.City).Distinct().Count();
 }
 
 <!-- ===== Hero ===== -->
@@ -28,6 +30,72 @@
             <div class="eda-stat"><i class="bi bi-people"></i><strong>+@CompanyData.Clients.Count</strong><span>عميل من كبرى العلامات</span></div>
             <div class="eda-stat"><i class="bi bi-geo-alt"></i><strong>@CompanyData.CitiesServed.Length</strong><span>مدن في المملكة</span></div>
             <div class="eda-stat"><i class="bi bi-patch-check"></i><strong>TRANE</strong><span>صيانة بضمان معتمد</span></div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== TRANE license ===== -->
+<section class="eda-tl" id="trane-license" aria-labelledby="tl-title">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6 eda-tl-copy">
+                <span class="eda-tl-pill"><span class="eda-tl-pulse" aria-hidden="true"></span> شريك خدمة مرخّص من TRANE</span>
+                <h2 id="tl-title">مرخّصون من <span class="eda-tl-brand" dir="ltr">TRANE</span><br />لصيانة أنظمة التكييف المركزي</h2>
+                <p class="eda-tl-lead">تحمل شركة إيدا ترخيص شركة TRANE الأمريكية، أحد أعرق الأسماء العالمية في أنظمة التكييف المركزي بأكثر من قرن من الريادة، لتنفيذ أعمال الصيانة والإصلاح بضمان TRANE ووفق مواصفاتها الفنية المعتمدة. جودة مصنع عالمية، بفريق محلي قريب منك.</p>
+
+                <ul class="eda-tl-features">
+                    <li>
+                        <i class="bi bi-shield-check" aria-hidden="true"></i>
+                        <div><h3>صيانة بضمان TRANE</h3><p>أعمال صيانة وإصلاح مضمونة من شركة TRANE.</p></div>
+                    </li>
+                    <li>
+                        <i class="bi bi-clipboard2-check" aria-hidden="true"></i>
+                        <div><h3>مواصفات المصنع المعتمدة</h3><p>نلتزم بالمعايير الفنية لشركة TRANE في كل زيارة صيانة.</p></div>
+                    </li>
+                    <li>
+                        <i class="bi bi-person-gear" aria-hidden="true"></i>
+                        <div><h3>فنيون مؤهلون</h3><p>كادر مدرب على أنظمة التكييف المركزي داخل المملكة وخارجها.</p></div>
+                    </li>
+                    <li>
+                        <i class="bi bi-buildings" aria-hidden="true"></i>
+                        <div><h3>ثقة كبرى العلامات</h3><p>إيكيا، مكتبة جرير، موڤي سينما، ومحطة التحلية بالليث.</p></div>
+                    </li>
+                </ul>
+
+                <div class="d-flex flex-wrap align-items-center gap-3 gap-sm-4 mt-4">
+                    <a class="btn btn-success btn-lg" asp-controller="Home" asp-action="Contact"><i class="bi bi-tools"></i> اطلب صيانة معتمدة</a>
+                    <a class="eda-tl-link" asp-controller="Projects" asp-action="Index" asp-route-category="@CompanyData.CategorySlug(ProjectCategory.TraneMaintenance)">مشاريع صيانة TRANE (@traneProjects.Count) <i class="bi bi-arrow-left"></i></a>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="eda-tl-visual">
+                    <span class="eda-tl-rings" aria-hidden="true"><i></i><i></i><i></i></span>
+
+                    <div class="eda-tl-card" data-eda-tilt>
+                        <div class="eda-tl-card-head"><i class="bi bi-patch-check-fill"></i> ترخيص خدمة معتمد</div>
+                        <div class="eda-tl-card-body">
+                            <img src="~/images/brands/trane.svg" alt="شعار شركة TRANE" class="eda-tl-trane" width="588" height="196" />
+                            <span class="eda-tl-x" aria-hidden="true"><i class="bi bi-plus-lg"></i></span>
+                            <img src="~/images/logo.png" alt="شعار @CompanyData.NameAr" class="eda-tl-eda" asp-append-version="true" />
+                        </div>
+                        <div class="eda-tl-card-foot">
+                            <div><strong data-eda-count="@traneProjects.Count">@traneProjects.Count</strong><span>مشروع صيانة معتمد</span></div>
+                            <div><strong data-eda-count="@traneCities">@traneCities</strong><span>مدن في المملكة</span></div>
+                            <div><strong><i class="bi bi-shield-fill-check"></i></strong><span>بضمان TRANE</span></div>
+                        </div>
+                        <span class="eda-tl-shine" aria-hidden="true"></span>
+                    </div>
+
+                    <div class="eda-tl-seal" aria-hidden="true">
+                        <svg viewBox="0 0 120 120">
+                            <defs><path id="tlSealPath" d="M60 60 m-46 0 a46 46 0 1 1 92 0 a46 46 0 1 1 -92 0" /></defs>
+                            <text><textPath href="#tlSealPath" textLength="289" lengthAdjust="spacing">AUTHORIZED SERVICE • TRANE LICENSED • </textPath></text>
+                        </svg>
+                        <i class="bi bi-award-fill"></i>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>

@@ -20,7 +20,10 @@ public static class CompanyData
     public const string WhatsApp = "966540010402";
     public const string Email = "edaac.co@gmail.com";
     public const string Address = "جدة – تقاطع شارع صاري مع طريق المدينة";
-    public const string MapQuery = "تقاطع شارع صاري مع طريق المدينة، جدة، السعودية";
+    // Exact company pin, from the Google Maps link the owner shared (https://maps.app.goo.gl/tpCCQJcjegsVFDKv9)
+    public const string MapLatitude = "21.5815468";
+    public const string MapLongitude = "39.1662788";
+    public const string MapShareUrl = "https://maps.app.goo.gl/tpCCQJcjegsVFDKv9";
 
     // From the Commercial Registration & VAT certificates (profile slide 34)
     public const string UnifiedNumber = "7032447745";
@@ -31,8 +34,8 @@ public static class CompanyData
     public static string WhatsAppUrl(string? text = null) =>
         $"https://wa.me/{WhatsApp}" + (string.IsNullOrEmpty(text) ? "" : "?text=" + Uri.EscapeDataString(text));
 
-    public static string MapEmbedUrl => "https://maps.google.com/maps?q=" + Uri.EscapeDataString(MapQuery) + "&z=15&output=embed";
-    public static string MapLinkUrl => "https://www.google.com/maps/search/?api=1&query=" + Uri.EscapeDataString(MapQuery);
+    public static string MapEmbedUrl => $"https://maps.google.com/maps?q={MapLatitude},{MapLongitude}&z=17&hl=ar&output=embed";
+    public static string MapLinkUrl => MapShareUrl;
 
     // ---------- About ----------
     public const string AboutIntro =

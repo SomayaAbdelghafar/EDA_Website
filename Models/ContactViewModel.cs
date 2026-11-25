@@ -30,4 +30,7 @@ public class ContactViewModel
     [StringLength(2000, MinimumLength = 10, ErrorMessage = "يرجى كتابة 10 أحرف على الأقل")]
     [Display(Name = "تفاصيل الطلب")]
     public string Message { get; set; } = "";
+
+    /// <summary>Honeypot: hidden from visitors, so only spam bots fill it in.</summary>
+    public string? Website { get; set; }
 }

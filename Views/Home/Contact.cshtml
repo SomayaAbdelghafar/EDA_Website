@@ -59,6 +59,14 @@
                         </div>
                     }
 
+                    @if (ViewData["ContactError"] is true)
+                    {
+                        <div class="alert alert-danger d-flex gap-2 align-items-start" role="alert">
+                            <i class="bi bi-exclamation-triangle-fill fs-5"></i>
+                            <div>عذرًا، تعذّر إرسال طلبك حاليًا بسبب خلل تقني. يرجى المحاولة مرة أخرى بعد قليل، أو التواصل معنا مباشرة على الرقم <a href="tel:@CompanyData.Phone1" dir="ltr">@CompanyData.Phone1Display</a> أو عبر زر واتساب بالأسفل.</div>
+                        </div>
+                    }
+
                     @if (staticPreview)
                     {
                         <div class="alert alert-info d-none gap-2 align-items-start" role="alert" id="previewNotice">
@@ -69,6 +77,11 @@
 
                     <form asp-action="Contact" method="post" novalidate id="contactForm">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        @* Honeypot against spam bots: hidden from visitors and screen readers *@
+                        <div class="visually-hidden" aria-hidden="true">
+                            <label for="Website">اترك هذا الحقل فارغًا</label>
+                            <input asp-for="Website" tabindex="-1" autocomplete="off" />
+                        </div>
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label asp-for="Name" class="form-label"></label>

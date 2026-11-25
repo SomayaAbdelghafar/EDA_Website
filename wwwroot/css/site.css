@@ -456,6 +456,372 @@ h1, h2, h3, h4 {
   .eda-stat strong { font-size: 1.6rem; }
 }
 
+/* ==========================================================
+   TRANE license (home page, right after the stats)
+   eda-tl = "TRANE license". TRANE red is sampled from the official logo.
+   ========================================================== */
+@property --tl-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.eda-tl {
+  --trane-red: #ef3c13;
+  --trane-red-rgb: 239, 60, 19;
+  position: relative;
+  overflow: hidden;
+  padding: 6rem 0 5rem;
+  background:
+    /* fade in from the white strip under the stats card */
+    linear-gradient(#fff, rgba(255, 255, 255, 0) 9rem),
+    radial-gradient(620px 420px at 0% 20%, rgba(var(--trane-red-rgb), .10), transparent 70%),
+    radial-gradient(700px 520px at 100% 100%, rgba(var(--eda-green-rgb), .10), transparent 70%),
+    radial-gradient(rgba(var(--eda-blue-rgb), .10) 1px, transparent 1.5px) 0 0 / 22px 22px,
+    #f5f7fb;
+}
+
+@media (max-width: 767.98px) {
+  .eda-tl { padding: 4.5rem 0 3.5rem; }
+}
+
+/* ---- copy ---- */
+.eda-tl-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: .65rem;
+  padding: .4rem 1.1rem;
+  border-radius: 2rem;
+  background: #fff;
+  border: 1px solid rgba(var(--trane-red-rgb), .25);
+  box-shadow: 0 .35rem 1rem rgba(var(--trane-red-rgb), .10);
+  color: var(--eda-blue);
+  font-weight: 700;
+  font-size: .92rem;
+}
+
+.eda-tl-pulse {
+  position: relative;
+  flex: 0 0 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--trane-red);
+}
+
+.eda-tl-pulse::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--trane-red);
+  animation: eda-tl-ping 1.8s cubic-bezier(0, 0, .2, 1) infinite;
+}
+
+.eda-tl h2 {
+  font-size: clamp(1.75rem, 3.6vw, 2.7rem);
+  line-height: 1.35;
+  margin: 1.1rem 0 1rem;
+}
+
+.eda-tl-brand {
+  position: relative;
+  z-index: 0;
+  display: inline-block;
+  color: var(--trane-red);
+  letter-spacing: .04em;
+}
+
+/* highlighter stroke under the brand name */
+.eda-tl-brand::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset-inline: -.1em;
+  bottom: .14em;
+  height: .22em;
+  border-radius: 1em;
+  background: rgba(var(--trane-red-rgb), .18);
+}
+
+.eda-tl-lead { color: #4d5769; font-size: 1.08rem; max-width: 580px; }
+
+.eda-tl-features {
+  list-style: none;
+  padding: 0;
+  margin: 1.75rem 0 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.eda-tl-features li {
+  display: flex;
+  gap: .85rem;
+  align-items: flex-start;
+  padding: 1rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, .8);
+  border: 1px solid #e3e9f2;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+
+.eda-tl-features li:hover {
+  transform: translateY(-3px);
+  border-color: rgba(var(--trane-red-rgb), .35);
+  box-shadow: 0 .75rem 1.5rem rgba(var(--eda-blue-rgb), .08);
+}
+
+.eda-tl-features li > i {
+  flex: 0 0 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: .75rem;
+  background: rgba(var(--trane-red-rgb), .10);
+  color: var(--trane-red);
+  font-size: 1.2rem;
+  transition: background .2s ease, color .2s ease;
+}
+
+.eda-tl-features li:hover > i { background: var(--trane-red); color: #fff; }
+.eda-tl-features h3 { font-size: 1rem; margin: 0 0 .15rem; }
+.eda-tl-features p { margin: 0; font-size: .88rem; line-height: 1.7; color: #5d6778; }
+
+@media (max-width: 575.98px) {
+  .eda-tl-features { grid-template-columns: 1fr; }
+}
+
+.eda-tl .btn-lg { border-radius: 2rem; font-weight: 700; padding-inline: 1.6rem; }
+
+.eda-tl-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  color: var(--eda-blue);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.eda-tl-link i { transition: transform .2s ease; }
+.eda-tl-link:hover { color: var(--trane-red); }
+.eda-tl-link:hover i { transform: translateX(-4px); }
+
+/* ---- visual: license card ---- */
+.eda-tl-visual {
+  position: relative;
+  max-width: 500px;
+  margin-inline: auto;
+  padding: 3rem 2rem 2rem;
+  perspective: 1200px;
+}
+
+/* radar rings behind the card */
+.eda-tl-rings { position: absolute; top: 50%; left: 50%; pointer-events: none; }
+
+.eda-tl-rings i {
+  position: absolute;
+  left: -260px;
+  top: -260px;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  border: 1px solid rgba(var(--eda-blue-rgb), .16);
+  opacity: 0;
+  animation: eda-tl-ring 6s ease-out infinite;
+}
+
+.eda-tl-rings i:nth-child(2) { animation-delay: 2s; }
+.eda-tl-rings i:nth-child(3) { animation-delay: 4s; }
+
+.eda-tl-card {
+  position: relative;
+  z-index: 1;
+  border-radius: 1.75rem;
+  border: 2px solid transparent;
+  background:
+    linear-gradient(#fff, #fff) padding-box,
+    conic-gradient(from var(--tl-angle), var(--trane-red), #ffb199, var(--eda-blue), var(--eda-green), var(--trane-red)) border-box;
+  box-shadow: 0 2rem 4rem -1rem rgba(var(--eda-blue-rgb), .30), 0 .5rem 1rem rgba(var(--eda-blue-rgb), .06);
+  overflow: hidden;
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform .5s cubic-bezier(.2, .8, .2, 1);
+  animation: eda-tl-spin 7s linear infinite;
+}
+
+.eda-tl-card.is-tilting { transition: transform .1s linear; }
+
+/* soft glare that follows the pointer while tilting (see site.js) */
+.eda-tl-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(var(--trane-red-rgb), .09), transparent 45%);
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+
+.eda-tl-card.is-tilting::after { opacity: 1; }
+
+.eda-tl-card-head {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .85rem 1.5rem;
+  background: linear-gradient(135deg, var(--eda-blue) 0%, #0a3f8f 100%);
+  color: #fff;
+  font-weight: 700;
+  font-size: .95rem;
+}
+
+.eda-tl-card-head i { color: #8ff0b9; }
+
+.eda-tl-card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.1rem;
+  padding: 2.5rem 2rem 1.75rem;
+  background: radial-gradient(circle at 50% 0%, rgba(var(--trane-red-rgb), .07), transparent 65%);
+}
+
+.eda-tl-trane {
+  width: 80%;
+  max-width: 320px;
+  height: auto;
+  filter: drop-shadow(0 .5rem 1rem rgba(var(--trane-red-rgb), .20));
+}
+
+.eda-tl-x {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  width: 100%;
+}
+
+.eda-tl-x::before,
+.eda-tl-x::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #cfd8e6, transparent);
+}
+
+.eda-tl-x i {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #f1f4f9;
+  color: #8a93a3;
+  font-size: .9rem;
+}
+
+.eda-tl-eda { width: 42%; max-width: 160px; height: auto; }
+
+.eda-tl-card-foot {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px dashed #d6deea;
+}
+
+.eda-tl-card-foot div {
+  display: flex;
+  flex-direction: column;
+  gap: .1rem;
+  padding: 1rem .5rem;
+  text-align: center;
+}
+
+.eda-tl-card-foot div + div { border-inline-start: 1px dashed #d6deea; }
+.eda-tl-card-foot strong { font-size: 1.6rem; font-weight: 800; line-height: 1.25; color: var(--eda-blue); }
+.eda-tl-card-foot strong i { color: var(--eda-green); }
+.eda-tl-card-foot span { font-size: .8rem; font-weight: 600; color: #5d6778; }
+
+/* light sweep across the card */
+.eda-tl-shine {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, .6) 48%, transparent 60%);
+  transform: translateX(-120%);
+  animation: eda-tl-shine 6s ease-in-out 1.5s infinite;
+}
+
+/* rotating "authorized" seal on the card corner */
+.eda-tl-seal {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  inset-inline-end: 0;
+  width: 116px;
+  height: 116px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--eda-blue);
+  box-shadow: 0 1rem 2rem rgba(var(--eda-blue-rgb), .35), inset 0 0 0 6px rgba(255, 255, 255, .06);
+}
+
+.eda-tl-seal svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  direction: ltr;
+  overflow: visible;
+  animation: eda-tl-rotate 18s linear infinite;
+}
+
+.eda-tl-seal text {
+  fill: #fff;
+  font-family: "Cairo", system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.eda-tl-seal i {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--trane-red);
+  color: #fff;
+  font-size: 1.5rem;
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, .12);
+}
+
+@media (max-width: 575.98px) {
+  .eda-tl-visual { padding: 2.5rem .75rem 1rem; }
+  .eda-tl-seal { width: 88px; height: 88px; }
+  .eda-tl-seal text { font-size: 10.5px; }
+  .eda-tl-seal i { width: 40px; height: 40px; font-size: 1.15rem; }
+  .eda-tl-card-body { padding: 2.25rem 1.25rem 1.5rem; }
+  .eda-tl-card-foot strong { font-size: 1.35rem; }
+}
+
+@keyframes eda-tl-ping { 75%, 100% { transform: scale(2.6); opacity: 0; } }
+@keyframes eda-tl-spin { to { --tl-angle: 360deg; } }
+@keyframes eda-tl-rotate { to { transform: rotate(360deg); } }
+@keyframes eda-tl-shine { 0% { transform: translateX(-120%); } 35%, 100% { transform: translateX(120%); } }
+
+@keyframes eda-tl-ring {
+  0% { transform: scale(.45); opacity: 0; }
+  20% { opacity: 1; }
+  100% { transform: scale(1.15); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eda-tl-card, .eda-tl-seal svg, .eda-tl-pulse::after { animation: none; }
+  .eda-tl-rings, .eda-tl-shine { display: none; }
+  .eda-tl-features li, .eda-tl-card { transition: none; }
+}
+
 /* ---------- About media ---------- */
 .eda-about-media { position: relative; padding-bottom: 3rem; padding-inline-end: 3rem; }
 
