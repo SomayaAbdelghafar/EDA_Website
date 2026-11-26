@@ -1,0 +1,135 @@
+{
+  // Projects, keyed by slug (/projects/{slug}). Order and photos are set in Data/CompanyData.cs.
+  // Projects in the same city must use exactly the same City text (the home page counts distinct cities).
+  "mohammed-abdu-palaces": {
+    "Title": "Palaces, Villas and Factories of Artist Mohammed Abdu",
+    "City": "Al-Mahjar District – Jeddah",
+    "Summary": "We are proud to have carried out all the air conditioning work for the renowned artist Mohammed Abdu, covering his palaces, villas and factories. We designed and installed integrated air conditioning systems that meet the highest standards of efficiency and luxury."
+  },
+  "sudais-hall-mina": {
+    "Title": "Private Hall of Sheikh Abdulrahman Al-Sudais – Presidency for the Affairs of the Grand Mosque",
+    "ShortTitle": "Private Hall of the Presidency for the Affairs of the Grand Mosque",
+    "City": "Mina – Makkah",
+    "Summary": "Complete design and installation of the air conditioning for the private hall of the Presidency for the Affairs of the Grand Mosque, under the supervision of His Eminence Sheikh Abdulrahman Al-Sudais. The systems were installed to the highest technical and engineering standards to ensure maximum comfort and quality in the workplace."
+  },
+  "bin-mahfouz-villa": {
+    "Title": "Bin Mahfouz Villa",
+    "City": "Obhur – Jeddah",
+    "Summary": "Complete air conditioning works, including design and installation with the latest systems and to the highest standards of quality and efficiency."
+  },
+  "al-hijrain-village": {
+    "Title": "Al-Hijrain Village – Al Murjan Company",
+    "City": "Jeddah",
+    "Summary": "Complete design and installation of the air conditioning for Al Murjan Company as part of the Al-Hijrain Village project. The systems were built to the highest standards of quality and efficiency, providing integrated air conditioning solutions that meet the needs of modern developments."
+  },
+  "al-jamoum-municipality": {
+    "Title": "Al-Jamoum Governorate Municipality",
+    "City": "Al-Jamoum – Makkah",
+    "Summary": "Installation and rehabilitation of the control unit, managed and supervised by the company, to the highest quality standards and technical specifications, ensuring efficient operation and stable performance."
+  },
+  "hada-al-sham-rest-house": {
+    "Title": "Private Rest House of the Sheikhs of Hada Al-Sham",
+    "City": "Al-Barza – Makkah",
+    "Summary": "Complete design and installation of the air conditioning for the private rest house of the sheikhs of Hada Al-Sham in Al-Barza, using the latest systems and technical standards for the highest levels of efficiency, quality and comfort."
+  },
+  "seychelles-2-resort": {
+    "Title": "Seychelles 2 Resort – Al Murjan Company",
+    "City": "Jeddah",
+    "Summary": "Complete rough-in and installation works for Al Murjan Company's Seychelles 2 Resort, including the study and installation of the air conditioning systems to the highest engineering standards, for high operational efficiency and a luxurious environment befitting a resort project."
+  },
+  "al-barza-mosque": {
+    "Title": "Al-Barza City Mosque",
+    "City": "Hada Al-Sham – Makkah",
+    "Summary": "Complete design and installation of the mosque's air conditioning, including engineering planning and installation to the highest quality standards, ensuring efficient operation and maximum comfort for worshippers."
+  },
+  "king-fahd-mosque-madinah": {
+    "Title": "King Fahd Mosque",
+    "City": "Madinah",
+    "Summary": "Complete air conditioning works, including the supply and installation of air conditioning systems to the highest technical specifications and engineering standards, ensuring efficient operation and maximum comfort inside the mosque."
+  },
+  "in2-fitness-gym": {
+    "Title": "IN2 Fitness Gym",
+    "City": "Al-Rawdah District – Jeddah",
+    "Summary": "Complete design and installation of the air conditioning for IN2 Fitness, including load calculations and the installation of ventilation and cooling systems to the highest standards of quality and efficiency, creating an ideal environment for training and comfort."
+  },
+  "snb-red-sea-mall": {
+    "Title": "Saudi National Bank (SNB) Branch – Red Sea Mall",
+    "City": "Jeddah",
+    "Summary": "Complete rough-in and installation of the air conditioning systems for the Saudi National Bank branch at Red Sea Mall, including design and installation to the highest technical specifications, ensuring efficient operation and a comfortable, safe working environment."
+  },
+  "ikea-madinah": {
+    "Title": "Maintenance Works – IKEA",
+    "City": "Madinah",
+    "Summary": "Maintenance of the air conditioning systems at the IKEA store in Madinah, including routine inspection, cleaning and replacement of the necessary parts, ensuring maximum operating efficiency and continued performance to TRANE standards."
+  },
+  "jazan-economy-hall": {
+    "Title": "Economy Hall",
+    "City": "Jazan",
+    "Summary": "Maintenance and coil welding of the German-made units, followed by their repair, as part of the Economy Hall project in Jazan, to the approved specifications."
+  },
+  "air-defense-jeddah": {
+    "Title": "Air Defense Project",
+    "City": "Jeddah",
+    "Summary": "Installation of a compressor and restart of the machine, in cooperation with Alkhorayef Company and using the latest techniques, ensuring efficient operation and continued performance."
+  },
+  "adeeks-complex": {
+    "Title": "Adeeks Company Complex",
+    "City": "Jeddah",
+    "Summary": "Installation of a heater for the machine and its commissioning at the Adeeks Company complex, to the approved technical standards, ensuring operational efficiency and continued high-quality performance."
+  },
+  "jarir-jazan": {
+    "Title": "Jarir Bookstore",
+    "City": "Jazan",
+    "Summary": "Reinstallation of a compressor and filter as part of the maintenance work for the Jarir Bookstore branch in Jazan, to the technical specifications approved by TRANE, ensuring efficient operation and stable performance."
+  },
+  "benchmark-events-hall": {
+    "Title": "Benchmark Events Hall",
+    "City": "Jeddah",
+    "Summary": "Maintenance and air conditioning works at Benchmark Events Hall in Jeddah, including inspection, operation and readjustment of the cooling systems, ensuring efficient and stable performance."
+  },
+  "madinah-museum": {
+    "Title": "The Museum",
+    "City": "Madinah",
+    "Summary": "Comprehensive maintenance and filter replacement for all of the museum's air conditioning units, with a full diagnosis of the units' performance and a detailed report to management, ensuring continued operation to the highest technical standards."
+  },
+  "al-lith-desalination": {
+    "Title": "Desalination Plant",
+    "City": "Al-Lith",
+    "Summary": "Re-welding of a leak in the condenser head and replacement of the air filters at the desalination plant, applying precise maintenance standards to ensure efficient operation and stable equipment performance."
+  },
+  "muvi-cinema-jeddah": {
+    "Title": "Muvi Cinemas",
+    "City": "Jeddah",
+    "Summary": "Welding of more than 14 points across all the condenser units on site, then starting up the units and handing them over to site management after confirming efficient and stable operation."
+  },
+  "homemax-taif": {
+    "Title": "Homemax – Taif Branch",
+    "City": "Taif",
+    "Summary": "Comprehensive maintenance of all the store's air conditioning systems, ensuring quality performance and stable operation to the highest approved technical standards."
+  },
+  "u-walk-jeddah": {
+    "Title": "U-Walk",
+    "City": "Jeddah",
+    "Summary": "Comprehensive maintenance of all the air conditioning units on site, with performance tuning to ensure stable operation to the highest approved technical standards."
+  },
+  "aldo-al-andalus-mall": {
+    "Title": "ALDO – Al Andalus Mall",
+    "City": "Jeddah",
+    "Summary": "Comprehensive maintenance of all the air conditioning units at Al Andalus Mall, managed and supervised by the company, with performance tuning to ensure stable operation to the highest quality standards and technical specifications."
+  },
+  "oxxo-al-yasmin-mall": {
+    "Title": "OXXO – Al Yasmin Mall",
+    "City": "Jeddah",
+    "Summary": "Comprehensive maintenance of all the air conditioning units of the OXXO store at Al Yasmin Mall, managed and supervised by the company, with performance tuning to ensure stable operation to the highest quality standards and technical specifications."
+  },
+  "spring-al-yasmin-mall": {
+    "Title": "Spring – Al Yasmin Mall",
+    "City": "Jeddah",
+    "Summary": "Comprehensive maintenance of all the air conditioning units of the Spring store at Al Yasmin Mall, managed and supervised by the company, with performance tuning to ensure stable operation to the highest quality standards and technical specifications."
+  },
+  "aldo-haifaa-mall": {
+    "Title": "ALDO – Haifa Mall",
+    "City": "Jeddah",
+    "Summary": "Comprehensive maintenance of all the air conditioning units of the ALDO store at Haifa Mall, managed and supervised by the company, with performance tuning to ensure stable operation to the highest quality standards and technical specifications."
+  }
+}

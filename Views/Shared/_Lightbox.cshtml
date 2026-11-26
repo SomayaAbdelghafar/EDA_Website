@@ -1,11 +1,12 @@
-<div class="modal fade eda-lightbox" id="edaLightbox" tabindex="-1" aria-label="عرض الصورة" aria-hidden="true">
+@* "Previous" sits at the start of the reading direction (right in Arabic, left in English); its arrow flips in LTR *@
+<div class="modal fade eda-lightbox" id="edaLightbox" tabindex="-1" aria-label="@T["Shared.Lightbox.Label"]" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content">
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="إغلاق"></button>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="@T["Shared.Lightbox.Close"]"></button>
             <img src="data:," alt="" class="eda-lightbox-img" />
             <p class="eda-lightbox-caption"></p>
-            <button type="button" class="eda-lightbox-nav eda-lightbox-prev" aria-label="الصورة السابقة"><i class="bi bi-chevron-right"></i></button>
-            <button type="button" class="eda-lightbox-nav eda-lightbox-next" aria-label="الصورة التالية"><i class="bi bi-chevron-left"></i></button>
+            <button type="button" class="eda-lightbox-nav eda-lightbox-prev" aria-label="@T["Shared.Lightbox.Previous"]"><i class="bi bi-chevron-right eda-flip-ltr"></i></button>
+            <button type="button" class="eda-lightbox-nav eda-lightbox-next" aria-label="@T["Shared.Lightbox.Next"]"><i class="bi bi-chevron-left eda-flip-ltr"></i></button>
         </div>
     </div>
 </div>

@@ -1,18 +1,25 @@
 ﻿@{
-    ViewData["Title"] = "سياسة الخصوصية";
+    ViewData["Title"] = T["Shared.Nav.Privacy"].Value;
+    ViewData["Description"] = T["Privacy.Description"].Value;
+    var analyticsOn = !string.IsNullOrWhiteSpace(Configuration["Analytics:Ga4MeasurementId"]) && !Configuration.GetValue<bool>("StaticPreview");
 }
 <partial name="_PageHeader" />
 
 <section class="eda-section">
     <div class="container eda-prose">
-        <p>نحترم في @CompanyData.NameAr خصوصية زوار موقعنا، وتوضح هذه الصفحة كيفية تعاملنا مع البيانات التي تشاركونها معنا.</p>
-        <h2>البيانات التي نجمعها</h2>
-        <p>عند استخدام نموذج «تواصل معنا» نجمع الاسم ورقم الجوال والبريد الإلكتروني (اختياري) والمدينة وتفاصيل الطلب، وذلك فقط بغرض الرد على استفساركم وتقديم عرض السعر أو الخدمة المطلوبة.</p>
-        <h2>استخدام البيانات</h2>
-        <p>نستخدم بياناتكم للتواصل معكم بخصوص طلبكم فقط، ولا نقوم ببيعها أو مشاركتها مع أي طرف ثالث لأغراض تسويقية.</p>
-        <h2>خدمات خارجية</h2>
-        <p>يستخدم الموقع خرائط Google لعرض موقعنا، وخطوط Google، وروابط واتساب للتواصل. تخضع هذه الخدمات لسياسات الخصوصية الخاصة بمزوديها.</p>
-        <h2>التواصل</h2>
-        <p>لأي استفسار بخصوص الخصوصية يمكنكم مراسلتنا على <a href="mailto:@CompanyData.Email">@CompanyData.Email</a>.</p>
+        <p>@T["Privacy.Intro", CompanyData.Name]</p>
+        <h2>@T["Privacy.Collected.Title"]</h2>
+        <p>@T["Privacy.Collected.Text"]</p>
+        <h2>@T["Privacy.Use.Title"]</h2>
+        <p>@T["Privacy.Use.Text"]</p>
+        <p>@T["Privacy.Use.LanguageCookie"]</p>
+        <h2>@T["Privacy.ThirdParty.Title"]</h2>
+        <p>@T["Privacy.ThirdParty.Text"]</p>
+        @if (analyticsOn)
+        {
+            <p>@T["Privacy.ThirdParty.Analytics"]</p>
+        }
+        <h2>@T["Privacy.Contact.Title"]</h2>
+        <p>@T.Html("Privacy.Contact.Text", Html.Raw($"<a href=\"mailto:{CompanyData.Email}\">{CompanyData.Email}</a>"))</p>
     </div>
 </section>

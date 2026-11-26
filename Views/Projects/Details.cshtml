@@ -1,10 +1,19 @@
 @model Project
 @{
+    // Google shows about 155 characters of a description: cut the summary at a word boundary
+    static string Snippet(string text, int max = 155)
+    {
+        if (text.Length <= max) return text;
+        var cut = text.LastIndexOf(' ', max - 1);
+        return text[..(cut > 0 ? cut : max)].TrimEnd('،', ',', ' ') + "…";
+    }
+
     ViewData["Title"] = Model.Title;
+    ViewData["SeoTitle"] = T["Projects.Details.SeoTitle", Model.ShortTitle ?? Model.Title, Model.City].Value;
     ViewData["Subtitle"] = Model.City;
-    ViewData["Description"] = Model.Summary;
+    ViewData["Description"] = Snippet(Model.Summary);
     ViewData["HeaderImage"] = $"/images/projects/{Model.Slug}/1.jpg";
-    ViewData["Breadcrumb"] = ((string, string)?)("سابقة الأعمال", Url.Action("Index", "Projects")!);
+    ViewData["Breadcrumb"] = ((string, string)?)(T["Shared.Nav.Projects"], Url.Action("Index", "Projects")!);
     var images = Model.ImageUrls.ToList();
     var related = CompanyData.Projects.Where(p => p.Category == Model.Category && p.Slug != Model.Slug).Take(3).ToList();
     var index = CompanyData.Projects.ToList().IndexOf(Model);
@@ -13,6 +22,10 @@
 
     // Thumbnails sit on a 6-column grid, 3 per row; a short last row stretches so no photo is left alone.
     var thumbs = images.Count - 1;
+    // Big galleries show 3 rows first; the rest stay in the page (lightbox + static export see them) until "show all".
+    const int VisibleThumbs = 9;
+    var collapsible = thumbs > VisibleThumbs + 3; // only the last 4 thumbs ever change span, so the first 9 stay a clean 3×3
+    string MoreClass(int k) => collapsible && k >= VisibleThumbs ? " eda-gallery-more" : "";
     string ThumbSpan(int k)
     {
         if (thumbs == 1) return "g-span-6";
@@ -31,41 +44,47 @@
     <div class="container">
         <div class="row g-4 g-lg-5">
             <div class="col-lg-8">
-                <div class="eda-gallery">
+                <div class="eda-gallery" id="projectGallery">
                     @for (var i = 0; i < images.Count; i++)
                     {
-                        <a href="@images[i]" class="@(i == 0 ? "eda-gallery-main" : ThumbSpan(i - 1))" data-eda-lightbox="project" data-caption="@Model.Title">
-                            <img src="@images[i]" alt="@Model.Title – صورة @(i + 1)" loading="@(i == 0 ? "eager" : "lazy")" />
+                        <a href="@images[i]" class="@(i == 0 ? "eda-gallery-main" : ThumbSpan(i - 1) + MoreClass(i - 1))" data-eda-lightbox="project" data-caption="@Model.Title">
+                            <img src="@images[i]" alt="@T["Projects.Details.PhotoAlt", Model.Title, i + 1]" loading="@(i == 0 ? "eager" : "lazy")" />
                         </a>
                     }
                 </div>
+                @if (collapsible)
+                {
+                    <button type="button" class="btn btn-outline-success eda-gallery-toggle" data-eda-gallery-toggle="projectGallery">
+                        <i class="bi bi-images"></i> @T["Projects.Details.ShowAllPhotos", images.Count]
+                    </button>
+                }
             </div>
             <div class="col-lg-4">
                 <aside class="eda-project-info">
-                    <h2>عن المشروع</h2>
+                    <h2>@T["Projects.Details.About"]</h2>
                     <p>@Model.Summary</p>
                     <ul>
-                        <li><i class="bi bi-geo-alt"></i><span>الموقع</span><strong>@Model.City</strong></li>
-                        <li><i class="bi bi-tag"></i><span>التصنيف</span>
+                        <li><i class="bi bi-geo-alt"></i><span>@T["Projects.Details.Location"]</span><strong>@Model.City</strong></li>
+                        <li><i class="bi bi-tag"></i><span>@T["Projects.Details.Category"]</span>
                             <strong><a asp-action="Index" asp-route-category="@CompanyData.CategorySlug(Model.Category)">@CompanyData.CategoryTitle(Model.Category)</a></strong></li>
-                        <li><i class="bi bi-images"></i><span>الصور</span><strong>@images.Count</strong></li>
-                        <li><i class="bi bi-building"></i><span>المنفذ</span><strong>@CompanyData.NameAr</strong></li>
+                        <li><i class="bi bi-images"></i><span>@T["Projects.Details.Photos"]</span><strong>@images.Count</strong></li>
+                        <li><i class="bi bi-building"></i><span>@T["Projects.Details.Contractor"]</span><strong>@CompanyData.Name</strong></li>
                     </ul>
-                    <a class="btn btn-success w-100" asp-controller="Home" asp-action="Contact"><i class="bi bi-send"></i> اطلب مشروعًا مماثلًا</a>
-                    <a class="btn btn-outline-success w-100 mt-2" href="@CompanyData.WhatsAppUrl($"استفسار بخصوص مشروع مشابه لـ: {Model.Title}")" target="_blank" rel="noopener"><i class="bi bi-whatsapp"></i> تواصل عبر واتساب</a>
+                    <a class="btn btn-success w-100" asp-controller="Home" asp-action="Contact"><i class="bi bi-send"></i> @T["Projects.Details.RequestSimilar"]</a>
+                    <a class="btn btn-outline-success w-100 mt-2" href="@CompanyData.WhatsAppUrl(T["Shared.WhatsApp.ProjectMessage", Model.Title])" target="_blank" rel="noopener"><i class="bi bi-whatsapp"></i> @T["Shared.WhatsApp.Label"]</a>
                 </aside>
             </div>
         </div>
 
-        <nav class="eda-prevnext" aria-label="التنقل بين المشاريع">
+        <nav class="eda-prevnext" aria-label="@T["Projects.Details.PrevNextLabel"]">
             @if (prev is not null)
             {
-                <a asp-action="Details" asp-route-slug="@prev.Slug"><i class="bi bi-arrow-right"></i><span><small>المشروع السابق</small>@prev.Title</span></a>
+                <a asp-action="Details" asp-route-slug="@prev.Slug"><i class="bi bi-arrow-right eda-flip-ltr"></i><span><small>@T["Projects.Details.Previous"]</small>@prev.Title</span></a>
             }
             else { <span></span> }
             @if (next is not null)
             {
-                <a asp-action="Details" asp-route-slug="@next.Slug" class="text-start"><span><small>المشروع التالي</small>@next.Title</span><i class="bi bi-arrow-left"></i></a>
+                <a asp-action="Details" asp-route-slug="@next.Slug" class="text-start"><span><small>@T["Projects.Details.Next"]</small>@next.Title</span><i class="bi bi-arrow-left eda-flip-ltr"></i></a>
             }
         </nav>
     </div>
@@ -77,7 +96,7 @@
         <div class="container">
             <div class="eda-section-head">
                 <span class="eda-eyebrow">@CompanyData.CategoryTitle(Model.Category)</span>
-                <h2>مشاريع مشابهة</h2>
+                <h2>@T["Projects.Details.Similar"]</h2>
             </div>
             <div class="row g-4">
                 @foreach (var p in related)

@@ -1,25 +1,48 @@
+using EDA_Website.Localization;
 using EDA_Website.Models;
 
 namespace EDA_Website.Data;
 
 /// <summary>
-/// All company content, taken from the EDA company profile (PDF).
-/// Edit this file to change texts, contact details, services or projects.
+/// The company's content, taken from the EDA company profile (PDF).
+/// <para>
+/// This file holds what is the same in every language: contact details, registration numbers, and the list,
+/// order, icons, photos and links of services, projects, values and clients.
+/// All wording (Arabic and English) lives in Resources/Translations/{language}/Data.*.json, keyed by the
+/// slugs and ids used here. To add a project: add it below, then add its text to Data.Projects.json in every language.
+/// </para>
 /// </summary>
 public static class CompanyData
 {
-    // ---------- Identity & contact ----------
-    public const string NameAr = "شركة إيدا للتكييف والتبريد";
-    public const string NameEn = "EDA For Air Conditioning Company";
-    public const string Tagline = "خبرة واحترافية في كل مشروع";
+    // ---------- Identity (text: Data.Company.json) ----------
 
+    /// <summary>Official company name in the current language.</summary>
+    public static string Name => Translations.Get("Data.Company.Name");
+
+    public static string NameIn(SiteLanguage language) => Translations.Get("Data.Company.Name", language.Code);
+
+    /// <summary>Short brand name used in page titles ("إيدا للتكييف", "EDA Air Conditioning").</summary>
+    public static string ShortName => Translations.Get("Data.Company.ShortName");
+
+    public static string Tagline => Translations.Get("Data.Company.Tagline");
+
+    /// <summary>Meta description for pages that don't set their own (Google shows about 150 characters).</summary>
+    public static string DefaultDescription => Translations.Get("Data.Company.Description");
+
+    // ---------- Contact (the same in every language) ----------
     public const string Phone1 = "+966547777603";
     public const string Phone1Display = "966 547777603";
     public const string Phone2 = "+966540010402";
     public const string Phone2Display = "966 540010402";
     public const string WhatsApp = "966540010402";
     public const string Email = "edaac.co@gmail.com";
-    public const string Address = "جدة – تقاطع شارع صاري مع طريق المدينة";
+
+    public static string StreetAddress => Translations.Get("Data.Company.StreetAddress");
+    public static string City => Translations.Get("Data.Company.City");
+    public static string Region => Translations.Get("Data.Company.Region");
+    public static string Country => Translations.Get("Data.Company.Country");
+    public static string Address => Translations.Get("Data.Company.Address");
+
     // Exact company pin, from the Google Maps link the owner shared (https://maps.app.goo.gl/tpCCQJcjegsVFDKv9)
     public const string MapLatitude = "21.5815468";
     public const string MapLongitude = "39.1662788";
@@ -34,107 +57,96 @@ public static class CompanyData
     public static string WhatsAppUrl(string? text = null) =>
         $"https://wa.me/{WhatsApp}" + (string.IsNullOrEmpty(text) ? "" : "?text=" + Uri.EscapeDataString(text));
 
-    public static string MapEmbedUrl => $"https://maps.google.com/maps?q={MapLatitude},{MapLongitude}&z=17&hl=ar&output=embed";
+    /// <summary>Embedded Google map, with its labels in the page's language.</summary>
+    public static string MapEmbedUrl => $"https://maps.google.com/maps?q={MapLatitude},{MapLongitude}&z=17&hl={SiteLanguages.Current.Code}&output=embed";
     public static string MapLinkUrl => MapShareUrl;
 
-    // ---------- About ----------
-    public const string AboutIntro =
-        "تعنى شركة إيدا للتكييف المركزي بتقديم أفضل تكنولوجيا التكييف والتبريد لعملائها في جميع أنحاء المملكة العربية السعودية. " +
-        "وكخطوة أولى لهذا الإنجاز، قام المؤسسون باستقطاب أفضل الموارد والأجهزة المعنية بالتكييف المركزي، والاتفاق مع ذوي الخبرات المدربة لتصبح النتيجة ذات جودة عالية.";
+    // ---------- About (text: Data.Company.json → About) ----------
+    public static string AboutIntro => Translations.Get("Data.Company.About.Intro");
+    public static string AboutDesign => Translations.Get("Data.Company.About.Design");
+    public static string AboutSupply => Translations.Get("Data.Company.About.Supply");
+    public static string AboutPosition => Translations.Get("Data.Company.About.Position");
 
-    public const string AboutDesign =
-        "نقوم بتصميم وتنفيذ مشروعات التكييف المركزي من خلال حساب الأحمال الحرارية لكافة المباني، بأسلوب علمي وباستخدام تكنولوجيا جديدة توفر الطاقة، وترفع الكفاءة، وتزيد العمر الافتراضي للمنظومة.";
-
-    public const string AboutSupply =
-        "كما نقوم بتوريد وتركيب جميع أنواع المكيفات: «سبليت»، «دكت سبليت يونت»، والأجهزة «الباكدج». ونقدم عروض الصيانة السنوية للفلل والأبراج السكنية والمطاعم بخدمات متميزة وأسعار مناسبة، وذلك من خلال كادر متخصص في صيانة أجهزة التكييف وفقًا لأفضل المعايير العلمية.";
-
-    public const string AboutPosition =
-        "تحتل المؤسسة موقعًا متقدمًا في سوق التكييف ومعالجة الأجواء الداخلية في المملكة، حيث تحظى بالقبول والتميز لدى عملائها ومورديها الذين يشهدون لها بالجودة وحسن التعامل. " +
-        "وهذا دليل على الخدمة الرفيعة والتواصل المستمر مع العملاء، ولا شك أن شركة إيدا تسعى للمحافظة على عملائها الحاليين بإطلاعهم على الخدمات والأفكار الجديدة، وكذلك استقطاب عملاء جدد، آملين أن تحقق خدماتنا احتياجاتكم وطموحاتكم.";
-
+    // Text: Data.Company.json → Values.{id}
     public static readonly IReadOnlyList<CompanyValue> Values =
     [
-        new("الاحترافية والجودة", "نلتزم بأعلى معايير المهنية والنمو المستمر، ونسعى لتقديم أعمالنا بأقصى درجات الدقة والجودة.", "bi-award"),
-        new("تطوير فريقنا", "نحرص على تطوير مهارات فريقنا من خلال التدريب والتأهيل الفني المستمر داخل المملكة وخارجها، لنواكب أحدث التطورات في مجالات التكييف والتبريد.", "bi-people"),
-        new("السلامة والأمان", "نولي أهمية كبرى للسلامة في بيئة العمل، ونلتزم بتوفير مواقع عمل نظيفة وآمنة، مع الحفاظ على ممتلكات العملاء من أي تلف أو ضرر.", "bi-shield-check"),
-        new("العميل شريك نجاح", "نتعامل مع كل عميل باعتباره شريك نجاح، ونسعى دائمًا لإرضائه وتلبية احتياجاته بأعلى مستويات الاحتراف.", "bi-hand-thumbs-up"),
-        new("الالتزام بالمواعيد", "تقوم ثقتنا ومصداقيتنا على أسس متينة من الالتزام بالمواعيد والجودة العالية في كل مرحلة من مراحل التنفيذ.", "bi-clock-history"),
-        new("حلول هندسية مبتكرة", "نقدم حلولًا هندسية مبتكرة تحقق أفضل النتائج وأعلى كفاءة بأقل التكاليف الممكنة، مع خدمة متميزة لما بعد البيع.", "bi-lightbulb")
+        new("quality", "bi-award"),
+        new("team", "bi-people"),
+        new("safety", "bi-shield-check"),
+        new("partner", "bi-hand-thumbs-up"),
+        new("punctuality", "bi-clock-history"),
+        new("innovation", "bi-lightbulb")
     ];
 
-    // ---------- Org chart (profile slide 05) ----------
-    public const string OrgTop = "المدير العام";
-    public static readonly string[] OrgManagers = ["المدير الإداري", "مدير المشروع", "الإدارة المالية"];
-    public static readonly string[] OrgProjectTeam = ["سوبر فايزر", "مهندس المشروع", "فنيين المشروع"];
+    // ---------- Org chart (profile slide 05; text: Data.Company.json → Org.{id}) ----------
+    public static readonly OrgRole OrgTop = new("general-manager");
+    public static readonly IReadOnlyList<OrgRole> OrgManagers = [new("admin-manager"), new("project-manager", LeadsProjectTeam: true), new("finance")];
+    public static readonly IReadOnlyList<OrgRole> OrgProjectTeam = [new("supervisor"), new("project-engineer"), new("technicians")];
 
-    // ---------- Services (profile slide 04) ----------
+    // ---------- Services (profile slide 04; text: Data.Services.json → {slug}) ----------
+    // Order here = order of the service cards, the footer list and the contact form choices.
+    // Each service has its own page, /services/{slug}, whose wording is in the translation files.
     public static readonly IReadOnlyList<Service> Services =
     [
-        new("central-ventilation", "أنظمة التهوية المركزية",
-            "تصميم وتنفيذ أنظمة تهوية مركزية تضمن تجديد الهواء وجودة الأجواء الداخلية.",
-            "نصمم وننفذ أنظمة التهوية المركزية للمباني السكنية والتجارية والمنشآت العامة، بما يضمن تجديد الهواء بشكل مستمر وتحقيق أعلى معايير جودة الهواء الداخلي والراحة.",
-            "bi-wind",
-            ["دراسة احتياجات التهوية لكل منشأة", "مراوح سحب وطرد ووحدات معالجة هواء", "تهوية الصالات والمساجد والمنشآت التجارية"]),
-        new("split-window", "أنظمة التكييف الشباك والأسبليت",
-            "توريد وتركيب جميع أنواع المكيفات الشباك والسبليت بأفضل الماركات.",
-            "نوفر ونركب مكيفات الشباك والسبليت للفلل والشقق والمكاتب والمحلات، مع اختيار السعة المناسبة لكل مساحة وتنفيذ التمديدات بشكل احترافي ونظيف.",
-            "bi-snow",
-            ["توريد مكيفات سبليت وشباك", "تمديدات نحاس وتصريف احترافية", "اختيار السعة المناسبة لكل غرفة"]),
-        new("central-package", "أنظمة التكييف السنترال والباكدج المركزية",
-            "تصميم وتنفيذ منظومات التكييف المركزي والدكت سبليت والباكدج.",
-            "نقوم بتصميم وتنفيذ مشروعات التكييف المركزي من خلال حساب الأحمال الحرارية لكافة المباني بأسلوب علمي، وتوريد وتركيب أجهزة «الدكت سبليت» و«الباكدج» باستخدام تكنولوجيا توفر الطاقة وترفع الكفاءة.",
-            "bi-building",
-            ["حساب الأحمال الحرارية", "دكت سبليت يونت وأجهزة باكدج", "حلول موفرة للطاقة وعالية الكفاءة"]),
-        new("ducts-grilles", "صناعة مجاري الهواء والجريلات",
-            "تصنيع وتركيب مجاري الهواء (الدكت) والجريلات وفق المواصفات الفنية.",
-            "نصنع ونركب مجاري الهواء المعدنية والعزل الخاص بها، إضافة إلى الجريلات وفتحات التوزيع، بما يضمن توزيعًا متوازنًا للهواء وأداءً هادئًا وفعالًا للمنظومة.",
-            "bi-bounding-box",
-            ["تصنيع الدكت المجلفن وعزله", "توريد وتركيب الجريلات والدفيوزرات", "تنفيذ وفق المخططات الهندسية"]),
-        new("operation-monitoring", "تشغيل ومتابعة أنظمة التكييف العملاقة",
-            "تشغيل ومتابعة الأنظمة الكبيرة للمولات والمنشآت التجارية والحكومية.",
-            "نتولى تشغيل ومتابعة أنظمة التكييف العملاقة في المجمعات التجارية والمنشآت الحكومية والخدمية، مع ضبط الأداء ومراقبة لوحات التحكم لضمان استقرار التشغيل وكفاءة استهلاك الطاقة.",
-            "bi-speedometer2",
-            ["تشغيل الوحدات المركزية ووحدات الباكدج", "تأهيل وتحديث لوحات التحكم", "متابعة دورية وتقارير أداء"]),
-        new("maintenance-contracts", "خدمات وعقود صيانة وإصلاح",
-            "عقود صيانة سنوية ودورية وإصلاح الأعطال بكادر فني متخصص.",
-            "نقدم عروض الصيانة السنوية للفلل والأبراج السكنية والمطاعم والمحلات التجارية بخدمات متميزة وأسعار مناسبة، من خلال كادر متخصص في صيانة أجهزة التكييف وفقًا لأفضل المعايير، إضافة إلى أعمال الصيانة المعتمدة بضمان شركة TRANE.",
-            "bi-tools",
-            ["عقود صيانة سنوية ودورية", "لحام وإصلاح الكويلات واستبدال الكمبروسر", "تغيير الفلاتر وتقارير تشخيص كاملة"])
+        new("central-ventilation", "bi-wind", "/images/site/rooftop.jpg")
+        {
+            RelatedProjects = ["in2-fitness-gym", "al-barza-mosque", "king-fahd-mosque-madinah"]
+        },
+        new("split-window", "bi-snow", "/images/site/about-unit.jpg")
+        {
+            RelatedProjects = ["bin-mahfouz-villa", "mohammed-abdu-palaces", "hada-al-sham-rest-house"]
+        },
+        new("central-package", "bi-building", "/images/site/hero.jpg")
+        {
+            RelatedProjects = ["al-hijrain-village", "seychelles-2-resort", "snb-red-sea-mall"]
+        },
+        // the duct photo from the profile (its old project path now holds a different photo)
+        new("ducts-grilles", "bi-bounding-box", "/images/site/ducts.jpg")
+        {
+            RelatedProjects = ["al-hijrain-village", "in2-fitness-gym", "snb-red-sea-mall"]
+        },
+        new("operation-monitoring", "bi-speedometer2", "/images/site/chillers.jpg")
+        {
+            RelatedProjects = ["al-jamoum-municipality", "air-defense-jeddah", "adeeks-complex"]
+        },
+        new("maintenance-contracts", "bi-tools", "/images/site/technician.jpg")
+        {
+            RelatedProjects = ["ikea-madinah", "muvi-cinema-jeddah", "jazan-economy-hall"]
+        }
     ];
 
+    public static Service? FindService(string? slug) =>
+        Services.FirstOrDefault(s => string.Equals(s.Slug, slug, StringComparison.OrdinalIgnoreCase));
+
+    // Text: Data.Company.json → Process.{id}
     public static readonly IReadOnlyList<ProcessStep> Process =
     [
-        new("دراسة الموقع", "معاينة المبنى وحساب الأحمال الحرارية بأسلوب علمي.", "bi-clipboard-data"),
-        new("التصميم", "اختيار المنظومة الأنسب وإعداد المخططات الهندسية.", "bi-rulers"),
-        new("التوريد والتركيب", "توريد أجهزة بأفضل الماركات وتنفيذ احترافي بإشراف هندسي.", "bi-gear-wide-connected"),
-        new("التشغيل والتسليم", "تشغيل المنظومة وضبط الأداء وتسليمها بعد التأكد من كفاءتها.", "bi-check2-circle"),
-        new("الصيانة الدورية", "عقود صيانة تضمن استمرارية التشغيل وإطالة عمر الأجهزة.", "bi-arrow-repeat")
+        new("survey", "bi-clipboard-data"),
+        new("design", "bi-rulers"),
+        new("installation", "bi-gear-wide-connected"),
+        new("handover", "bi-check2-circle"),
+        new("maintenance", "bi-arrow-repeat")
     ];
 
-    // ---------- Clients (profile slide "عملاء نفتخر بثقتهم بنا") ----------
+    // ---------- Clients (profile slide "عملاء نفتخر بثقتهم بنا"; names: Data.Company.json → Clients.{id}) ----------
+    // Square WebP logos (~3–12 KB each); the original PNG/JPG/WebP sources stay next to them.
+    // Order matters: the first cards are the ones seen first (IPC and Al-Rayan are featured).
     public static readonly IReadOnlyList<Client> Clients =
     [
-        new("ايكيا IKEA", "/images/clients/ikea.png"),
-        new("ماكدونالدز", "/images/clients/mcdonalds.png"),
-        new("موڤي سينما", "/images/clients/muvi.png"),
-        new("هايبر بنده", "/images/clients/hyperpanda.png"),
-        new("رئاسة شؤون المسجد الحرام", "/images/clients/haram-affairs.png"),
-        new("سينومي – الياسمين مول", "/images/clients/cenomi.png"),
-        new("هيفاء مول", "/images/clients/haifaa-mall.png"),
-        new("رد سي مول", "/images/clients/red-sea-mall.png"),
-        new("مصنع المدثر للبلاستيك", "/images/clients/al-madthar.png"),
-        new("أحد عملائنا", "/images/clients/al-rayan.png")
+        new("ipc", "/images/clients/ipc.webp"),
+        new("al-rayan", "/images/clients/al-rayan.webp"),
+        new("ikea", "/images/clients/ikea.webp"),
+        new("mcdonalds", "/images/clients/mcdonalds.webp"),
+        new("muvi", "/images/clients/muvi.webp"),
+        new("haram-affairs", "/images/clients/haram-affairs.webp"),
+        new("king-abdulaziz-hospital-jeddah", "/images/clients/king-abdulaziz-hospital-jeddah.webp"),
+        new("cenomi", "/images/clients/cenomi.webp"),
+        new("haifaa-mall", "/images/clients/haifaa-mall.webp"),
+        new("red-sea-mall", "/images/clients/red-sea-mall.webp"),
+        new("al-fahhad", "/images/clients/al-fahhad.webp")
     ];
 
-    // ---------- Project categories ----------
-    public static string CategoryTitle(ProjectCategory c) => c switch
-    {
-        ProjectCategory.AirConditioning => "مشاريع التكييف والتبريد",
-        ProjectCategory.TraneMaintenance => "أعمال الصيانة بضمان TRANE",
-        ProjectCategory.CompanyMaintenance => "أعمال صيانة الشركة",
-        _ => ""
-    };
-
+    // ---------- Project categories (text: Data.ProjectCategories.json → {slug}) ----------
     public static string CategorySlug(ProjectCategory c) => c switch
     {
         ProjectCategory.AirConditioning => "ac-projects",
@@ -146,82 +158,58 @@ public static class CompanyData
     public static ProjectCategory? CategoryFromSlug(string? slug) =>
         Enum.GetValues<ProjectCategory>().Cast<ProjectCategory?>().FirstOrDefault(c => CategorySlug(c!.Value) == slug);
 
-    public static string CategoryDescription(ProjectCategory c) => c switch
-    {
-        ProjectCategory.AirConditioning =>
-            "تنفيذ مشاريع متكاملة في مجالات التكييف والتبريد، تشمل التصميم، التركيب، والإشراف على التنفيذ وفق أعلى معايير الجودة والمواصفات الفنية المعتمدة، لضمان الكفاءة التشغيلية والأداء المثالي في مختلف أنواع المنشآت.",
-        ProjectCategory.TraneMaintenance =>
-            "تنفيذ مشاريع متكاملة في مجالات التكييف والتبريد، تشمل التصميم، التركيب، والصيانة، بالإضافة إلى الإشراف على التنفيذ وفق أعلى معايير الجودة والمواصفات الفنية المعتمدة من شركة TRANE.",
-        ProjectCategory.CompanyMaintenance =>
-            "أعمال صيانة متكاملة في مجالات التكييف والتبريد تحت إشراف وإدارة الشركة، مع الالتزام بأعلى معايير الجودة والمواصفات الفنية لضمان كفاءة التشغيل والأداء المثالي.",
-        _ => ""
-    };
+    private static string CategoryText(ProjectCategory c, string field) =>
+        Translations.Get($"Data.ProjectCategories.{CategorySlug(c)}.{field}");
 
-    // ---------- Projects (profile slides 06–33) ----------
+    public static string CategoryTitle(ProjectCategory c) => CategoryText(c, "Title");
+
+    public static string CategoryDescription(ProjectCategory c) => CategoryText(c, "Description");
+
+    /// <summary>Title of /projects?category=… in Google results (each category page gets its own).</summary>
+    public static string CategorySeoTitle(ProjectCategory c) => CategoryText(c, "SeoTitle");
+
+    public static string CategoryMetaDescription(ProjectCategory c) => CategoryText(c, "MetaDescription");
+
+    // ---------- Projects (profile slides 06–33; text: Data.Projects.json → {slug}) ----------
+    // Order here = order on the projects page; Featured ones also appear on the home page.
     public static readonly IReadOnlyList<Project> Projects =
     [
         // 1) Air-conditioning projects
-        new("mohammed-abdu-palaces", "قصور وفيلات ومصانع الفنان محمد عبده", "حي المحجر – جدة", ProjectCategory.AirConditioning,
-            "نفخر بتولينا تنفيذ جميع أعمال التكييف الخاصة بالفنان الكبير محمد عبده، والتي شملت قصوره وفيلاته ومصانعه، حيث قمنا بتصميم وتنفيذ أنظمة تكييف متكاملة تحقق أعلى معايير الكفاءة والفخامة.", 4, true),
-        new("sudais-hall-mina", "القاعة الخاصة لفضيلة الشيخ عبدالرحمن السديس – رئاسة شؤون المسجد الحرام", "منى – مكة المكرمة", ProjectCategory.AirConditioning,
-            "تنفيذ وتصميم أعمال التكييف الكاملة للقاعة الخاصة التابعة لرئاسة شؤون المسجد الحرام، بإشراف فضيلة الشيخ عبدالرحمن السديس، حيث تم تنفيذ أنظمة التكييف وفق أعلى المعايير الفنية والهندسية لضمان أقصى درجات الراحة والجودة في بيئة العمل.", 3, true),
-        new("bin-mahfouz-villa", "فيلا بن محفوظ", "أبحر – جدة", ProjectCategory.AirConditioning,
-            "تنفيذ أعمال التكييف بالكامل، بما يشمل التصميم والتركيب وفق أحدث الأنظمة وأعلى معايير الجودة والكفاءة.", 3),
-        new("al-hijrain-village", "قرية الهجرين – شركة المرجان", "جدة", ProjectCategory.AirConditioning,
-            "تنفيذ وتصميم أعمال التكييف بالكامل لصالح شركة المرجان، في إطار مشروع قرية الهجرين، حيث تم تنفيذ الأنظمة وفق أعلى معايير الجودة والكفاءة لتوفير حلول تكييف متكاملة تلبي متطلبات المشاريع الحديثة.", 6, true),
-        new("al-jamoum-municipality", "بلدية محافظة الجموم", "الجموم – مكة المكرمة", ProjectCategory.AirConditioning,
-            "تنفيذ أعمال تركيب وتأهيل وحدة الكنترول تحت إشراف وإدارة الشركة، مع الالتزام بأعلى معايير الجودة والمواصفات الفنية لضمان كفاءة التشغيل واستقرار الأداء.", 3),
-        new("hada-al-sham-rest-house", "الاستراحة الخاصة بمشايخ هدي الشام", "البرزة – مكة المكرمة", ProjectCategory.AirConditioning,
-            "تصميم وتنفيذ أعمال التكييف بالكامل للاستراحة الخاصة بمشايخ منطقة هدي الشام، البرزة، وفق أحدث الأنظمة والمعايير الفنية لضمان أعلى مستويات الكفاءة والجودة والراحة.", 4),
-        new("seychelles-2-resort", "منتجع سيشليز 2 – شركة المرجان", "جدة", ProjectCategory.AirConditioning,
-            "أعمال تأسيس وتنفيذ كاملة لمشروع منتجع سيشليز 2 لصالح شركة المرجان، شملت دراسة وتنفيذ أنظمة التكييف وفق أعلى المعايير الهندسية، لتحقيق كفاءة تشغيلية عالية وبيئة فاخرة تناسب طبيعة المشروع السياحي.", 3, true),
-        new("al-barza-mosque", "مسجد مدينة البرزة", "هدي الشام – مكة المكرمة", ProjectCategory.AirConditioning,
-            "تصميم وتنفيذ كامل لأعمال التكييف في المسجد، بما يشمل التخطيط الهندسي والتركيب وفق أعلى معايير الجودة، لضمان كفاءة التشغيل وتوفير أقصى درجات الراحة للمصلين.", 3),
-        new("king-fahd-mosque-madinah", "مسجد الملك فهد", "المدينة المنورة", ProjectCategory.AirConditioning,
-            "تنفيذ أعمال التكييف بالكامل، شملت توريد وتركيب أنظمة التكييف وفق أعلى المواصفات الفنية والمعايير الهندسية، بما يضمن كفاءة التشغيل وتوفير أقصى درجات الراحة داخل المسجد.", 5, true),
-        new("in2-fitness-gym", "IN2 Fitness Gym", "حي الروضة – جدة", ProjectCategory.AirConditioning,
-            "تصميم وتنفيذ أعمال التكييف بالكامل لصالة IN2 Fitness، بما يشمل دراسة الأحمال وتنفيذ أنظمة التهوية والتبريد وفق أعلى معايير الجودة والكفاءة لتوفير بيئة مثالية للتدريب والراحة.", 5),
-        new("snb-red-sea-mall", "فرع البنك الأهلي – رد سي مول", "جدة", ProjectCategory.AirConditioning,
-            "أعمال تأسيس وتنفيذ كاملة لأنظمة التكييف الخاصة بفرع البنك الأهلي في رد سي مول، شملت التصميم والتركيب وفق أعلى المواصفات الفنية لضمان كفاءة التشغيل وتوفير بيئة عمل مريحة وآمنة.", 5, true),
+        new("mohammed-abdu-palaces", ProjectCategory.AirConditioning, 13, Featured: true),
+        new("sudais-hall-mina", ProjectCategory.AirConditioning, 27, Featured: true),
+        new("bin-mahfouz-villa", ProjectCategory.AirConditioning, 3),
+        new("al-hijrain-village", ProjectCategory.AirConditioning, 49, Featured: true),
+        new("al-jamoum-municipality", ProjectCategory.AirConditioning, 3),
+        new("hada-al-sham-rest-house", ProjectCategory.AirConditioning, 4),
+        new("seychelles-2-resort", ProjectCategory.AirConditioning, 52, Featured: true),
+        new("al-barza-mosque", ProjectCategory.AirConditioning, 11),
+        new("king-fahd-mosque-madinah", ProjectCategory.AirConditioning, 7, Featured: true),
+        new("in2-fitness-gym", ProjectCategory.AirConditioning, 35),
+        new("snb-red-sea-mall", ProjectCategory.AirConditioning, 29, Featured: true),
 
         // 2) Maintenance under TRANE warranty
-        new("ikea-madinah", "أعمال صيانة – إيكيا", "المدينة المنورة", ProjectCategory.TraneMaintenance,
-            "تنفيذ أعمال الصيانة لأنظمة التكييف الخاصة بفرع IKEA في المدينة المنورة، شملت الفحص الدوري، والتنظيف، واستبدال القطع اللازمة لضمان أعلى كفاءة تشغيل واستمرارية الأداء وفق معايير شركة TRANE.", 5, true),
-        new("jazan-economy-hall", "الصالة الاقتصادية", "جازان", ProjectCategory.TraneMaintenance,
-            "تنفيذ أعمال الصيانة ولحام كويل الوحدات الألمانية، مع إعادة إصلاحها ضمن مشروع الصالة الاقتصادية في جازان، وفق المواصفات المعتمدة.", 5),
-        new("air-defense-jeddah", "مشروع الدفاع الجوي", "جدة", ProjectCategory.TraneMaintenance,
-            "تنفيذ أعمال تركيب كمبروسر وإعادة تشغيل الماكينة بالتعاون مع شركة الخريف، وباستخدام أحدث التقنيات لضمان كفاءة التشغيل واستمرارية الأداء.", 3),
-        new("adeeks-complex", "مجمع شركة أديكس", "جدة", ProjectCategory.TraneMaintenance,
-            "تنفيذ أعمال تركيب هيتر للماكينة وتشغيلها ضمن مجمع شركة أديكس، وذلك وفق المعايير الفنية المعتمدة لضمان الكفاءة التشغيلية واستمرارية الأداء بأعلى جودة.", 4),
-        new("jarir-jazan", "مكتبة جرير", "جازان", ProjectCategory.TraneMaintenance,
-            "إعادة تركيب كمبروسر وفلتر ضمن أعمال الصيانة الخاصة بفرع مكتبة جرير في مدينة جازان، وفق المواصفات الفنية المعتمدة من TRANE لضمان كفاءة التشغيل واستقرار الأداء.", 4),
-        new("benchmark-events-hall", "قاعة بنش مارك للحفلات", "جدة", ProjectCategory.TraneMaintenance,
-            "تنفيذ أعمال الصيانة والتكييف في قاعة بنش مارك للحفلات بمدينة جدة، شملت الفحص والتشغيل وإعادة ضبط أنظمة التبريد لضمان كفاءة الأداء واستقرار التشغيل.", 4),
-        new("madinah-museum", "المتحف", "المدينة المنورة", ProjectCategory.TraneMaintenance,
-            "تنفيذ أعمال صيانة شاملة وتغيير الفلاتر لجميع وحدات التكييف بالمتحف، مع تشخيص كامل لأداء المكيفات وتقديم تقرير مفصل للإدارة، لضمان استمرارية التشغيل وفق أعلى المعايير الفنية.", 3),
-        new("al-lith-desalination", "محطة التحلية", "مدينة الليث", ProjectCategory.TraneMaintenance,
-            "إعادة لحام تسريب في رأس المكثف وتغيير فلاتر الهواء بمحطة التحلية، مع تطبيق معايير الصيانة الدقيقة لضمان كفاءة التشغيل واستقرار أداء المعدات.", 3),
-        new("muvi-cinema-jeddah", "موڤي سينما", "جدة", ProjectCategory.TraneMaintenance,
-            "تنفيذ أعمال لحام أكثر من 14 نقطة في جميع مكيفات المكثف بالموقع، مع تشغيل الوحدات وتسليمها لإدارة الموقع بعد التأكد من كفاءة التشغيل واستقرار الأداء.", 4, true),
-        new("homemax-taif", "Homemax – فرع مدينة الطائف", "الطائف", ProjectCategory.TraneMaintenance,
-            "تنفيذ أعمال صيانة شاملة لجميع أنظمة التكييف بالمحل، مع التأكد من جودة الأداء واستقرار التشغيل وفق أعلى المعايير الفنية المعتمدة.", 5),
-        new("u-walk-jeddah", "U-Walk", "جدة", ProjectCategory.TraneMaintenance,
-            "تنفيذ أعمال صيانة شاملة لجميع وحدات التكييف بالموقع، مع ضبط الأداء وضمان استقرار التشغيل وفق أعلى المعايير الفنية المعتمدة.", 4),
+        new("ikea-madinah", ProjectCategory.TraneMaintenance, 5, Featured: true),
+        new("jazan-economy-hall", ProjectCategory.TraneMaintenance, 5),
+        new("air-defense-jeddah", ProjectCategory.TraneMaintenance, 3),
+        new("adeeks-complex", ProjectCategory.TraneMaintenance, 4),
+        new("jarir-jazan", ProjectCategory.TraneMaintenance, 4),
+        new("benchmark-events-hall", ProjectCategory.TraneMaintenance, 4),
+        new("madinah-museum", ProjectCategory.TraneMaintenance, 3),
+        new("al-lith-desalination", ProjectCategory.TraneMaintenance, 3),
+        new("muvi-cinema-jeddah", ProjectCategory.TraneMaintenance, 4, Featured: true),
+        new("homemax-taif", ProjectCategory.TraneMaintenance, 5),
+        new("u-walk-jeddah", ProjectCategory.TraneMaintenance, 4),
 
         // 3) Company maintenance
-        new("aldo-al-andalus-mall", "ألدو – مول الأندلس", "جدة", ProjectCategory.CompanyMaintenance,
-            "تنفيذ أعمال صيانة شاملة لجميع وحدات التكييف بمول الأندلس تحت إشراف وإدارة الشركة، مع ضبط الأداء وضمان استقرار التشغيل وفق أعلى معايير الجودة والمواصفات الفنية.", 5),
-        new("oxxo-al-yasmin-mall", "OXXO – مول الياسمين", "جدة", ProjectCategory.CompanyMaintenance,
-            "تنفيذ أعمال صيانة شاملة لجميع وحدات التكييف بمول الياسمين لمحل OXXO تحت إشراف وإدارة الشركة، مع ضبط الأداء وضمان استقرار التشغيل وفق أعلى معايير الجودة والمواصفات الفنية.", 4),
-        new("spring-al-yasmin-mall", "Spring – مول الياسمين", "جدة", ProjectCategory.CompanyMaintenance,
-            "تنفيذ أعمال صيانة شاملة لجميع وحدات التكييف بمول الياسمين لمحل Spring تحت إشراف وإدارة الشركة، مع ضبط الأداء وضمان استقرار التشغيل وفق أعلى معايير الجودة والمواصفات الفنية.", 5),
-        new("aldo-haifaa-mall", "ألدو – هيفاء مول", "جدة", ProjectCategory.CompanyMaintenance,
-            "تنفيذ أعمال صيانة شاملة لجميع وحدات التكييف بمول هيفاء لمحل ألدو تحت إشراف وإدارة الشركة، مع ضبط الأداء وضمان استقرار التشغيل وفق أعلى معايير الجودة والمواصفات الفنية.", 5)
+        new("aldo-al-andalus-mall", ProjectCategory.CompanyMaintenance, 5),
+        new("oxxo-al-yasmin-mall", ProjectCategory.CompanyMaintenance, 4),
+        new("spring-al-yasmin-mall", ProjectCategory.CompanyMaintenance, 5),
+        new("aldo-haifaa-mall", ProjectCategory.CompanyMaintenance, 5)
     ];
 
     public static Project? FindProject(string slug) =>
         Projects.FirstOrDefault(p => string.Equals(p.Slug, slug, StringComparison.OrdinalIgnoreCase));
 
-    /// <summary>Cities where the projects above were delivered.</summary>
-    public static readonly string[] CitiesServed = ["جدة", "مكة المكرمة", "المدينة المنورة", "جازان", "الطائف", "الليث"];
+    /// <summary>Cities where the projects above were delivered (text: Data.Company.json → Cities).</summary>
+    public static IReadOnlyList<string> CitiesServed => Translations.List("Data.Company.Cities");
 }

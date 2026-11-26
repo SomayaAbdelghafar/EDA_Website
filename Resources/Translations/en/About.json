@@ -1,0 +1,43 @@
+{
+  // About page (Views/Home/About.cshtml). The company paragraphs, values and org chart are in Data.Company.json.
+  "SeoTitle": "About Us | EDA Air Conditioning & Refrigeration, Jeddah",
+  "Subtitle": "We provide the best air conditioning and refrigeration technology to our clients throughout Saudi Arabia.",
+  "Description": "Get to know EDA Air Conditioning & Refrigeration in Jeddah: who we are, our values, our organizational structure, and our commercial registration and VAT certificates.",
+  "Who": {
+    "Eyebrow": "Who We Are",
+    "ImageAlt": "Air conditioning unit"
+  },
+  "Position": {
+    "Eyebrow": "Our Standing",
+    "Title": "A Leading Position in the Saudi AC Market",
+    "VanAlt": "EDA service vehicle",
+    "TeamAlt": "EDA team on site",
+    "Projects": "Projects",
+    "Clients": "Clients",
+    "Cities": "Cities",
+    "Services": "Services"
+  },
+  "Values": {
+    "Eyebrow": "Our Values",
+    "Title": "The Principles We Work By",
+    "Text": "We treat every client as a partner in success and build lasting relationships founded on mutual trust."
+  },
+  "Org": {
+    "Eyebrow": "Our Team",
+    "Title": "Organizational Structure",
+    "Text": "A clear structure that ensures quality delivery and engineering supervision on every project."
+  },
+  "Licenses": {
+    "Eyebrow": "Credentials",
+    "Title": "Commercial Registration and VAT Certificate",
+    "Text": "An officially registered company with the Ministry of Commerce and the Zakat, Tax and Customs Authority (ZATCA).",
+    "TradeName": "Trade name",
+    "UnifiedNumber": "Unified national number",
+    "CrNumber": "Commercial Registration No.",
+    "VatNumber": "VAT registration No.",
+    "IssueDate": "Issue date",
+    "CrCertificate": "Commercial Registration certificate",
+    "VatCertificate": "VAT registration certificate",
+    "VatCertificateFull": "Value Added Tax (VAT) registration certificate"
+  }
+}

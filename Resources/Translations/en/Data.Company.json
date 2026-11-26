@@ -1,0 +1,97 @@
+{
+  // Company identity and About content, used through Data/CompanyData.cs
+  "Name": "EDA For Air Conditioning Company",
+  "ShortName": "EDA Air Conditioning",
+  "Tagline": "Expertise and professionalism in every project",
+  "Description": "EDA Air Conditioning in Jeddah: design, supply, installation and maintenance of central, split and package AC, annual contracts and TRANE-warranted maintenance.",
+  "StreetAddress": "Intersection of Sari Street and Madinah Road",
+  "City": "Jeddah",
+  "Region": "Makkah Province",
+  "Country": "Saudi Arabia",
+  "Address": "Jeddah – Intersection of Sari Street and Madinah Road",
+  "About": {
+    "Intro": "EDA Central Air Conditioning is dedicated to providing the best air conditioning and refrigeration technology to its clients throughout Saudi Arabia. As a first step toward this goal, its founders brought in the best central air conditioning resources and equipment and partnered with trained, experienced professionals, so that the result is of the highest quality.",
+    "Design": "We design and build central air conditioning projects by calculating the heat loads of every building scientifically, using new technology that saves energy, raises efficiency and extends the life of the system.",
+    "Supply": "We also supply and install all types of air conditioners: split units, ducted split units and package units. We offer annual maintenance plans for villas, residential towers and restaurants with excellent service at fair prices, carried out by a team specialized in air conditioning maintenance to the best scientific standards.",
+    "Position": "The company holds a leading position in Saudi Arabia's air conditioning and indoor climate market, and has earned the trust of clients and suppliers who attest to its quality and integrity. This reflects our high standard of service and constant communication with our clients. EDA strives to keep its existing clients informed of new services and ideas and to win new ones, in the hope that our services meet your needs and ambitions."
+  },
+  "Values": {
+    "quality": {
+      "Title": "Professionalism and Quality",
+      "Description": "We are committed to the highest professional standards and continuous growth, and we strive to deliver our work with the utmost precision and quality."
+    },
+    "team": {
+      "Title": "Developing Our Team",
+      "Description": "We keep developing our team's skills through ongoing technical training and qualification in Saudi Arabia and abroad, to keep pace with the latest advances in air conditioning and refrigeration."
+    },
+    "safety": {
+      "Title": "Health and Safety",
+      "Description": "Safety at work is a top priority. We keep our work sites clean and safe, and we protect our clients' property from any damage."
+    },
+    "partner": {
+      "Title": "Clients as Partners",
+      "Description": "We treat every client as a partner in success, and always strive to satisfy them and meet their needs with the highest level of professionalism."
+    },
+    "punctuality": {
+      "Title": "Commitment to Deadlines",
+      "Description": "Our credibility rests on a solid foundation of punctuality and high quality at every stage of execution."
+    },
+    "innovation": {
+      "Title": "Innovative Engineering Solutions",
+      "Description": "We deliver innovative engineering solutions that achieve the best results and the highest efficiency at the lowest possible cost, backed by outstanding after-sales service."
+    }
+  },
+  "Org": {
+    "general-manager": "General Manager",
+    "admin-manager": "Administrative Manager",
+    "project-manager": "Project Manager",
+    "finance": "Finance Department",
+    "supervisor": "Supervisor",
+    "project-engineer": "Project Engineer",
+    "technicians": "Project Technicians"
+  },
+  "Process": {
+    "survey": {
+      "Title": "Site Survey",
+      "Description": "We inspect the building and calculate heat loads scientifically."
+    },
+    "design": {
+      "Title": "Design",
+      "Description": "We choose the most suitable system and prepare the engineering drawings."
+    },
+    "installation": {
+      "Title": "Supply & Installation",
+      "Description": "Equipment from the best brands, professionally installed under engineering supervision."
+    },
+    "handover": {
+      "Title": "Commissioning & Handover",
+      "Description": "We start up the system, fine-tune its performance and hand it over once its efficiency is confirmed."
+    },
+    "maintenance": {
+      "Title": "Routine Maintenance",
+      "Description": "Maintenance contracts that keep the system running and extend the life of the equipment."
+    }
+  },
+  // Same order as the Arabic list
+  "Cities": [
+    "Jeddah",
+    "Makkah",
+    "Madinah",
+    "Jazan",
+    "Taif",
+    "Al-Lith"
+  ],
+  "Clients": {
+    "ipc": "International Printing Company (IPC)",
+    "al-rayan": "One of our clients",
+    "ikea": "IKEA",
+    "mcdonalds": "McDonald's",
+    "muvi": "Muvi Cinemas",
+    "haram-affairs": "Presidency for the Affairs of the Grand Mosque",
+    "king-abdulaziz-hospital-jeddah": "King Abdulaziz Hospital – Jeddah",
+    "cenomi": "Cenomi – Al Yasmin Mall",
+    "haifaa-mall": "Haifa Mall",
+    "red-sea-mall": "Red Sea Mall",
+    "al-fahhad": "Ahmed Soliman Al Fahhad & Sons Co."
+  }
+}

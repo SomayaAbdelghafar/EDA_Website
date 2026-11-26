@@ -1,0 +1,26 @@
+{
+  // Projects list and project pages (Views/Projects). Project and category text is in Data.Projects.json and Data.ProjectCategories.json.
+  "Heading": "سابقة أعمالنا في التكييف والصيانة",
+  "SeoTitle": "سابقة الأعمال: مشاريع تكييف مركزي وصيانة TRANE | إيدا للتكييف",
+  "Subtitle": "مشاريع التكييف والتبريد وأعمال الصيانة التي نفذناها في مختلف مدن المملكة.",
+  "Description": "سابقة أعمال شركة إيدا للتكييف والتبريد: مشاريع تكييف مركزي، صيانة بضمان TRANE، وأعمال صيانة للمولات والمحلات في جدة ومكة والمدينة وجازان والطائف.",
+  "FilterLabel": "تصنيف المشاريع",
+  "All": "الكل",
+  "Details": {
+    // {0} = project name (short form when it has one), {1} = city
+    "SeoTitle": "{0} – {1} | إيدا للتكييف",
+    // {0} = project name, {1} = photo number
+    "PhotoAlt": "{0} – صورة {1}",
+    "ShowAllPhotos": "عرض كل الصور ({0})",
+    "About": "عن المشروع",
+    "Location": "الموقع",
+    "Category": "التصنيف",
+    "Photos": "الصور",
+    "Contractor": "المنفذ",
+    "RequestSimilar": "اطلب مشروعًا مماثلًا",
+    "PrevNextLabel": "التنقل بين المشاريع",
+    "Previous": "المشروع السابق",
+    "Next": "المشروع التالي",
+    "Similar": "مشاريع مشابهة"
+  }
+}

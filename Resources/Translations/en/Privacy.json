@@ -1,0 +1,25 @@
+{
+  // Privacy policy (Views/Home/Privacy.cshtml)
+  "Description": "Privacy policy of the EDA Air Conditioning & Refrigeration website: the data we collect through the contact form, how we use it, and the external services the website uses.",
+  // {0} = company name
+  "Intro": "At {0}, we respect the privacy of our website's visitors. This page explains how we handle the information you share with us.",
+  "Collected": {
+    "Title": "Information We Collect",
+    "Text": "When you use the “Contact Us” form, we collect your name, mobile number, email address (optional), city and request details, solely to respond to your inquiry and provide the quotation or service you asked for."
+  },
+  "Use": {
+    "Title": "How We Use Your Information",
+    "Text": "We use your information only to contact you about your request. We do not sell it or share it with any third party for marketing purposes.",
+    "LanguageCookie": "When you choose the website's language, we save your choice in a cookie on your device so the site opens in that language on your next visit. We use it for no other purpose."
+  },
+  "ThirdParty": {
+    "Title": "External Services",
+    "Text": "The website uses Google Maps to show our location, Google Fonts, and WhatsApp links for contacting us. These services are subject to their providers' own privacy policies.",
+    "Analytics": "We also use Google Analytics to measure, in aggregate, the number of visits, the most-used pages and the number of contact requests, in order to improve the website. It relies on cookies, which you can disable in your browser settings."
+  },
+  "Contact": {
+    "Title": "Contact",
+    // {0} = the company's e-mail address (a link)
+    "Text": "For any privacy question, you can email us at {0}."
+  }
+}

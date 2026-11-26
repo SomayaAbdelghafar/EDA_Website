@@ -1,0 +1,15 @@
+{
+  // Error pages (Views/Shared/NotFound.cshtml and Error.cshtml)
+  "NotFound": {
+    "Title": "Page Not Found",
+    "Text": "The page may have moved, or the link may be incorrect."
+  },
+  "General": {
+    "Title": "An Error Occurred",
+    "Heading": "Sorry, something went wrong",
+    "Text": "We apologize for the inconvenience. Please try again shortly or contact us directly."
+  },
+  "BackHome": "Back to Home",
+  "BrowseProjects": "Browse Our Projects",
+  "CallUs": "Call Us"
+}

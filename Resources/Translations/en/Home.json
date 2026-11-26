@@ -1,0 +1,83 @@
+{
+  // Home page (Views/Home/Index.cshtml)
+  "Title": "Home",
+  "SeoTitle": "AC Company in Jeddah: Central AC Installation & Maintenance | EDA",
+  "Hero": {
+    "Eyebrow": "EDA Air Conditioning & Refrigeration",
+    "Title": "Air Conditioning Company in Jeddah",
+    "TitleAccent": "Expertise and professionalism in every project",
+    "Lead": "We design, supply, install and maintain central, split and package air conditioning systems for villas, towers, mosques, shopping centers and government facilities in Jeddah and throughout Saudi Arabia.",
+    "ViewWork": "See Our Work"
+  },
+  "Stats": {
+    "Projects": "Completed projects",
+    "Clients": "Clients among leading brands",
+    "Cities": "Cities across the Kingdom",
+    "Trane": "Certified warranty maintenance"
+  },
+  "License": {
+    "Pill": "TRANE-licensed service partner",
+    // {0} = the TRANE name, styled in red
+    "Title": "Licensed by {0}",
+    "TitleLine2": "to maintain central AC systems",
+    "Lead": "EDA holds a license from TRANE, the American company that is one of the most established names in central air conditioning, with more than a century of leadership, to carry out maintenance and repair work under TRANE warranty and to its approved technical specifications. World-class factory quality, from a local team close to you.",
+    "Warranty": {
+      "Title": "TRANE-Warranted Maintenance",
+      "Text": "Maintenance and repair work guaranteed by TRANE."
+    },
+    "Specs": {
+      "Title": "Approved Factory Specifications",
+      "Text": "We follow TRANE's technical standards on every maintenance visit."
+    },
+    "Technicians": {
+      "Title": "Qualified Technicians",
+      "Text": "A team trained on central AC systems in Saudi Arabia and abroad."
+    },
+    "Brands": {
+      "Title": "Trusted by Leading Brands",
+      "Text": "IKEA, Jarir Bookstore, Muvi Cinemas and the Al-Lith desalination plant."
+    },
+    "Cta": "Request Certified Maintenance",
+    "ProjectsLink": "TRANE maintenance projects ({0})",
+    "Card": {
+      "Head": "Authorized Service License",
+      "TraneLogo": "TRANE logo",
+      "CompanyLogo": "{0} logo",
+      "Projects": "Certified maintenance projects",
+      "Cities": "Cities in the Kingdom",
+      "Warranty": "TRANE warranty"
+    }
+  },
+  "About": {
+    "UnitAlt": "Outdoor air conditioning unit",
+    "VanAlt": "EDA Air Conditioning service vehicle",
+    "Title": "Your Trusted Partner in Air Conditioning and Refrigeration",
+    "Points": [
+      "Scientific heat-load calculations",
+      "Energy-saving, high-efficiency technology",
+      "Technicians trained in Saudi Arabia and abroad",
+      "Annual maintenance contracts at fair prices"
+    ],
+    "More": "Learn More About Us"
+  },
+  "Services": {
+    "Title": "Complete Solutions for Every Air Conditioning Need",
+    "Text": "From survey and design to commissioning and routine maintenance."
+  },
+  "Why": {
+    "Eyebrow": "Our Values",
+    "Title": "Why Choose EDA?",
+    "Text": "We hold ourselves to the highest professional standards and keep growing, and we put customer satisfaction and after-sales service first, because we believe real success means building a lasting relationship founded on mutual trust.",
+    "TeamAlt": "EDA team during maintenance work"
+  },
+  "Projects": {
+    "Title": "Projects We Are Proud Of",
+    "Text": "A selection of the air conditioning and maintenance projects we have delivered for clients in cities across the Kingdom."
+  },
+  "TraneBand": {
+    "Eyebrow": "Maintenance Under TRANE Warranty",
+    "Title": "Certified Maintenance to TRANE Specifications",
+    "Text": "We carry out maintenance and repairs on central air conditioning systems to the technical specifications approved by TRANE, for clients such as IKEA, Jarir Bookstore, Muvi Cinemas, the Museum in Madinah and the Al-Lith desalination plant.",
+    "Cta": "Maintenance Projects"
+  }
+}

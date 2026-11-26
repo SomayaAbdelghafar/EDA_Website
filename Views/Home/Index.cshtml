@@ -1,5 +1,8 @@
 ﻿@{
-    ViewData["Title"] = "الرئيسية";
+    ViewData["Title"] = T["Home.Title"].Value;
+    ViewData["SeoTitle"] = T["Home.SeoTitle"].Value;
+    ViewData["Description"] = CompanyData.DefaultDescription;
+    ViewData["PreloadImage"] = "/images/site/hero.webp"; // hero background (site.css) = largest element on screen
     var featured = CompanyData.Projects.Where(p => p.Featured).Take(6).ToList();
     var traneProjects = CompanyData.Projects.Where(p => p.Category == ProjectCategory.TraneMaintenance).ToList();
     var traneCities = traneProjects.Select(p => p.City).Distinct().Count();
@@ -10,12 +13,13 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-xl-7">
-                <span class="eda-hero-eyebrow"><i class="bi bi-snow"></i> للتكييف والتبريد</span>
-                <h1>حلول تكييف متكاملة<br /><span>بخبرة واحترافية في كل مشروع</span></h1>
-                <p class="lead">نصمم ونورد ونركب ونصون أنظمة التكييف المركزي والسبليت والباكدج للفلل والأبراج والمساجد والمجمعات التجارية والجهات الحكومية في جميع أنحاء المملكة العربية السعودية.</p>
+                <span class="eda-hero-eyebrow"><i class="bi bi-snow"></i> @T["Home.Hero.Eyebrow"]</span>
+                @* The H1 carries the page's main search phrase ("شركة تكييف في جدة" / "air conditioning company in Jeddah") *@
+                <h1>@T["Home.Hero.Title"]<br /><span>@T["Home.Hero.TitleAccent"]</span></h1>
+                <p class="lead">@T["Home.Hero.Lead"]</p>
                 <div class="d-flex flex-wrap gap-3 mt-4">
-                    <a class="btn btn-success btn-lg" asp-controller="Home" asp-action="Contact"><i class="bi bi-send"></i> اطلب عرض سعر</a>
-                    <a class="btn btn-outline-light btn-lg" asp-controller="Projects" asp-action="Index"><i class="bi bi-grid"></i> شاهد أعمالنا</a>
+                    <a class="btn btn-success btn-lg" asp-controller="Home" asp-action="Contact"><i class="bi bi-send"></i> @T["Shared.Actions.RequestQuote"]</a>
+                    <a class="btn btn-outline-light btn-lg" asp-controller="Projects" asp-action="Index"><i class="bi bi-grid"></i> @T["Home.Hero.ViewWork"]</a>
                 </div>
             </div>
         </div>
@@ -26,10 +30,10 @@
 <section class="eda-stats-wrap">
     <div class="container">
         <div class="eda-stats">
-            <div class="eda-stat"><i class="bi bi-building-check"></i><strong>+@CompanyData.Projects.Count</strong><span>مشروع منفذ</span></div>
-            <div class="eda-stat"><i class="bi bi-people"></i><strong>+@CompanyData.Clients.Count</strong><span>عميل من كبرى العلامات</span></div>
-            <div class="eda-stat"><i class="bi bi-geo-alt"></i><strong>@CompanyData.CitiesServed.Length</strong><span>مدن في المملكة</span></div>
-            <div class="eda-stat"><i class="bi bi-patch-check"></i><strong>TRANE</strong><span>صيانة بضمان معتمد</span></div>
+            <div class="eda-stat"><i class="bi bi-building-check"></i><strong>+@CompanyData.Projects.Count</strong><span>@T["Home.Stats.Projects"]</span></div>
+            <div class="eda-stat"><i class="bi bi-people"></i><strong>+@CompanyData.Clients.Count</strong><span>@T["Home.Stats.Clients"]</span></div>
+            <div class="eda-stat"><i class="bi bi-geo-alt"></i><strong>@CompanyData.CitiesServed.Count</strong><span>@T["Home.Stats.Cities"]</span></div>
+            <div class="eda-stat"><i class="bi bi-patch-check"></i><strong>TRANE</strong><span>@T["Home.Stats.Trane"]</span></div>
         </div>
     </div>
 </section>
@@ -39,32 +43,32 @@
     <div class="container">
         <div class="row g-5 align-items-center">
             <div class="col-lg-6 eda-tl-copy">
-                <span class="eda-tl-pill"><span class="eda-tl-pulse" aria-hidden="true"></span> شريك خدمة مرخّص من TRANE</span>
-                <h2 id="tl-title">مرخّصون من <span class="eda-tl-brand" dir="ltr">TRANE</span><br />لصيانة أنظمة التكييف المركزي</h2>
-                <p class="eda-tl-lead">تحمل شركة إيدا ترخيص شركة TRANE الأمريكية، أحد أعرق الأسماء العالمية في أنظمة التكييف المركزي بأكثر من قرن من الريادة، لتنفيذ أعمال الصيانة والإصلاح بضمان TRANE ووفق مواصفاتها الفنية المعتمدة. جودة مصنع عالمية، بفريق محلي قريب منك.</p>
+                <span class="eda-tl-pill"><span class="eda-tl-pulse" aria-hidden="true"></span> @T["Home.License.Pill"]</span>
+                <h2 id="tl-title">@T.Html("Home.License.Title", Html.Raw("<span class=\"eda-tl-brand\" dir=\"ltr\">TRANE</span>"))<br />@T["Home.License.TitleLine2"]</h2>
+                <p class="eda-tl-lead">@T["Home.License.Lead"]</p>
 
                 <ul class="eda-tl-features">
                     <li>
                         <i class="bi bi-shield-check" aria-hidden="true"></i>
-                        <div><h3>صيانة بضمان TRANE</h3><p>أعمال صيانة وإصلاح مضمونة من شركة TRANE.</p></div>
+                        <div><h3>@T["Home.License.Warranty.Title"]</h3><p>@T["Home.License.Warranty.Text"]</p></div>
                     </li>
                     <li>
                         <i class="bi bi-clipboard2-check" aria-hidden="true"></i>
-                        <div><h3>مواصفات المصنع المعتمدة</h3><p>نلتزم بالمعايير الفنية لشركة TRANE في كل زيارة صيانة.</p></div>
+                        <div><h3>@T["Home.License.Specs.Title"]</h3><p>@T["Home.License.Specs.Text"]</p></div>
                     </li>
                     <li>
                         <i class="bi bi-person-gear" aria-hidden="true"></i>
-                        <div><h3>فنيون مؤهلون</h3><p>كادر مدرب على أنظمة التكييف المركزي داخل المملكة وخارجها.</p></div>
+                        <div><h3>@T["Home.License.Technicians.Title"]</h3><p>@T["Home.License.Technicians.Text"]</p></div>
                     </li>
                     <li>
                         <i class="bi bi-buildings" aria-hidden="true"></i>
-                        <div><h3>ثقة كبرى العلامات</h3><p>إيكيا، مكتبة جرير، موڤي سينما، ومحطة التحلية بالليث.</p></div>
+                        <div><h3>@T["Home.License.Brands.Title"]</h3><p>@T["Home.License.Brands.Text"]</p></div>
                     </li>
                 </ul>
 
                 <div class="d-flex flex-wrap align-items-center gap-3 gap-sm-4 mt-4">
-                    <a class="btn btn-success btn-lg" asp-controller="Home" asp-action="Contact"><i class="bi bi-tools"></i> اطلب صيانة معتمدة</a>
-                    <a class="eda-tl-link" asp-controller="Projects" asp-action="Index" asp-route-category="@CompanyData.CategorySlug(ProjectCategory.TraneMaintenance)">مشاريع صيانة TRANE (@traneProjects.Count) <i class="bi bi-arrow-left"></i></a>
+                    <a class="btn btn-success btn-lg" asp-controller="Home" asp-action="Contact"><i class="bi bi-tools"></i> @T["Home.License.Cta"]</a>
+                    <a class="eda-tl-link" asp-controller="Projects" asp-action="Index" asp-route-category="@CompanyData.CategorySlug(ProjectCategory.TraneMaintenance)">@T["Home.License.ProjectsLink", traneProjects.Count] <i class="bi bi-arrow-left eda-flip-ltr"></i></a>
                 </div>
             </div>
 
@@ -73,16 +77,16 @@
                     <span class="eda-tl-rings" aria-hidden="true"><i></i><i></i><i></i></span>
 
                     <div class="eda-tl-card" data-eda-tilt>
-                        <div class="eda-tl-card-head"><i class="bi bi-patch-check-fill"></i> ترخيص خدمة معتمد</div>
+                        <div class="eda-tl-card-head"><i class="bi bi-patch-check-fill"></i> @T["Home.License.Card.Head"]</div>
                         <div class="eda-tl-card-body">
-                            <img src="~/images/brands/trane.svg" alt="شعار شركة TRANE" class="eda-tl-trane" width="588" height="196" />
+                            <img src="~/images/brands/trane.svg" alt="@T["Home.License.Card.TraneLogo"]" class="eda-tl-trane" width="588" height="196" />
                             <span class="eda-tl-x" aria-hidden="true"><i class="bi bi-plus-lg"></i></span>
-                            <img src="~/images/logo.png" alt="شعار @CompanyData.NameAr" class="eda-tl-eda" asp-append-version="true" />
+                            <img src="~/images/logo.png" alt="@T["Home.License.Card.CompanyLogo", CompanyData.Name]" class="eda-tl-eda" asp-append-version="true" />
                         </div>
                         <div class="eda-tl-card-foot">
-                            <div><strong data-eda-count="@traneProjects.Count">@traneProjects.Count</strong><span>مشروع صيانة معتمد</span></div>
-                            <div><strong data-eda-count="@traneCities">@traneCities</strong><span>مدن في المملكة</span></div>
-                            <div><strong><i class="bi bi-shield-fill-check"></i></strong><span>بضمان TRANE</span></div>
+                            <div><strong data-eda-count="@traneProjects.Count">@traneProjects.Count</strong><span>@T["Home.License.Card.Projects"]</span></div>
+                            <div><strong data-eda-count="@traneCities">@traneCities</strong><span>@T["Home.License.Card.Cities"]</span></div>
+                            <div><strong><i class="bi bi-shield-fill-check"></i></strong><span>@T["Home.License.Card.Warranty"]</span></div>
                         </div>
                         <span class="eda-tl-shine" aria-hidden="true"></span>
                     </div>
@@ -106,22 +110,24 @@
         <div class="row g-4 g-lg-5 align-items-center">
             <div class="col-lg-6">
                 <div class="eda-about-media">
-                    <img src="~/images/site/about-unit.jpg" alt="وحدة تكييف خارجية" class="eda-about-main" loading="lazy" />
-                    <img src="~/images/site/van.jpg" alt="سيارة خدمة إيدا للتكييف" class="eda-about-small" loading="lazy" />
+                    <img src="~/images/site/rooftop.jpg" alt="@T["Home.About.UnitAlt"]" class="eda-about-main" loading="lazy" />
+                    @* <img src="~/images/site/about-unit.jpg" alt="@T["Home.About.UnitAlt"]" class="eda-about-main" loading="lazy" /> *@
+                    <img src="~/images/site/about-3.jpg" alt="@T["Home.About.VanAlt"]" class="eda-about-small" loading="lazy" />
+                    @* <img src="~/images/site/van.jpg" alt="@T["Home.About.VanAlt"]" class="eda-about-small" loading="lazy" /> *@
                 </div>
             </div>
             <div class="col-lg-6">
-                <span class="eda-eyebrow">من نحن</span>
-                <h2 class="eda-title">شريكك الموثوق في عالم التكييف والتبريد</h2>
+                <span class="eda-eyebrow">@T["Shared.Nav.About"]</span>
+                <h2 class="eda-title">@T["Home.About.Title"]</h2>
                 <p>@CompanyData.AboutIntro</p>
                 <p>@CompanyData.AboutDesign</p>
                 <ul class="eda-checklist">
-                    <li>حساب الأحمال الحرارية بأسلوب علمي</li>
-                    <li>تكنولوجيا موفرة للطاقة وعالية الكفاءة</li>
-                    <li>كادر فني مدرب داخل المملكة وخارجها</li>
-                    <li>عقود صيانة سنوية بأسعار مناسبة</li>
+                    @foreach (var point in Translations.List("Home.About.Points"))
+                    {
+                        <li>@point</li>
+                    }
                 </ul>
-                <a class="btn btn-primary mt-2" asp-controller="Home" asp-action="About">اعرف المزيد عنا <i class="bi bi-arrow-left"></i></a>
+                <a class="btn btn-primary mt-2" asp-controller="Home" asp-action="About">@T["Home.About.More"] <i class="bi bi-arrow-left eda-flip-ltr"></i></a>
             </div>
         </div>
     </div>
@@ -131,19 +137,19 @@
 <section class="eda-section eda-section-alt">
     <div class="container">
         <div class="eda-section-head">
-            <span class="eda-eyebrow">خدماتنا</span>
-            <h2>حلول شاملة لكل احتياجات التكييف</h2>
-            <p>من الدراسة والتصميم حتى التشغيل والصيانة الدورية.</p>
+            <span class="eda-eyebrow">@T["Shared.Nav.Services"]</span>
+            <h2>@T["Home.Services.Title"]</h2>
+            <p>@T["Home.Services.Text"]</p>
         </div>
         <div class="row g-4">
             @foreach (var s in CompanyData.Services)
             {
                 <div class="col-md-6 col-lg-4">
-                    <a class="eda-service-card" asp-controller="Home" asp-action="Services" asp-fragment="@s.Slug">
+                    <a class="eda-service-card" asp-controller="Home" asp-action="ServiceDetails" asp-route-slug="@s.Slug">
                         <span class="eda-service-icon"><i class="bi @s.Icon"></i></span>
                         <h3>@s.Title</h3>
                         <p>@s.ShortDescription</p>
-                        <span class="eda-link">التفاصيل <i class="bi bi-arrow-left"></i></span>
+                        <span class="eda-link">@T["Shared.Actions.Details"] <i class="bi bi-arrow-left eda-flip-ltr"></i></span>
                     </a>
                 </div>
             }
@@ -156,10 +162,10 @@
     <div class="container">
         <div class="row g-4 g-lg-5 align-items-center">
             <div class="col-lg-5">
-                <span class="eda-eyebrow">قيمنا</span>
-                <h2 class="eda-title">لماذا تختار إيدا؟</h2>
-                <p>نلتزم في شركتنا بأعلى معايير المهنية والنمو المستمر، ونضع رضا العميل وخدمته ما بعد البيع في مقدمة أولوياتنا، إيمانًا منا بأن النجاح الحقيقي هو بناء علاقة مستمرة قائمة على الثقة المتبادلة.</p>
-                <img src="~/images/site/team.jpg" alt="فريق إيدا أثناء أعمال الصيانة" class="img-fluid rounded-4 shadow-sm mt-2 eda-why-img" loading="lazy" />
+                <span class="eda-eyebrow">@T["Home.Why.Eyebrow"]</span>
+                <h2 class="eda-title">@T["Home.Why.Title"]</h2>
+                <p>@T["Home.Why.Text"]</p>
+                <img src="~/images/site/team.jpg" alt="@T["Home.Why.TeamAlt"]" class="img-fluid rounded-4 shadow-sm mt-2 eda-why-img" loading="lazy" />
             </div>
             <div class="col-lg-7">
                 <div class="row g-3">
@@ -185,9 +191,9 @@
 <section class="eda-section eda-section-alt">
     <div class="container">
         <div class="eda-section-head">
-            <span class="eda-eyebrow">سابقة الأعمال</span>
-            <h2>مشاريع نفخر بتنفيذها</h2>
-            <p>نماذج من مشاريع التكييف والصيانة التي نفذناها لعملائنا في مختلف مدن المملكة.</p>
+            <span class="eda-eyebrow">@T["Shared.Nav.Projects"]</span>
+            <h2>@T["Home.Projects.Title"]</h2>
+            <p>@T["Home.Projects.Text"]</p>
         </div>
         <div class="row g-4">
             @foreach (var p in featured)
@@ -198,7 +204,7 @@
             }
         </div>
         <div class="text-center mt-5">
-            <a class="btn btn-primary btn-lg" asp-controller="Projects" asp-action="Index">جميع المشاريع (@CompanyData.Projects.Count) <i class="bi bi-arrow-left"></i></a>
+            <a class="btn btn-primary btn-lg" asp-controller="Projects" asp-action="Index">@T["Shared.Actions.AllProjectsCount", CompanyData.Projects.Count] <i class="bi bi-arrow-left eda-flip-ltr"></i></a>
         </div>
     </div>
 </section>
@@ -208,12 +214,12 @@
     <div class="container">
         <div class="row g-4 align-items-center">
             <div class="col-lg-8">
-                <span class="eda-eyebrow eda-eyebrow-light">أعمال الصيانة بضمان شركة TRANE</span>
-                <h2>صيانة معتمدة وفق مواصفات TRANE</h2>
-                <p class="mb-0">ننفذ أعمال الصيانة والإصلاح لأنظمة التكييف المركزية وفق المواصفات الفنية المعتمدة من شركة TRANE، لعملاء مثل إيكيا ومكتبة جرير وموڤي سينما والمتحف بالمدينة المنورة ومحطة التحلية بالليث.</p>
+                <span class="eda-eyebrow eda-eyebrow-light">@T["Home.TraneBand.Eyebrow"]</span>
+                <h2>@T["Home.TraneBand.Title"]</h2>
+                <p class="mb-0">@T["Home.TraneBand.Text"]</p>
             </div>
             <div class="col-lg-4 text-lg-end">
-                <a class="btn btn-light btn-lg" asp-controller="Projects" asp-action="Index" asp-route-category="@CompanyData.CategorySlug(ProjectCategory.TraneMaintenance)">مشاريع الصيانة <i class="bi bi-arrow-left"></i></a>
+                <a class="btn btn-light btn-lg" asp-controller="Projects" asp-action="Index" asp-route-category="@CompanyData.CategorySlug(ProjectCategory.TraneMaintenance)">@T["Home.TraneBand.Cta"] <i class="bi bi-arrow-left eda-flip-ltr"></i></a>
             </div>
         </div>
     </div>

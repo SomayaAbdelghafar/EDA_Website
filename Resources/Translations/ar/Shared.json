@@ -1,0 +1,74 @@
+{
+  // Texts used on every page: layout, navigation, footer, buttons and shared blocks.
+  // Keys start with "Shared." (the file name): @T["Shared.Nav.Home"].
+  "Language": {
+    "Name": "العربية",
+    "OgLocale": "ar_SA",
+    "SwitchLabel": "عرض هذه الصفحة باللغة العربية"
+  },
+  "SkipToContent": "تخطي إلى المحتوى",
+  "Breadcrumb": "مسار التنقل",
+  "Nav": {
+    "Menu": "القائمة",
+    "Home": "الرئيسية",
+    "About": "من نحن",
+    "Services": "خدماتنا",
+    "Projects": "سابقة الأعمال",
+    "Contact": "تواصل معنا",
+    "Privacy": "سياسة الخصوصية"
+  },
+  "Actions": {
+    "RequestQuote": "اطلب عرض سعر",
+    "CallNow": "اتصل الآن",
+    "Details": "التفاصيل",
+    "AllProjects": "جميع المشاريع",
+    "AllProjectsCount": "جميع المشاريع ({0})"
+  },
+  "Footer": {
+    "About": "نقدم أفضل تكنولوجيا التكييف والتبريد لعملائنا في جميع أنحاء المملكة العربية السعودية: تصميم، توريد، تركيب، تشغيل وصيانة.",
+    "QuickLinks": "روابط سريعة",
+    "Services": "خدماتنا",
+    "Contact": "تواصل معنا",
+    "CrNumber": "سجل تجاري: {0}",
+    "Copyright": "© {0} {1} – جميع الحقوق محفوظة"
+  },
+  "WhatsApp": {
+    "Label": "تواصل عبر واتساب",
+    "DefaultMessage": "السلام عليكم، أرغب بالاستفسار عن خدمات التكييف",
+    "ServiceMessage": "السلام عليكم، أرغب بالاستفسار عن خدمة: {0}",
+    "ProjectMessage": "استفسار بخصوص مشروع مشابه لـ: {0}"
+  },
+  "Cta": {
+    "Title": "هل لديك مشروع تكييف أو تحتاج إلى صيانة؟",
+    "Text": "فريقنا من المهندسين والفنيين جاهز لدراسة مشروعك وتقديم أفضل حل بأنسب تكلفة. خبرة واحترافية في كل مشروع."
+  },
+  "Clients": {
+    "Eyebrow": "شركاء النجاح",
+    "Title": "عملاء نفتخر بثقتهم بنا",
+    "Text": "نخدم كبرى العلامات التجارية والمجمعات والجهات الحكومية في المملكة."
+  },
+  "ProjectCard": {
+    "More": "عرض المشروع"
+  },
+  "Lightbox": {
+    "Label": "عرض الصورة",
+    "Close": "إغلاق",
+    "Previous": "الصورة السابقة",
+    "Next": "الصورة التالية"
+  },
+  "Seo": {
+    // Browser-tab / Google title of pages without their own SeoTitle: {0} = page title, {1} = company name
+    "TitleFormat": "{0} | {1}",
+    "OfferCatalog": "خدمات التكييف والتبريد"
+  },
+  // Texts used by wwwroot/js/site.js (handed to the browser in every page)
+  "Js": {
+    "sending": "جارٍ الإرسال...",
+    "whatsAppIntro": "السلام عليكم، أرغب في طلب خدمة من شركة إيدا للتكييف والتبريد.",
+    "whatsAppName": "الاسم:",
+    "whatsAppPhone": "الجوال:",
+    "whatsAppCity": "المدينة:",
+    "whatsAppService": "الخدمة:",
+    "whatsAppDetails": "التفاصيل:"
+  }
+}

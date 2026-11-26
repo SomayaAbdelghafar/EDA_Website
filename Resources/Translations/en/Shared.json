@@ -1,0 +1,74 @@
+{
+  // Texts used on every page: layout, navigation, footer, buttons and shared blocks.
+  // Keys start with "Shared." (the file name): @T["Shared.Nav.Home"].
+  "Language": {
+    "Name": "English",
+    "OgLocale": "en_US",
+    "SwitchLabel": "View this page in English"
+  },
+  "SkipToContent": "Skip to content",
+  "Breadcrumb": "Breadcrumb",
+  "Nav": {
+    "Menu": "Menu",
+    "Home": "Home",
+    "About": "About Us",
+    "Services": "Services",
+    "Projects": "Projects",
+    "Contact": "Contact Us",
+    "Privacy": "Privacy Policy"
+  },
+  "Actions": {
+    "RequestQuote": "Request a Quote",
+    "CallNow": "Call Now",
+    "Details": "Details",
+    "AllProjects": "All Projects",
+    "AllProjectsCount": "All Projects ({0})"
+  },
+  "Footer": {
+    "About": "We provide the best air conditioning and refrigeration technology to clients throughout Saudi Arabia: design, supply, installation, operation and maintenance.",
+    "QuickLinks": "Quick Links",
+    "Services": "Our Services",
+    "Contact": "Contact Us",
+    "CrNumber": "CR No.: {0}",
+    "Copyright": "© {0} {1}. All rights reserved."
+  },
+  "WhatsApp": {
+    "Label": "Chat on WhatsApp",
+    "DefaultMessage": "Hello, I would like to ask about your air conditioning services.",
+    "ServiceMessage": "Hello, I would like to ask about this service: {0}",
+    "ProjectMessage": "Inquiry about a project similar to: {0}"
+  },
+  "Cta": {
+    "Title": "Planning an AC project or need maintenance?",
+    "Text": "Our engineers and technicians are ready to study your project and offer the best solution at the right cost. Expertise and professionalism in every project."
+  },
+  "Clients": {
+    "Eyebrow": "Partners in Success",
+    "Title": "Clients Who Trust Us",
+    "Text": "We serve leading brands, shopping centers and government bodies across the Kingdom."
+  },
+  "ProjectCard": {
+    "More": "View Project"
+  },
+  "Lightbox": {
+    "Label": "Photo viewer",
+    "Close": "Close",
+    "Previous": "Previous photo",
+    "Next": "Next photo"
+  },
+  "Seo": {
+    // Browser-tab / Google title of pages without their own SeoTitle: {0} = page title, {1} = company name
+    "TitleFormat": "{0} | {1}",
+    "OfferCatalog": "Air Conditioning and Refrigeration Services"
+  },
+  // Texts used by wwwroot/js/site.js (handed to the browser in every page)
+  "Js": {
+    "sending": "Sending...",
+    "whatsAppIntro": "Hello, I would like to request a service from EDA Air Conditioning Company.",
+    "whatsAppName": "Name:",
+    "whatsAppPhone": "Mobile:",
+    "whatsAppCity": "City:",
+    "whatsAppService": "Service:",
+    "whatsAppDetails": "Details:"
+  }
+}

@@ -1,0 +1,260 @@
+{
+  // Services, keyed by slug (/services/{slug}). Order, icon, photo and related projects are set in Data/CompanyData.cs.
+  "central-ventilation": {
+    "Title": "Central Ventilation Systems",
+    "ShortDescription": "Design and installation of central ventilation systems that keep indoor air fresh and healthy.",
+    "Description": "We design and install central ventilation systems for residential and commercial buildings and public facilities, ensuring continuous air renewal and the highest standards of indoor air quality and comfort.",
+    "Points": [
+      "Ventilation needs assessed for each facility",
+      "Exhaust and supply fans and air handling units",
+      "Ventilation for halls, mosques and commercial premises"
+    ],
+    "SeoTitle": "Central Ventilation Systems in Jeddah: Design & Installation | EDA",
+    "MetaDescription": "Design and installation of central ventilation in Jeddah for mosques, halls, gyms and commercial buildings: exhaust and supply fans and air handling units. Book a site visit with EDA.",
+    "Heading": "Central Ventilation Systems in Jeddah",
+    "Details": [
+      "Good ventilation replaces a building's stale air with fresh air and removes excess heat, humidity and odors. It is essential wherever many people gather, such as mosques, halls, gyms and shops.",
+      "We study each facility's needs according to its area, number of users and type of use, then select suitable exhaust and supply fans and air handling units and design their routes to work together with the air conditioning system, so the air stays fresh without wasting cooling."
+    ],
+    "Includes": [
+      "Ventilation needs assessment for each facility",
+      "Supply and installation of exhaust and supply fans",
+      "Supply and installation of air handling units",
+      "Fabrication and installation of the required ducts and grilles",
+      "Commissioning, airflow balancing and handover"
+    ],
+    "SuitableFor": [
+      "Mosques",
+      "Halls and venues",
+      "Gyms",
+      "Restaurants and shops",
+      "Commercial and government buildings"
+    ],
+    "Faqs": [
+      {
+        "Question": "What is the difference between ventilation and air conditioning?",
+        "Answer": "Air conditioning cools the indoor air and lowers its humidity, while ventilation replaces stale air with fresh outdoor air and removes odors. An enclosed building needs both for its occupants' comfort and good air quality."
+      },
+      {
+        "Question": "Why do mosques and halls need central ventilation?",
+        "Answer": "When large numbers of people gather at once, heat and humidity rise and air quality drops quickly, so worshippers or guests feel stuffy even with the air conditioners running. Central ventilation renews the air continuously and eases the load on the air conditioning."
+      }
+    ]
+  },
+  "split-window": {
+    "Title": "Window and Split Air Conditioning Systems",
+    "ShortDescription": "Supply and installation of all types of window and split air conditioners from the best brands.",
+    "Description": "We supply and install window and split air conditioners for villas, apartments, offices and shops, choosing the right capacity for each space and carrying out the piping professionally and neatly.",
+    "Points": [
+      "Supply of split and window units",
+      "Professional copper piping and drainage",
+      "The right capacity for every room"
+    ],
+    "SeoTitle": "Split & Window AC Supply and Installation in Jeddah | EDA",
+    "MetaDescription": "Supply and installation of split and window air conditioners for villas, apartments, offices and shops in Jeddah, with the right capacity for each room and professional copper piping. Get a quote.",
+    "Heading": "Split and Window AC Supply and Installation in Jeddah",
+    "Details": [
+      "Before supplying any unit, we determine the right capacity for each room based on its size, sun exposure and number of occupants. An undersized air conditioner can't cool the space in Jeddah's summer, while an oversized one raises the purchase cost and power consumption for no benefit.",
+      "We then install the units and run the copper piping and drainage cleanly and securely, start up each unit and check its performance before handover. For large or multi-room spaces, concealed air conditioning (ducted split) may be the better choice."
+    ],
+    "Includes": [
+      "Supply of split and window units",
+      "The right capacity for every room",
+      "Professional copper piping and drainage",
+      "Start-up and testing before handover",
+      "Routine maintenance contracts after installation"
+    ],
+    "SuitableFor": [
+      "Villas and palaces",
+      "Apartments",
+      "Offices",
+      "Shops",
+      "Rest houses"
+    ],
+    "Faqs": [
+      {
+        "Question": "Which is better: a split or a window air conditioner?",
+        "Answer": "Split units are quieter and look better because the compressor sits in an outdoor unit, which makes them the most common choice for rooms and offices. Window units cost less and are simpler to install, but they are noisier and need an opening in the wall. We help you choose based on the space and your budget."
+      },
+      {
+        "Question": "How do I know the right AC capacity for my room?",
+        "Answer": "Capacity depends on the room's area, ceiling height, sun exposure, and the number of people and appliances in it, and Jeddah's hot climate needs more capacity than milder regions. That's why we determine the capacity after a site visit instead of guessing."
+      }
+    ]
+  },
+  "central-package": {
+    "Title": "Central and Package Air Conditioning Systems",
+    "ShortDescription": "Design and installation of central air conditioning, ducted split and package systems.",
+    "Description": "We design and build central air conditioning projects by calculating the heat loads of every building scientifically, and we supply and install ducted split and package units using technology that saves energy and raises efficiency.",
+    "Points": [
+      "Heat-load calculation",
+      "Ducted split units and package units",
+      "Energy-saving, high-efficiency solutions"
+    ],
+    "SeoTitle": "Central AC in Jeddah: Ducted Split & Package Units | EDA",
+    "MetaDescription": "Central air conditioning design and installation in Jeddah: heat-load calculation, and supply and installation of ducted split (concealed) and package units with energy-saving solutions. Book a visit.",
+    "Heading": "Central AC, Ducted Split and Package Systems in Jeddah",
+    "Details": [
+      "Every project starts with a site visit and a review of the drawings, followed by a heat-load calculation for each space based on its area, orientation, insulation and number of occupants. Based on this study we choose the type of system, the unit capacities and the duct routes, so the equipment is neither oversized, which raises the cost, nor undersized, which leaves the space uncooled.",
+      "We install ducted split (concealed) systems for villas, offices and restaurants, and package units for large spaces such as halls, mosques and shops. We handle supply, installation, commissioning and handover under engineering supervision, followed by routine maintenance under an annual contract."
+    ],
+    "Includes": [
+      "Site survey and heat-load calculation",
+      "System selection, sizing and drawings",
+      "Supply and installation of ducted split and package units",
+      "Fabrication and installation of ducts and grilles",
+      "Commissioning, performance tuning and handover",
+      "Routine maintenance contracts after handover"
+    ],
+    "SuitableFor": [
+      "Villas and palaces",
+      "Offices and banks",
+      "Restaurants and shops",
+      "Mosques and halls",
+      "Resorts and residential compounds"
+    ],
+    "Faqs": [
+      {
+        "Question": "What is the difference between a ducted split and a package unit?",
+        "Answer": "A ducted split (concealed) system has an indoor unit hidden in the false ceiling plus an outdoor unit, and distributes air through ducts to several rooms; it suits villas and offices. A package unit is a single self-contained unit, usually installed on the roof, suited to large spaces such as halls, mosques and shops."
+      },
+      {
+        "Question": "Why should heat loads be calculated before choosing air conditioners?",
+        "Answer": "Because the right capacity depends on the space's area, orientation and insulation and on the number of people and appliances in it. An oversized unit raises purchase and electricity costs and controls humidity poorly, while an undersized one runs non-stop without reaching the desired temperature."
+      },
+      {
+        "Question": "How much does central air conditioning for a villa in Jeddah cost?",
+        "Answer": "The cost depends on the villa's area, the number of rooms, the type of system, the brand and the duct routes, so it can't be priced accurately before a site visit. Contact us to arrange a visit and a heat-load calculation, and we'll give you a clear, detailed quotation."
+      }
+    ]
+  },
+  "ducts-grilles": {
+    "Title": "Air Duct and Grille Fabrication",
+    "ShortDescription": "Fabrication and installation of air ducts and grilles to technical specifications.",
+    "Description": "We fabricate and install metal air ducts and their insulation, as well as grilles and diffusers, ensuring balanced air distribution and quiet, efficient system performance.",
+    "Points": [
+      "Galvanized duct fabrication and insulation",
+      "Supply and installation of grilles and diffusers",
+      "Built to the engineering drawings"
+    ],
+    "SeoTitle": "AC Duct & Grille Fabrication and Installation in Jeddah | EDA",
+    "MetaDescription": "Fabrication of galvanized steel air ducts, insulated and installed with grilles and diffusers to the engineering drawings in Jeddah, for balanced air distribution and quiet operation.",
+    "Heading": "Air Duct and Grille Fabrication and Installation",
+    "Details": [
+      "Air ducts carry the conditioned air to every room, and any mistake in their sizing or insulation causes weak cooling in some areas, condensation and noisy airflow.",
+      "That's why we fabricate ducts from galvanized steel to the dimensions specified in the engineering drawings and insulate them, then install them with the right grilles, diffusers and return openings for each space, and balance the airflow between the outlets before handover."
+    ],
+    "Includes": [
+      "Galvanized steel duct fabrication and insulation",
+      "Duct installation to the engineering drawings",
+      "Supply and installation of grilles and diffusers",
+      "Airflow balancing between the outlets"
+    ],
+    "SuitableFor": [
+      "Central AC projects",
+      "Villas and residential buildings",
+      "Shops and restaurants",
+      "Halls and commercial facilities"
+    ],
+    "Faqs": [
+      {
+        "Question": "Why must air ducts be insulated?",
+        "Answer": "Insulation prevents cooling losses as the air passes through hot ceiling spaces, stops condensation from forming on the duct surface and dripping onto ceilings, and reduces the noise of the airflow."
+      },
+      {
+        "Question": "What is the difference between a grille and a diffuser?",
+        "Answer": "A grille is an opening with blades that directs or draws in air, often used in walls and return openings. A diffuser spreads air from the ceiling in several directions for wider coverage and a gentler flow. We choose the type and size based on the airflow and the shape of the space."
+      }
+    ]
+  },
+  "operation-monitoring": {
+    "Title": "Operation and Monitoring of Large-Scale AC Systems",
+    "ShortDescription": "Operation and monitoring of large systems for malls and commercial and government facilities.",
+    "Description": "We operate and monitor large air conditioning systems in shopping centers and government and service facilities, tuning performance and monitoring control panels to ensure stable operation and efficient energy use.",
+    "Points": [
+      "Operation of central and package units",
+      "Control panel rehabilitation and upgrades",
+      "Routine monitoring and performance reports"
+    ],
+    "SeoTitle": "Central AC Operation & Monitoring for Malls and Facilities | EDA",
+    "MetaDescription": "Operation and monitoring of central AC systems in malls, complexes and government facilities: performance tuning, control panel rehabilitation, and regular reports on equipment condition and energy use.",
+    "Heading": "Operation and Monitoring of Large Central AC Systems",
+    "Details": [
+      "Large systems in malls, complexes and government facilities need daily operation and continuous monitoring, not just repairs when something breaks. We operate central and package units, tune their performance, monitor the control panels, and submit regular reports on the equipment's condition and consumption.",
+      "Examples of our work include rehabilitating the control unit for Al-Jamoum Governorate Municipality, restarting a machine after installing a compressor at the Air Defense project in Jeddah, and commissioning a machine after fitting it with a heater at the Adeeks Company complex."
+    ],
+    "Includes": [
+      "Operation of central and package units",
+      "Control panel rehabilitation and upgrades",
+      "Performance tuning and energy efficiency",
+      "Routine monitoring and performance reports for management"
+    ],
+    "SuitableFor": [
+      "Malls and shopping centers",
+      "Government facilities",
+      "Factories and plants",
+      "Halls and cinemas",
+      "Hotels and resorts"
+    ],
+    "Faqs": [
+      {
+        "Question": "What are the benefits of a contract to operate and monitor AC systems?",
+        "Answer": "Having a team responsible for tuning performance every day catches problems before they turn into breakdowns and shutdowns, keeps visitors comfortable, lowers energy consumption and extends the life of the equipment."
+      },
+      {
+        "Question": "Do you work outside Jeddah?",
+        "Answer": "Yes. We have carried out air conditioning, operation and maintenance work in Jeddah, Makkah, Madinah, Jazan, Taif and Al-Lith, and you can see it on our Projects page."
+      }
+    ]
+  },
+  "maintenance-contracts": {
+    "Title": "Maintenance and Repair Services and Contracts",
+    "ShortDescription": "Annual and routine maintenance contracts and fault repairs by a specialized technical team.",
+    "Description": "We offer annual maintenance plans for villas, residential towers, restaurants and shops with excellent service at fair prices, carried out by a team specialized in air conditioning maintenance to the best standards, as well as certified maintenance work under TRANE warranty.",
+    "Points": [
+      "Annual and routine maintenance contracts",
+      "Coil welding and repair, and compressor replacement",
+      "Filter replacement and full diagnostic reports"
+    ],
+    "SeoTitle": "Central AC Maintenance & Annual Contracts in Jeddah | EDA",
+    "MetaDescription": "Annual and routine maintenance contracts and repair of central and split AC faults in Jeddah: coil welding, compressor replacement, filter changes and TRANE-warranted maintenance. Book a visit.",
+    "Heading": "Central AC Maintenance and Maintenance Contracts in Jeddah",
+    "Details": [
+      "In Jeddah, air conditioning runs most of the year in high heat and humidity, so dust builds up on the filters and coils, efficiency drops and power consumption rises. Routine maintenance catches faults early, extends the system's life and reduces unexpected breakdowns.",
+      "We offer annual and routine maintenance contracts for villas, residential towers, restaurants, shops and commercial facilities, and carry out repairs such as coil welding, leak repair and compressor replacement, as well as maintenance under TRANE warranty for clients such as IKEA, Jarir Bookstore and Muvi Cinemas."
+    ],
+    "Includes": [
+      "Annual and routine maintenance contracts with scheduled visits",
+      "Filter cleaning and replacement, and coil inspection",
+      "Leak detection and coil welding",
+      "Compressor and spare-part replacement when needed",
+      "Full performance diagnosis and a written report for management",
+      "Maintenance under TRANE warranty, to its technical specifications"
+    ],
+    "SuitableFor": [
+      "Villas and palaces",
+      "Residential towers",
+      "Restaurants and cafés",
+      "Shops and malls",
+      "Offices and government facilities"
+    ],
+    "Faqs": [
+      {
+        "Question": "How often does central air conditioning need maintenance?",
+        "Answer": "Preventive maintenance is usually recommended at least twice a year, before and after summer, with regular filter cleaning or replacement. Facilities that run long hours, such as malls and restaurants, need more frequent visits, and the maintenance contract sets the schedule based on the number of units and how they are used."
+      },
+      {
+        "Question": "What are the signs that an air conditioner needs urgent maintenance?",
+        "Answer": "Weak cooling despite long running times, ice forming on the pipes or coil, water leaks, unusual noises, or a sudden rise in the electricity bill. If you notice any of these, switch the unit off and contact us so the compressor isn't damaged."
+      },
+      {
+        "Question": "What does maintenance under TRANE warranty mean?",
+        "Answer": "It is maintenance and repair work on central air conditioning systems that we carry out under TRANE's warranty and to its approved technical specifications, as in our projects for IKEA, Jarir Bookstore and Muvi Cinemas branches. You'll find the full list on our Projects page."
+      },
+      {
+        "Question": "Do you offer maintenance contracts for villas and restaurants?",
+        "Answer": "Yes. We offer annual maintenance plans for villas, residential towers, restaurants and shops at fair prices, and the contract's scope and number of visits are set according to the number and type of units."
+      }
+    ]
+  }
+}

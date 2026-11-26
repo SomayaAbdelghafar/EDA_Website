@@ -29,6 +29,10 @@
   --bs-link-hover-color-rgb: var(--eda-green-rgb);
   --bs-heading-color: var(--eda-blue);
   --bs-focus-ring-color: rgba(var(--eda-green-rgb), .35);
+
+  /* Angle of banner gradients, from the text side (inline start) to the photo side:
+     right → left in Arabic (RTL), left → right in English (see "Left-to-right languages" at the end) */
+  --eda-gradient-to-end: 270deg;
 }
 
 html {
@@ -254,6 +258,34 @@ h1, h2, h3, h4 {
 
 .eda-navbar .navbar-toggler:focus { box-shadow: 0 0 0 .2rem rgba(var(--eda-green-rgb), .35); }
 
+/* Language switcher: next to the menu button on phones, after the quote button on wide screens */
+.eda-lang { display: flex; gap: .35rem; }
+
+.eda-lang-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  padding: .4rem .9rem;
+  border: 1px solid rgba(var(--eda-blue-rgb), .25);
+  border-radius: 2rem;
+  color: var(--eda-blue);
+  font-size: .9rem;
+  font-weight: 700;
+  line-height: 1.5;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color .2s ease, background-color .2s ease, border-color .2s ease;
+}
+
+.eda-lang-switch:hover,
+.eda-lang-switch:focus-visible { color: #fff; background: var(--eda-blue); border-color: var(--eda-blue); }
+.eda-lang-switch i { font-size: 1rem; }
+
+@media (max-width: 374.98px) {
+  /* very narrow phones: icon + short label still fit beside the logo and the menu button */
+  .eda-lang-switch { padding: .4rem .65rem; font-size: .85rem; }
+}
+
 .eda-footer {
   flex-shrink: 0;
   padding: 3.5rem 0 0;
@@ -402,8 +434,8 @@ h1, h2, h3, h4 {
   color: #fff;
   padding: 7rem 0 9rem;
   background:
-    linear-gradient(270deg, rgba(4, 35, 79, .95) 0%, rgba(6, 46, 108, .82) 45%, rgba(6, 46, 108, .35) 100%),
-    url("/images/site/hero.jpg") center / cover no-repeat;
+    linear-gradient(var(--eda-gradient-to-end), rgba(4, 35, 79, .95) 0%, rgba(6, 46, 108, .82) 45%, rgba(6, 46, 108, .35) 100%),
+    url("/images/site/hero.webp") center / cover no-repeat; /* WebP: 220 KB instead of the 349 KB JPEG (kept for link previews) */
 }
 
 .eda-hero h1 { font-size: clamp(2rem, 5vw, 3.4rem); color: #fff; margin: 1rem 0; }
@@ -962,7 +994,7 @@ h1, h2, h3, h4 {
   padding: 4rem 0;
   color: rgba(255, 255, 255, .88);
   background:
-    linear-gradient(270deg, rgba(3, 110, 55, .95), rgba(3, 139, 70, .85)),
+    linear-gradient(var(--eda-gradient-to-end), rgba(3, 110, 55, .95), rgba(3, 139, 70, .85)),
     url("/images/site/chillers.jpg") center / cover no-repeat;
 }
 
@@ -978,13 +1010,18 @@ h1, h2, h3, h4 {
 .eda-cta .btn-light, .eda-trane .btn-light { color: var(--eda-blue); }
 
 /* ---------- Clients ---------- */
+/* Flex instead of grid so an incomplete last row is centred (11 logos = 5 + 5 + 1) */
 .eda-clients {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 1.25rem;
+  --cols: 5;
+  --gap: 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--gap);
 }
 
 .eda-client {
+  flex: 0 0 calc((100% - (var(--cols) - 1) * var(--gap)) / var(--cols));
   aspect-ratio: 1;
   background: #fff;
   border-radius: 1rem;
@@ -1002,8 +1039,8 @@ h1, h2, h3, h4 {
   transform: scale(1.04); /* hides the thin slide border left from cropping */
 }
 
-@media (max-width: 991.98px) { .eda-clients { grid-template-columns: repeat(4, 1fr); } }
-@media (max-width: 575.98px) { .eda-clients { grid-template-columns: repeat(3, 1fr); gap: .75rem; } }
+@media (max-width: 991.98px) { .eda-clients { --cols: 4; } }
+@media (max-width: 575.98px) { .eda-clients { --cols: 3; --gap: .75rem; } }
 
 /* ==========================================================
    Inner pages
@@ -1013,7 +1050,7 @@ h1, h2, h3, h4 {
   padding: 4.5rem 0 4rem;
   color: #fff;
   background:
-    linear-gradient(270deg, rgba(4, 35, 79, .94), rgba(6, 46, 108, .72)),
+    linear-gradient(var(--eda-gradient-to-end), rgba(4, 35, 79, .94), rgba(6, 46, 108, .72)),
     var(--bg) center / cover no-repeat;
 }
 
@@ -1305,6 +1342,8 @@ h1, h2, h3, h4 {
 .eda-gallery a.g-span-3 { grid-column: span 3; aspect-ratio: 4 / 3; }
 .eda-gallery img { width: 100%; height: 100%; object-fit: cover; transition: transform .35s ease; }
 .eda-gallery a:hover img { transform: scale(1.05); }
+.eda-gallery:not(.is-expanded) .eda-gallery-more { display: none; }
+.eda-gallery-toggle { display: flex; align-items: center; justify-content: center; gap: .5rem; width: 100%; margin-top: 1rem; }
 
 .eda-project-info {
   position: sticky;
@@ -1375,8 +1414,9 @@ h1, h2, h3, h4 {
   place-items: center;
 }
 
-.eda-lightbox-prev { right: .75rem; }
-.eda-lightbox-next { left: .75rem; }
+/* "previous" at the start of the reading direction: right in Arabic, left in English */
+.eda-lightbox-prev { inset-inline-start: .75rem; }
+.eda-lightbox-next { inset-inline-end: .75rem; }
 .eda-lightbox.is-single .eda-lightbox-nav { display: none; }
 .modal-backdrop.show { opacity: .85; }
 
@@ -1440,6 +1480,70 @@ h1, h2, h3, h4 {
 .eda-hours i { color: #8ff0b9; }
 .eda-hours .eda-checklist li::before { color: #8ff0b9; }
 
+/* ---------- Service detail pages (/services/{slug}) ---------- */
+.eda-service-page .lead { font-size: 1.15rem; color: #2f3a4c; }
+
+.eda-service-tags { display: flex; flex-wrap: wrap; gap: .6rem; list-style: none; padding: 0; margin: 0 0 1.25rem; }
+.eda-service-tags li {
+  padding: .45rem 1rem;
+  border-radius: 2rem;
+  background: var(--bs-success-bg-subtle);
+  color: var(--eda-green-dark);
+  font-weight: 700;
+  font-size: .95rem;
+}
+
+/* The sticky side box only sticks where the screen is tall enough to show all of it */
+.eda-project-info.eda-service-aside { position: static; }
+@media (min-width: 992px) and (min-height: 820px) {
+  .eda-project-info.eda-service-aside { position: sticky; }
+}
+
+.eda-service-links { margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid #e1e7f0; }
+.eda-service-links h3 { font-size: 1.05rem; margin-bottom: .5rem; }
+.eda-service-links ul { list-style: none; padding: 0; margin: 0; }
+/* Undo the 3-column grid that .eda-project-info gives its own list items */
+.eda-project-info .eda-service-links li { display: block; padding: 0; border-bottom: 1px solid #e1e7f0; }
+.eda-project-info .eda-service-links li:last-child { border-bottom: 0; }
+.eda-service-links a {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .5rem 0;
+  font-weight: 600;
+  text-decoration: none;
+}
+.eda-service-links i { color: var(--eda-green); font-size: 1.1rem; }
+.eda-service-links a:hover { color: var(--eda-green); }
+
+.eda-faq { max-width: 900px; margin-inline: auto; display: grid; gap: .85rem; }
+.eda-faq details { border: 1px solid #e6ebf3; border-radius: 1rem; background: #fff; padding: 0 1.25rem; }
+.eda-faq summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem 0;
+  cursor: pointer;
+  list-style: none;
+}
+.eda-faq summary::-webkit-details-marker { display: none; }
+.eda-faq summary h3 { font-size: 1.05rem; margin: 0; }
+/* Small chevron that points down when closed and up when open */
+.eda-faq summary::after {
+  content: "";
+  flex: none;
+  width: .6rem;
+  height: .6rem;
+  margin-top: -.3rem;
+  border-right: 2px solid var(--eda-green);
+  border-bottom: 2px solid var(--eda-green);
+  transform: rotate(45deg);
+  transition: transform .2s ease;
+}
+.eda-faq details[open] summary::after { transform: rotate(-135deg); margin-top: .3rem; }
+.eda-faq details p { color: #5d6778; margin: 0 0 1.1rem; }
+
 /* ---------- Error pages ---------- */
 .eda-error { max-width: 640px; }
 .eda-error > i { font-size: 4rem; color: var(--eda-green); }
@@ -1454,3 +1558,27 @@ h1, h2, h3, h4 {
   .js .eda-reveal { opacity: 1; transform: none; transition: none; }
   .eda-project-card, .eda-service-card, .eda-project-img img, .eda-gallery img { transition: none; }
 }
+
+/* ==========================================================
+   Left-to-right languages (English)
+   The styles above are written right-to-left first. Bootstrap's LTR build (picked in
+   _Layout.cshtml) and the logical properties used above (inset-inline-*, margin-inline-*,
+   padding-inline-*, text-align: end) mirror the layout by themselves; these rules cover
+   what logical properties cannot express.
+   ========================================================== */
+:root[dir="ltr"] { --eda-gradient-to-end: 90deg; }
+
+/* Latin text needs less line spacing than Arabic (which needs room above and below for its letter shapes) */
+[dir="ltr"] body { line-height: 1.7; }
+[dir="ltr"] h1, [dir="ltr"] h2, [dir="ltr"] h3, [dir="ltr"] h4 { line-height: 1.25; }
+
+/* Arrows that point along the reading direction ("more", "next", "previous") are drawn for RTL:
+   add .eda-flip-ltr to such an icon and it turns around on LTR pages */
+[dir="ltr"] .eda-flip-ltr::before { transform: scaleX(-1); }
+[dir="ltr"] .eda-tl-link:hover i { transform: translateX(4px); }
+
+/* Breadcrumb separator points forward: "›" in LTR ("‹" is drawn for the Arabic pages) */
+[dir="ltr"] .eda-page-header .breadcrumb { --bs-breadcrumb-divider: "›"; }
+
+/* Chat button stays in the bottom-right corner, where visitors expect it in both languages */
+[dir="ltr"] .eda-whatsapp { inset-inline-start: auto; inset-inline-end: 1.25rem; }

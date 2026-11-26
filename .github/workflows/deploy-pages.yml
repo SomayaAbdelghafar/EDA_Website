@@ -40,6 +40,8 @@ jobs:
         env:
           ASPNETCORE_ENVIRONMENT: Production
           StaticPreview: 'true'
+          # Absolute links (WhatsApp/social preview images, structured data) point at the Pages address
+          Seo__SiteUrl: ${{ steps.pages.outputs.base_url }}
         run: |
           nohup dotnet EDA_Website.dll --urls http://127.0.0.1:5080 > ../server.log 2>&1 &
           for i in $(seq 1 30); do

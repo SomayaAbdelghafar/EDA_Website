@@ -1,10 +1,10 @@
 @{
-    ViewData["Title"] = "خدماتنا";
-    ViewData["Subtitle"] = "حلول تكييف وتبريد متكاملة: تصميم، توريد، تركيب، تشغيل وصيانة.";
-    ViewData["Description"] = "خدمات شركة إيدا للتكييف والتبريد: أنظمة التهوية المركزية، المكيفات الشباك والسبليت، التكييف المركزي والباكدج، صناعة مجاري الهواء، تشغيل الأنظمة العملاقة، وعقود الصيانة.";
+    ViewData["Title"] = T["Shared.Nav.Services"].Value;
+    ViewData["Heading"] = T["Services.Heading"].Value;
+    ViewData["SeoTitle"] = T["Services.SeoTitle"].Value;
+    ViewData["Subtitle"] = T["Services.Subtitle"].Value;
+    ViewData["Description"] = T["Services.Description"].Value;
     ViewData["HeaderImage"] = "/images/site/technician.jpg";
-    var images = new[] { "/images/site/rooftop.jpg", "/images/site/about-unit.jpg", "/images/site/hero.jpg",
-                         "/images/projects/al-hijrain-village/4.jpg", "/images/site/chillers.jpg", "/images/site/technician.jpg" };
 }
 <partial name="_PageHeader" />
 
@@ -29,7 +29,7 @@
             <article class="eda-service-row" id="@s.Slug">
                 <div class="row g-4 g-lg-5 align-items-center">
                     <div class="col-lg-5 @(i % 2 == 1 ? "order-lg-2" : "")">
-                        <img src="@images[i % images.Length]" alt="@s.Title" class="img-fluid rounded-4 shadow-sm eda-cover" loading="lazy" />
+                        <img src="@s.Image" alt="@s.Heading" class="img-fluid rounded-4 shadow-sm eda-cover" loading="lazy" />
                     </div>
                     <div class="col-lg-7">
                         <span class="eda-service-num">0@(i + 1)</span>
@@ -41,7 +41,10 @@
                                 <li>@point</li>
                             }
                         </ul>
-                        <a class="btn btn-outline-primary" asp-controller="Home" asp-action="Contact" asp-route-service="@s.Title">اطلب هذه الخدمة <i class="bi bi-arrow-left"></i></a>
+                        <div class="d-flex flex-wrap gap-2">
+                            <a class="btn btn-primary" asp-controller="Home" asp-action="ServiceDetails" asp-route-slug="@s.Slug">@T["Services.DetailsAndFaq"] <i class="bi bi-arrow-left eda-flip-ltr"></i></a>
+                            <a class="btn btn-outline-primary" asp-controller="Home" asp-action="Contact" asp-route-service="@s.Slug">@T["Services.RequestThis"]</a>
+                        </div>
                     </div>
                 </div>
             </article>
@@ -53,9 +56,9 @@
 <section class="eda-section eda-section-alt">
     <div class="container">
         <div class="eda-section-head">
-            <span class="eda-eyebrow">آلية العمل</span>
-            <h2>كيف ننفذ مشروعك؟</h2>
-            <p>منهجية علمية واضحة من أول زيارة حتى ما بعد التسليم.</p>
+            <span class="eda-eyebrow">@T["Services.Process.Eyebrow"]</span>
+            <h2>@T["Services.Process.Title"]</h2>
+            <p>@T["Services.Process.Text"]</p>
         </div>
         <ol class="eda-process">
             @for (var i = 0; i < CompanyData.Process.Count; i++)
@@ -75,18 +78,18 @@
 <section class="eda-section">
     <div class="container">
         <div class="eda-section-head">
-            <span class="eda-eyebrow">القطاعات</span>
-            <h2>نخدم مختلف أنواع المنشآت</h2>
+            <span class="eda-eyebrow">@T["Services.Sectors.Eyebrow"]</span>
+            <h2>@T["Services.Sectors.Title"]</h2>
         </div>
         <div class="eda-sectors">
-            <div><i class="bi bi-house-door"></i>الفلل والقصور</div>
-            <div><i class="bi bi-buildings"></i>الأبراج السكنية</div>
-            <div><i class="bi bi-moon-stars"></i>المساجد</div>
-            <div><i class="bi bi-shop"></i>المولات والمحلات</div>
-            <div><i class="bi bi-bank"></i>البنوك والمكاتب</div>
-            <div><i class="bi bi-cup-hot"></i>المطاعم</div>
-            <div><i class="bi bi-film"></i>دور السينما والقاعات</div>
-            <div><i class="bi bi-building-gear"></i>الجهات الحكومية والمصانع</div>
+            <div><i class="bi bi-house-door"></i>@T["Services.Sectors.Villas"]</div>
+            <div><i class="bi bi-buildings"></i>@T["Services.Sectors.Towers"]</div>
+            <div><i class="bi bi-moon-stars"></i>@T["Services.Sectors.Mosques"]</div>
+            <div><i class="bi bi-shop"></i>@T["Services.Sectors.Malls"]</div>
+            <div><i class="bi bi-bank"></i>@T["Services.Sectors.Banks"]</div>
+            <div><i class="bi bi-cup-hot"></i>@T["Services.Sectors.Restaurants"]</div>
+            <div><i class="bi bi-film"></i>@T["Services.Sectors.Cinemas"]</div>
+            <div><i class="bi bi-building-gear"></i>@T["Services.Sectors.Government"]</div>
         </div>
     </div>
 </section>

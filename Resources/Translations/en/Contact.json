@@ -1,0 +1,58 @@
+{
+  // Contact page (Views/Home/Contact.cshtml). Form labels and validation messages are used by Models/ContactViewModel.cs.
+  "Heading": "Contact EDA Air Conditioning in Jeddah",
+  "SeoTitle": "Contact Us – EDA Air Conditioning Jeddah: Phone & Quote",
+  "Subtitle": "We're happy to hear from you, whether you need a quote, a maintenance appointment or have any question.",
+  "Description": "Contact EDA Air Conditioning & Refrigeration in Jeddah: phone, WhatsApp, email and address – the intersection of Sari Street and Madinah Road.",
+  "Cards": {
+    "Call": "Call Us",
+    "WhatsApp": "WhatsApp",
+    "WhatsAppNote": "Direct, fast replies",
+    "Email": "Email",
+    "Address": "Address"
+  },
+  "Form": {
+    "Title": "Send Us Your Request",
+    "Intro": "Fill in the form and one of our engineers will contact you as soon as possible.",
+    // {0} = the visitor's name
+    "Success": "Thank you, {0}. We have received your request and will contact you soon. For urgent matters, you can call us directly.",
+    // {0} = the company's phone number (a link)
+    "SendError": "Sorry, we couldn't send your request right now due to a technical problem. Please try again shortly, or contact us directly at {0} or with the WhatsApp button below.",
+    "PreviewNotice": "This is a preview copy of the website, so the form isn't sent yet; it will work once the site officially launches. You can send your request now with the WhatsApp button.",
+    "Honeypot": "Leave this field empty",
+    "Name": "Name",
+    "Phone": "Mobile number",
+    "Email": "Email (optional)",
+    "City": "City",
+    "CityPlaceholder": "Jeddah",
+    "Service": "Service needed",
+    "ChooseService": "Choose a service",
+    "OtherService": "Other",
+    "Message": "Request details",
+    "MessagePlaceholder": "Tell us the building type, approximate area and the service you need...",
+    "Submit": "Send Request",
+    "SendWhatsApp": "Send via WhatsApp"
+  },
+  "Validation": {
+    "NameRequired": "Please enter your name",
+    "NameTooLong": "The name is too long",
+    "PhoneRequired": "Please enter your mobile number",
+    "PhoneInvalid": "Please enter a valid mobile number",
+    "EmailInvalid": "Please enter a valid email address",
+    "EmailTooLong": "The email address is too long",
+    "CityTooLong": "The city name is too long",
+    "ServiceInvalid": "Please choose a service from the list",
+    "MessageRequired": "Please describe your request",
+    "MessageLength": "Please write at least 10 characters"
+  },
+  "MapTitle": "EDA's location on the map",
+  "Why": {
+    "Title": "Why Contact Us?",
+    "Points": [
+      "Site survey and heat-load calculation",
+      "Fair, clear quotations",
+      "Annual maintenance contracts for villas, towers and restaurants",
+      "Top-level engineers and technicians, and fast execution"
+    ]
+  }
+}

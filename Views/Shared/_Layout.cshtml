@@ -4,41 +4,121 @@
     string NavActive(string controller, string? action = null) =>
         string.Equals(currentController, controller, StringComparison.OrdinalIgnoreCase)
         && (action is null || string.Equals(currentAction, action, StringComparison.OrdinalIgnoreCase)) ? "active" : "";
-    var description = ViewData["Description"] as string
-        ?? "شركة إيدا للتكييف والتبريد – تصميم وتوريد وتركيب وصيانة أنظمة التكييف المركزي والسبليت والباكدج في جدة وجميع أنحاء المملكة العربية السعودية.";
+
+    // ----- Language: taken from the URL (/en/… = English, no prefix = Arabic); see Localization/ -----
+    var language = SiteLanguages.Current;
+    var otherLanguages = SiteLanguages.All.Where(l => l != language).ToList();
+
+    // ----- Search & sharing (pages set these ViewData keys; Services/SiteUrls.cs builds the absolute URLs) -----
+    //   SeoTitle       full <title> for Google results; default "Title | company name"
+    //   Description    meta description; default CompanyData.DefaultDescription
+    //   CanonicalPath  the page's one indexable address, without language prefix; default the current path, lower case, no query string
+    //   OgImage        picture for WhatsApp / social previews; default the banner image, then the hero photo
+    //   PreloadImage   banner photo to fetch early (it is the largest element on screen); default HeaderImage
+    //   NoIndex        true keeps the page out of search results (error pages)
+    var staticPreview = Configuration.GetValue<bool>("StaticPreview");
+    var baseUrl = SiteUrls.Base(Context.Request, Configuration);
+    var documentTitle = ViewData["SeoTitle"]?.ToString() ?? T["Shared.Seo.TitleFormat", ViewData["Title"]?.ToString() ?? "", CompanyData.Name].Value;
+    var description = ViewData["Description"]?.ToString() ?? CompanyData.DefaultDescription;
+    var isErrorPage = Context.Response.StatusCode >= 400 || ViewData["NoIndex"] is true;
+    // The same page in each language: the address without language prefix, then each language adds its own
+    var neutralPath = ViewData["CanonicalPath"] as string ?? SiteLanguages.Split(SiteUrls.CurrentPath(Context.Request)).Path;
+    string AddressIn(SiteLanguage l) => SiteUrls.Absolute(baseUrl, SiteLanguages.Localize(neutralPath, l));
+    // The preview copy and error pages stay out of search results, so they declare no canonical address
+    var canonical = staticPreview || isErrorPage ? null : AddressIn(language);
+    var shareImage = SiteUrls.Absolute(baseUrl, ViewData["OgImage"] as string ?? ViewData["HeaderImage"] as string ?? "/images/site/hero.jpg");
+    var preloadImage = ViewData["PreloadImage"] as string ?? ViewData["HeaderImage"] as string;
+    var siteVerification = Configuration["Seo:GoogleSiteVerification"];
+    // Google Analytics 4 loads only when a measurement ID (G-XXXXXXX) is configured, never on the preview copy
+    var ga4Id = staticPreview ? null : Configuration["Analytics:Ga4MeasurementId"];
+    if (ga4Id is not null && !System.Text.RegularExpressions.Regex.IsMatch(ga4Id, "^G-[A-Z0-9]{4,20}$"))
+        ga4Id = null;
 }
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="@language.Code" dir="@language.Dir">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#062E6C" />
-    @if (Configuration.GetValue<bool>("StaticPreview"))
+    <title>@documentTitle</title>
+    <meta name="description" content="@description" />
+    @if (staticPreview)
     {
         @* Static preview copy on GitHub Pages: keep it out of search results until the real site launches *@
         <meta name="robots" content="noindex, nofollow" />
     }
-    <meta name="description" content="@description" />
-    <meta property="og:title" content="@ViewData["Title"] | @CompanyData.NameAr" />
+    else if (isErrorPage)
+    {
+        <meta name="robots" content="noindex" />
+    }
+    @if (canonical is not null)
+    {
+        <link rel="canonical" href="@canonical" />
+        <meta property="og:url" content="@canonical" />
+        @* Every language version of this page, so search engines show each visitor the right one *@
+        @foreach (var l in SiteLanguages.All)
+        {
+            <link rel="alternate" hreflang="@l.Code" href="@AddressIn(l)" />
+        }
+        <link rel="alternate" hreflang="x-default" href="@AddressIn(SiteLanguages.Default)" />
+    }
+    @if (!string.IsNullOrWhiteSpace(siteVerification))
+    {
+        <meta name="google-site-verification" content="@siteVerification" />
+    }
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="@CompanyData.Name" />
+    <meta property="og:title" content="@documentTitle" />
     <meta property="og:description" content="@description" />
-    <meta property="og:image" content="/images/site/hero.jpg" />
-    <meta property="og:locale" content="ar_SA" />
-    <title>@ViewData["Title"] | @CompanyData.NameAr</title>
+    <meta property="og:image" content="@shareImage" />
+    <meta property="og:locale" content="@language.OgLocale" />
+    @foreach (var l in otherLanguages)
+    {
+        <meta property="og:locale:alternate" content="@l.OgLocale" />
+    }
+    <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" href="~/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="32x32" href="~/images/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="~/images/favicon-16x16.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="~/images/apple-touch-icon.png" />
+    @if (preloadImage is not null)
+    {
+        @* The banner photo is a CSS background, which browsers find late: start downloading it now *@
+        <link rel="preload" as="image" href="@preloadImage" fetchpriority="high" />
+    }
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    @* Cairo covers Arabic and Latin; the browser only downloads the script subsets a page uses *@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
     <script type="importmap"></script>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.rtl.min.css" />
+    @if (language.IsRtl)
+    {
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.rtl.min.css" />
+    }
+    else
+    {
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    }
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/EDA_Website.styles.css" asp-append-version="true" />
+    @if (!isErrorPage)
+    {
+        @StructuredData.ScriptTag(StructuredData.SiteGraph(baseUrl))
+    }
+    @if (ga4Id is not null)
+    {
+        <script async src="https://www.googletagmanager.com/gtag/js?id=@ga4Id"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag("js", new Date());
+            gtag("config", "@ga4Id");
+        </script>
+    }
 </head>
 <body>
-    <a class="visually-hidden-focusable eda-skip" href="#main">تخطي إلى المحتوى</a>
+    <a class="visually-hidden-focusable eda-skip" href="#main">@T["Shared.SkipToContent"]</a>
 
     <div class="eda-topbar d-none d-md-block">
         <div class="container d-flex justify-content-between align-items-center">
@@ -55,22 +135,35 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-white eda-navbar">
             <div class="container">
                 <a class="navbar-brand" asp-controller="Home" asp-action="Index">
-                    <img src="~/images/logo.png" alt="@CompanyData.NameAr" class="eda-logo" asp-append-version="true" />
+                    <img src="~/images/logo.png" alt="@CompanyData.Name" class="eda-logo" width="936" height="620" asp-append-version="true" />
                 </a>
+                @*
+                    Language switcher: outside the collapsible menu so it is one tap away on phones (next to the menu button);
+                    on wide screens it moves after the quote button. Each link opens the same page in that language.
+                *@
+                <div class="eda-lang order-lg-last ms-auto ms-lg-3 me-2 me-lg-0">
+                    @foreach (var l in otherLanguages)
+                    {
+                        <a class="eda-lang-switch" href="@SiteUrls.InLanguage(Context, l)" hreflang="@l.Code" lang="@l.Code" dir="@l.Dir"
+                           data-eda-lang="@l.Code" title="@Translations.Get("Shared.Language.SwitchLabel", l.Code)">
+                            <i class="bi bi-globe2" aria-hidden="true"></i> @l.NativeName
+                        </a>
+                    }
+                </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav"
-                        aria-expanded="false" aria-label="القائمة">
+                        aria-expanded="false" aria-label="@T["Shared.Nav.Menu"]">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="mainNav">
                     <ul class="navbar-nav mx-auto">
-                        <li class="nav-item"><a class="nav-link @NavActive("Home", "Index")" asp-controller="Home" asp-action="Index">الرئيسية</a></li>
-                        <li class="nav-item"><a class="nav-link @NavActive("Home", "About")" asp-controller="Home" asp-action="About">من نحن</a></li>
-                        <li class="nav-item"><a class="nav-link @NavActive("Home", "Services")" asp-controller="Home" asp-action="Services">خدماتنا</a></li>
-                        <li class="nav-item"><a class="nav-link @NavActive("Projects")" asp-controller="Projects" asp-action="Index">سابقة الأعمال</a></li>
-                        <li class="nav-item"><a class="nav-link @NavActive("Home", "Contact")" asp-controller="Home" asp-action="Contact">تواصل معنا</a></li>
+                        <li class="nav-item"><a class="nav-link @NavActive("Home", "Index")" asp-controller="Home" asp-action="Index">@T["Shared.Nav.Home"]</a></li>
+                        <li class="nav-item"><a class="nav-link @NavActive("Home", "About")" asp-controller="Home" asp-action="About">@T["Shared.Nav.About"]</a></li>
+                        <li class="nav-item"><a class="nav-link @NavActive("Home", "Services")" asp-controller="Home" asp-action="Services">@T["Shared.Nav.Services"]</a></li>
+                        <li class="nav-item"><a class="nav-link @NavActive("Projects")" asp-controller="Projects" asp-action="Index">@T["Shared.Nav.Projects"]</a></li>
+                        <li class="nav-item"><a class="nav-link @NavActive("Home", "Contact")" asp-controller="Home" asp-action="Contact">@T["Shared.Nav.Contact"]</a></li>
                     </ul>
                     <a class="btn btn-success eda-nav-cta" asp-controller="Home" asp-action="Contact">
-                        <i class="bi bi-chat-dots"></i> اطلب عرض سعر
+                        <i class="bi bi-chat-dots"></i> @T["Shared.Actions.RequestQuote"]
                     </a>
                 </div>
             </div>
@@ -86,52 +179,58 @@
             <div class="row g-4">
                 <div class="col-lg-4">
                     <a class="eda-footer-logo" asp-controller="Home" asp-action="Index">
-                        <img src="~/images/logo.png" alt="@CompanyData.NameAr" asp-append-version="true" />
+                        <img src="~/images/logo.png" alt="@CompanyData.Name" width="936" height="620" loading="lazy" asp-append-version="true" />
                     </a>
-                    <p class="mt-3 mb-0">نقدم أفضل تكنولوجيا التكييف والتبريد لعملائنا في جميع أنحاء المملكة العربية السعودية: تصميم، توريد، تركيب، تشغيل وصيانة.</p>
+                    <p class="mt-3 mb-0">@T["Shared.Footer.About"]</p>
                 </div>
                 <div class="col-6 col-lg-2">
-                    <h3 class="eda-footer-title">روابط سريعة</h3>
+                    <h3 class="eda-footer-title">@T["Shared.Footer.QuickLinks"]</h3>
                     <ul class="list-unstyled eda-footer-links">
-                        <li><a asp-controller="Home" asp-action="About">من نحن</a></li>
-                        <li><a asp-controller="Home" asp-action="Services">خدماتنا</a></li>
-                        <li><a asp-controller="Projects" asp-action="Index">سابقة الأعمال</a></li>
-                        <li><a asp-controller="Home" asp-action="Contact">تواصل معنا</a></li>
-                        <li><a asp-controller="Home" asp-action="Privacy">سياسة الخصوصية</a></li>
+                        <li><a asp-controller="Home" asp-action="About">@T["Shared.Nav.About"]</a></li>
+                        <li><a asp-controller="Home" asp-action="Services">@T["Shared.Nav.Services"]</a></li>
+                        <li><a asp-controller="Projects" asp-action="Index">@T["Shared.Nav.Projects"]</a></li>
+                        <li><a asp-controller="Home" asp-action="Contact">@T["Shared.Nav.Contact"]</a></li>
+                        <li><a asp-controller="Home" asp-action="Privacy">@T["Shared.Nav.Privacy"]</a></li>
                     </ul>
                 </div>
                 <div class="col-6 col-lg-3">
-                    <h3 class="eda-footer-title">خدماتنا</h3>
+                    <h3 class="eda-footer-title">@T["Shared.Footer.Services"]</h3>
                     <ul class="list-unstyled eda-footer-links">
                         @foreach (var s in CompanyData.Services)
                         {
-                            <li><a asp-controller="Home" asp-action="Services" asp-fragment="@s.Slug">@s.Title</a></li>
+                            <li><a asp-controller="Home" asp-action="ServiceDetails" asp-route-slug="@s.Slug">@s.Title</a></li>
                         }
                     </ul>
                 </div>
                 <div class="col-lg-3">
-                    <h3 class="eda-footer-title">تواصل معنا</h3>
+                    <h3 class="eda-footer-title">@T["Shared.Footer.Contact"]</h3>
                     <ul class="list-unstyled eda-footer-contact">
                         <li><i class="bi bi-geo-alt"></i> @CompanyData.Address</li>
                         <li><i class="bi bi-telephone"></i> <a href="tel:@CompanyData.Phone1" dir="ltr">@CompanyData.Phone1Display</a></li>
                         <li><i class="bi bi-telephone"></i> <a href="tel:@CompanyData.Phone2" dir="ltr">@CompanyData.Phone2Display</a></li>
                         <li><i class="bi bi-envelope"></i> <a href="mailto:@CompanyData.Email">@CompanyData.Email</a></li>
-                        <li><i class="bi bi-patch-check"></i> سجل تجاري: @CompanyData.CrNumber</li>
+                        <li><i class="bi bi-patch-check"></i> @T["Shared.Footer.CrNumber", CompanyData.CrNumber]</li>
                     </ul>
                 </div>
             </div>
             <div class="eda-footer-bottom">
-                <span>&copy; @DateTime.Now.Year @CompanyData.NameAr – جميع الحقوق محفوظة</span>
-                <span dir="ltr">@CompanyData.NameEn</span>
+                <span>@T["Shared.Footer.Copyright", DateTime.Now.Year, CompanyData.Name]</span>
+                @* The company's name in the site's other languages *@
+                @foreach (var l in otherLanguages)
+                {
+                    <span lang="@l.Code" dir="@l.Dir">@CompanyData.NameIn(l)</span>
+                }
             </div>
         </div>
     </footer>
 
-    <a class="eda-whatsapp" href="@CompanyData.WhatsAppUrl("السلام عليكم، أرغب بالاستفسار عن خدمات التكييف")" target="_blank" rel="noopener" aria-label="تواصل عبر واتساب">
+    <a class="eda-whatsapp" href="@CompanyData.WhatsAppUrl(T["Shared.WhatsApp.DefaultMessage"])" target="_blank" rel="noopener" aria-label="@T["Shared.WhatsApp.Label"]">
         <i class="bi bi-whatsapp"></i>
     </a>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    @* Texts used by site.js (Shared.Js in the translation files) *@
+    <script type="application/json" id="eda-texts">@Html.Raw(StructuredData.Serialize(Translations.Section("Shared.Js")))</script>
+    @* jQuery is only needed by the contact form's validation, so it loads there (_ValidationScriptsPartial) *@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)

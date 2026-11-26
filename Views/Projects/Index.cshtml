@@ -1,19 +1,34 @@
 @model IReadOnlyList<Project>
 @{
     var selected = ViewData["Category"] as ProjectCategory?;
-    ViewData["Title"] = "سابقة الأعمال";
     ViewData["Subtitle"] = selected is null
-        ? "مشاريع التكييف والتبريد وأعمال الصيانة التي نفذناها في مختلف مدن المملكة."
+        ? T["Projects.Subtitle"].Value
         : CompanyData.CategoryDescription(selected.Value);
-    ViewData["Description"] = "سابقة أعمال شركة إيدا للتكييف والتبريد: مشاريع تكييف مركزي، صيانة بضمان TRANE، وأعمال صيانة للمولات والمحلات في جدة ومكة والمدينة وجازان والطائف.";
     ViewData["HeaderImage"] = "/images/site/services-bg.jpg";
+    if (selected is null)
+    {
+        ViewData["Title"] = T["Shared.Nav.Projects"].Value;
+        ViewData["Heading"] = T["Projects.Heading"].Value;
+        ViewData["SeoTitle"] = T["Projects.SeoTitle"].Value;
+        ViewData["Description"] = T["Projects.Description"].Value;
+        ViewData["CanonicalPath"] = "/projects"; // also for unknown ?category= values, which show the full list
+    }
+    else
+    {
+        // Each category is its own landing page (e.g. TRANE-warranty maintenance) with its own title and address
+        ViewData["Title"] = CompanyData.CategoryTitle(selected.Value);
+        ViewData["Breadcrumb"] = ((string, string)?)(T["Shared.Nav.Projects"], Url.Action("Index", "Projects")!);
+        ViewData["SeoTitle"] = CompanyData.CategorySeoTitle(selected.Value);
+        ViewData["Description"] = CompanyData.CategoryMetaDescription(selected.Value);
+        ViewData["CanonicalPath"] = $"/projects?category={CompanyData.CategorySlug(selected.Value)}";
+    }
 }
 <partial name="_PageHeader" />
 
 <section class="eda-section">
     <div class="container">
-        <nav class="eda-filter" aria-label="تصنيف المشاريع">
-            <a class="@(selected is null ? "active" : "")" asp-action="Index">الكل <span>@CompanyData.Projects.Count</span></a>
+        <nav class="eda-filter" aria-label="@T["Projects.FilterLabel"]">
+            <a class="@(selected is null ? "active" : "")" asp-action="Index">@T["Projects.All"] <span>@CompanyData.Projects.Count</span></a>
             @foreach (var c in Enum.GetValues<ProjectCategory>())
             {
                 <a class="@(selected == c ? "active" : "")" asp-action="Index" asp-route-category="@CompanyData.CategorySlug(c)">

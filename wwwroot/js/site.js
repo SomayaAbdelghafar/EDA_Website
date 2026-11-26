@@ -3,6 +3,21 @@
     "use strict";
     document.documentElement.classList.add("js");
 
+    // ---------- Texts in the page's language ----------
+    // The layout writes the "Shared.Js" translations into #eda-texts (Resources/Translations/{language}/Shared.json)
+    var texts = {};
+    try { texts = JSON.parse(document.getElementById("eda-texts").textContent) || {}; } catch (err) { texts = {}; }
+    var t = function (key) { return texts[key] || ""; };
+    var isRtl = document.documentElement.dir === "rtl";
+
+    // ---------- Language switcher: remember the choice for the next visit ----------
+    // The server reads this cookie only when someone opens the home page directly (Localization/LanguageRouting.cs)
+    document.querySelectorAll("[data-eda-lang]").forEach(function (link) {
+        link.addEventListener("click", function () {
+            document.cookie = "eda_lang=" + encodeURIComponent(link.dataset.edaLang) + "; path=/; max-age=31536000; samesite=lax";
+        });
+    });
+
     // ---------- Reveal-on-scroll for cards and section content ----------
     var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var revealTargets = document.querySelectorAll(
@@ -98,14 +113,23 @@
             modal.show();
         });
 
-        // RTL: "previous" sits on the right, "next" on the left
+        // "Previous" sits at the start of the reading direction: on the right in Arabic, on the left in English
         modalEl.querySelector(".eda-lightbox-prev").addEventListener("click", function () { show(current - 1); });
         modalEl.querySelector(".eda-lightbox-next").addEventListener("click", function () { show(current + 1); });
         modalEl.addEventListener("keydown", function (e) {
-            if (e.key === "ArrowRight") show(current - 1);
-            if (e.key === "ArrowLeft") show(current + 1);
+            if (e.key === "ArrowRight") show(isRtl ? current - 1 : current + 1);
+            if (e.key === "ArrowLeft") show(isRtl ? current + 1 : current - 1);
         });
     }
+
+    // ---------- Project gallery: "show all photos" ----------
+    document.querySelectorAll("[data-eda-gallery-toggle]").forEach(function (button) {
+        button.addEventListener("click", function () {
+            var gallery = document.getElementById(button.dataset.edaGalleryToggle);
+            if (gallery) gallery.classList.add("is-expanded");
+            button.remove();
+        });
+    });
 
     // ---------- Contact form: send the same details over WhatsApp ----------
     var waButton = document.getElementById("sendWhatsApp");
@@ -116,12 +140,15 @@
                 var field = form.querySelector('[name="' + name + '"]');
                 return field ? field.value.trim() : "";
             };
-            var lines = ["السلام عليكم، أرغب في طلب خدمة من شركة إيدا للتكييف والتبريد."];
-            if (val("Name")) lines.push("الاسم: " + val("Name"));
-            if (val("Phone")) lines.push("الجوال: " + val("Phone"));
-            if (val("City")) lines.push("المدينة: " + val("City"));
-            if (val("Service")) lines.push("الخدمة: " + val("Service"));
-            if (val("Message")) lines.push("التفاصيل: " + val("Message"));
+            // The service list sends a slug; the message shows the service's name as the visitor saw it
+            var service = form.querySelector('[name="Service"]');
+            var serviceName = service && service.value ? service.options[service.selectedIndex].text.trim() : "";
+            var lines = [t("whatsAppIntro")];
+            if (val("Name")) lines.push(t("whatsAppName") + " " + val("Name"));
+            if (val("Phone")) lines.push(t("whatsAppPhone") + " " + val("Phone"));
+            if (val("City")) lines.push(t("whatsAppCity") + " " + val("City"));
+            if (serviceName) lines.push(t("whatsAppService") + " " + serviceName);
+            if (val("Message")) lines.push(t("whatsAppDetails") + " " + val("Message"));
             window.open("https://wa.me/" + waButton.dataset.wa + "?text=" + encodeURIComponent(lines.join("\n")), "_blank", "noopener");
         });
     }
@@ -150,12 +177,41 @@
             var $ = window.jQuery;
             if ($ && $.fn.valid && !$(contactForm).valid()) return;
             submitButton.disabled = true;
-            submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" aria-hidden="true"></span> جارٍ الإرسال...';
+            submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" aria-hidden="true"></span> ';
+            submitButton.appendChild(document.createTextNode(t("sending")));
         });
         // Coming back with the browser's back button can restore the page with the button still disabled
         window.addEventListener("pageshow", function () {
             submitButton.disabled = false;
             submitButton.innerHTML = submitLabel;
         });
+    }
+
+    // ---------- Analytics: count calls, WhatsApp chats and sent forms as leads ----------
+    // gtag only exists when a GA4 measurement ID is set in appsettings ("Analytics"); otherwise nothing runs.
+    // Mark click_call, click_whatsapp and generate_lead as key events in GA4 to see leads per page and source.
+    if (typeof window.gtag === "function") {
+        document.addEventListener("click", function (e) {
+            var link = e.target.closest("a[href]");
+            if (!link) return;
+            var href = link.getAttribute("href");
+            if (href.indexOf("tel:") === 0) {
+                window.gtag("event", "click_call", { link_url: href });
+            } else if (href.indexOf("https://wa.me/") === 0) {
+                window.gtag("event", "click_whatsapp", { link_url: href.split("?")[0] }); // the message text stays private
+            } else if (href.indexOf("mailto:") === 0) {
+                window.gtag("event", "click_email");
+            }
+        });
+        var waFormButton = document.getElementById("sendWhatsApp");
+        if (waFormButton) {
+            waFormButton.addEventListener("click", function () {
+                window.gtag("event", "click_whatsapp", { form: "contact" });
+            });
+        }
+        // The thank-you message is only shown after a contact request was received
+        if (document.querySelector("[data-eda-lead]")) {
+            window.gtag("event", "generate_lead", { form: "contact" });
+        }
     }
 })();

@@ -1,6 +1,7 @@
 @*
     Page banner. Pass ViewData:
-      "Title"        – heading (already set by every page)
+      "Title"        – breadcrumb label (and the heading when "Heading" is not set) – already set by every page
+      "Heading"      – optional H1 when it should differ from the short title (e.g. include the service and city)
       "Subtitle"     – optional lead text
       "HeaderImage"  – optional background image URL
       "Breadcrumb"   – optional (string label, string url) parent crumb
@@ -8,23 +9,35 @@
 @{
     var image = ViewData["HeaderImage"] as string ?? "/images/site/rooftop.jpg";
     var parent = ViewData["Breadcrumb"] as (string Label, string Url)?;
+    var title = ViewData["Title"]?.ToString() ?? "";
+    var heading = ViewData["Heading"]?.ToString() ?? title;
+    var subtitle = ViewData["Subtitle"]?.ToString();
+    var homeUrl = Url.Action("Index", "Home")!; // the home page in the current language
+
+    // Same trail as the visible breadcrumb, as structured data so Google can show it in results
+    var baseUrl = SiteUrls.Base(Context.Request, Configuration);
+    var crumbs = new List<(string Name, string? Url)> { (T["Shared.Nav.Home"], SiteUrls.Absolute(baseUrl, homeUrl)) };
+    if (parent is not null)
+        crumbs.Add((parent.Value.Label, SiteUrls.Absolute(baseUrl, parent.Value.Url)));
+    crumbs.Add((title, null));
 }
 <section class="eda-page-header" style="--bg:url('@image')">
     <div class="container">
-        <nav aria-label="breadcrumb">
+        <nav aria-label="@T["Shared.Breadcrumb"]">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">الرئيسية</a></li>
+                <li class="breadcrumb-item"><a href="@homeUrl">@T["Shared.Nav.Home"]</a></li>
                 @if (parent is not null)
                 {
                     <li class="breadcrumb-item"><a href="@parent.Value.Url">@parent.Value.Label</a></li>
                 }
-                <li class="breadcrumb-item active" aria-current="page">@ViewData["Title"]</li>
+                <li class="breadcrumb-item active" aria-current="page">@title</li>
             </ol>
         </nav>
-        <h1>@ViewData["Title"]</h1>
-        @if (ViewData["Subtitle"] is string subtitle)
+        <h1>@heading</h1>
+        @if (!string.IsNullOrEmpty(subtitle))
         {
             <p class="lead mb-0">@subtitle</p>
         }
     </div>
 </section>
+@StructuredData.ScriptTag(StructuredData.Breadcrumbs(crumbs))

@@ -6,6 +6,8 @@ using MailKit;
 using MailKit.Net.Smtp;
 using Microsoft.Extensions.Options;
 using MimeKit;
+using EDA_Website.Data;
+using EDA_Website.Localization;
 using EDA_Website.Models;
 
 namespace EDA_Website.Services;
@@ -40,7 +42,7 @@ public partial class ContactEmailSender(IOptions<EmailOptions> options, ILogger<
             message.ReplyTo.Add(customer);
         }
 
-        message.Subject = $"طلب جديد من الموقع: {OneLine(string.IsNullOrWhiteSpace(model.Service) ? "استفسار" : model.Service)} – {OneLine(model.Name)}";
+        message.Subject = $"طلب جديد من الموقع: {OneLine(string.IsNullOrWhiteSpace(model.Service) ? "استفسار" : ServiceName(model.Service))} – {OneLine(model.Name)}";
         message.Body = new BodyBuilder
         {
             TextBody = BuildText(model, receivedAt),
@@ -66,7 +68,8 @@ public partial class ContactEmailSender(IOptions<EmailOptions> options, ILogger<
         sb.AppendLine($"رقم الجوال: {m.Phone}");
         if (!string.IsNullOrWhiteSpace(m.Email)) sb.AppendLine($"البريد الإلكتروني: {m.Email}");
         if (!string.IsNullOrWhiteSpace(m.City)) sb.AppendLine($"المدينة: {m.City}");
-        sb.AppendLine($"الخدمة المطلوبة: {(string.IsNullOrWhiteSpace(m.Service) ? "—" : m.Service)}");
+        sb.AppendLine($"الخدمة المطلوبة: {ServiceName(m.Service)}");
+        sb.AppendLine($"لغة الموقع: {VisitorLanguage()}");
         sb.AppendLine($"وقت الاستلام: {FormatTime(receivedAt)}");
         sb.AppendLine();
         sb.AppendLine("تفاصيل الطلب:");
@@ -93,7 +96,8 @@ public partial class ContactEmailSender(IOptions<EmailOptions> options, ILogger<
             Row("البريد الإلكتروني", $"""<a href="mailto:{E(m.Email)}" dir="ltr" style="color:#157347;">{E(m.Email)}</a>""");
         if (!string.IsNullOrWhiteSpace(m.City))
             Row("المدينة", E(m.City));
-        Row("الخدمة المطلوبة", string.IsNullOrWhiteSpace(m.Service) ? "—" : E(m.Service));
+        Row("الخدمة المطلوبة", E(ServiceName(m.Service)));
+        Row("لغة الموقع", E(VisitorLanguage()));
         Row("تفاصيل الطلب", E(m.Message).ReplaceLineEndings("<br>"));
         Row("وقت الاستلام", E(FormatTime(receivedAt)));
 
@@ -110,6 +114,25 @@ public partial class ContactEmailSender(IOptions<EmailOptions> options, ILogger<
             </html>
             """;
     }
+
+    // This e-mail goes to the company's staff, so it is always in the site's default language (Arabic),
+    // whatever language the visitor used; the visitor's language is listed so the reply can match it.
+
+    /// <summary>The chosen service's name in the default language (the form sends the service's slug).</summary>
+    private static string ServiceName(string? slug)
+    {
+        if (string.IsNullOrWhiteSpace(slug))
+            return "—";
+        var staffLanguage = SiteLanguages.Default.Code;
+        if (slug == ContactViewModel.OtherService)
+            return Translations.Get("Contact.Form.OtherService", staffLanguage);
+        return CompanyData.FindService(slug) is { } service
+            ? Translations.Get($"Data.Services.{service.Slug}.Title", staffLanguage)
+            : slug;
+    }
+
+    /// <summary>Language of the page the form was sent from ("العربية", "English").</summary>
+    private static string VisitorLanguage() => SiteLanguages.Current.NativeName;
 
     private static string FormatTime(DateTimeOffset time) =>
         time.ToOffset(SaudiOffset).ToString("yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture) + " (بتوقيت السعودية)";

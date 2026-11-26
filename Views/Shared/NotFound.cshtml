@@ -1,14 +1,15 @@
 @{
-    ViewData["Title"] = "الصفحة غير موجودة";
+    ViewData["Title"] = T["Errors.NotFound.Title"].Value;
+    ViewData["NoIndex"] = true;
 }
 <section class="eda-section">
     <div class="container text-center eda-error">
         <strong class="eda-404">404</strong>
-        <h1>الصفحة غير موجودة</h1>
-        <p class="lead">ربما تم نقل الصفحة أو أن الرابط غير صحيح.</p>
+        <h1>@T["Errors.NotFound.Title"]</h1>
+        <p class="lead">@T["Errors.NotFound.Text"]</p>
         <div class="d-flex justify-content-center flex-wrap gap-3 mt-4">
-            <a class="btn btn-primary" asp-controller="Home" asp-action="Index">العودة للرئيسية</a>
-            <a class="btn btn-outline-primary" asp-controller="Projects" asp-action="Index">تصفح مشاريعنا</a>
+            <a class="btn btn-primary" asp-controller="Home" asp-action="Index">@T["Errors.BackHome"]</a>
+            <a class="btn btn-outline-primary" asp-controller="Projects" asp-action="Index">@T["Errors.BrowseProjects"]</a>
         </div>
     </div>
 </section>

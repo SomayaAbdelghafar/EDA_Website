@@ -1,0 +1,44 @@
+{
+  // Services overview (Views/Home/Services.cshtml) and the labels of each service page (ServiceDetails.cshtml).
+  // The services' own text is in Data.Services.json.
+  "Heading": "Air Conditioning & Refrigeration Services in Jeddah",
+  "SeoTitle": "AC Services in Jeddah: Central, Split & Maintenance | EDA",
+  "Subtitle": "Complete air conditioning and refrigeration solutions: design, supply, installation, operation and maintenance.",
+  "Description": "EDA's air conditioning services in Jeddah: central AC, ducted split and package units, split and window units, central ventilation, ductwork, system operation and maintenance contracts.",
+  "DetailsAndFaq": "Service Details & FAQs",
+  "RequestThis": "Request This Service",
+  "Process": {
+    "Eyebrow": "How We Work",
+    "Title": "How Do We Deliver Your Project?",
+    "Text": "A clear, scientific method from the first visit to after handover."
+  },
+  "Sectors": {
+    "Eyebrow": "Sectors",
+    "Title": "We Serve All Types of Buildings",
+    "Villas": "Villas & palaces",
+    "Towers": "Residential towers",
+    "Mosques": "Mosques",
+    "Malls": "Malls & shops",
+    "Banks": "Banks & offices",
+    "Restaurants": "Restaurants",
+    "Cinemas": "Cinemas & halls",
+    "Government": "Government & factories"
+  },
+  "Page": {
+    "Includes": "What Does the Service Include?",
+    "SuitableFor": "Who Is This Service For?",
+    "Request": {
+      "Title": "Request the Service",
+      "Text": "Our engineers inspect your site and offer you the most suitable solution with a clear quotation."
+    },
+    "OtherServices": "Other Services",
+    "Related": {
+      "Title": "From Our Projects",
+      "Text": "Examples of work we have delivered for clients in cities across the Kingdom."
+    },
+    "Faq": {
+      "Eyebrow": "FAQs",
+      "Title": "Questions Our Clients Ask"
+    }
+  }
+}

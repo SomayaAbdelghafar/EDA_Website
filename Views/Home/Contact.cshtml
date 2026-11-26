@@ -1,8 +1,10 @@
 @model ContactViewModel
 @{
-    ViewData["Title"] = "تواصل معنا";
-    ViewData["Subtitle"] = "يسعدنا تواصلكم معنا لطلب عرض سعر أو حجز موعد صيانة أو أي استفسار.";
-    ViewData["Description"] = "تواصل مع شركة إيدا للتكييف والتبريد في جدة: الهاتف، الواتساب، البريد الإلكتروني، والعنوان – تقاطع شارع صاري مع طريق المدينة.";
+    ViewData["Title"] = T["Shared.Nav.Contact"].Value;
+    ViewData["Heading"] = T["Contact.Heading"].Value;
+    ViewData["SeoTitle"] = T["Contact.SeoTitle"].Value;
+    ViewData["Subtitle"] = T["Contact.Subtitle"].Value;
+    ViewData["Description"] = T["Contact.Description"].Value;
     ViewData["HeaderImage"] = "/images/site/chillers.jpg";
     var success = TempData["ContactSuccess"] as string;
     // Static preview on GitHub Pages has no server to receive the form (see tools/export_static.py)
@@ -16,7 +18,7 @@
             <div class="col-sm-6 col-lg-3">
                 <div class="eda-contact-card">
                     <i class="bi bi-telephone"></i>
-                    <h3>اتصل بنا</h3>
+                    <h3>@T["Contact.Cards.Call"]</h3>
                     <a href="tel:@CompanyData.Phone1" dir="ltr">@CompanyData.Phone1Display</a>
                     <a href="tel:@CompanyData.Phone2" dir="ltr">@CompanyData.Phone2Display</a>
                 </div>
@@ -24,22 +26,22 @@
             <div class="col-sm-6 col-lg-3">
                 <div class="eda-contact-card">
                     <i class="bi bi-whatsapp"></i>
-                    <h3>واتساب</h3>
+                    <h3>@T["Contact.Cards.WhatsApp"]</h3>
                     <a href="@CompanyData.WhatsAppUrl()" target="_blank" rel="noopener" dir="ltr">@CompanyData.Phone2Display</a>
-                    <small>تواصل مباشر وسريع</small>
+                    <small>@T["Contact.Cards.WhatsAppNote"]</small>
                 </div>
             </div>
             <div class="col-sm-6 col-lg-3">
                 <div class="eda-contact-card">
                     <i class="bi bi-envelope"></i>
-                    <h3>البريد الإلكتروني</h3>
+                    <h3>@T["Contact.Cards.Email"]</h3>
                     <a href="mailto:@CompanyData.Email">@CompanyData.Email</a>
                 </div>
             </div>
             <div class="col-sm-6 col-lg-3">
                 <div class="eda-contact-card">
                     <i class="bi bi-geo-alt"></i>
-                    <h3>العنوان</h3>
+                    <h3>@T["Contact.Cards.Address"]</h3>
                     <a href="@CompanyData.MapLinkUrl" target="_blank" rel="noopener">@CompanyData.Address</a>
                 </div>
             </div>
@@ -48,14 +50,15 @@
         <div class="row g-4 g-lg-5">
             <div class="col-lg-7">
                 <div class="eda-form-card">
-                    <h2 class="eda-title">أرسل لنا طلبك</h2>
-                    <p class="text-secondary">املأ النموذج وسيتواصل معك أحد مهندسينا في أقرب وقت.</p>
+                    <h2 class="eda-title">@T["Contact.Form.Title"]</h2>
+                    <p class="text-secondary">@T["Contact.Form.Intro"]</p>
 
                     @if (success is not null)
                     {
-                        <div class="alert alert-success d-flex gap-2 align-items-start" role="alert">
+                        @* data-eda-lead: site.js reports the sent request to Google Analytics as a lead (when analytics is on) *@
+                        <div class="alert alert-success d-flex gap-2 align-items-start" role="alert" data-eda-lead>
                             <i class="bi bi-check-circle-fill fs-5"></i>
-                            <div>شكرًا لك يا @success، تم استلام طلبك بنجاح وسنتواصل معك قريبًا. للحالات العاجلة يمكنك الاتصال بنا مباشرة.</div>
+                            <div>@T["Contact.Form.Success", success]</div>
                         </div>
                     }
 
@@ -63,7 +66,7 @@
                     {
                         <div class="alert alert-danger d-flex gap-2 align-items-start" role="alert">
                             <i class="bi bi-exclamation-triangle-fill fs-5"></i>
-                            <div>عذرًا، تعذّر إرسال طلبك حاليًا بسبب خلل تقني. يرجى المحاولة مرة أخرى بعد قليل، أو التواصل معنا مباشرة على الرقم <a href="tel:@CompanyData.Phone1" dir="ltr">@CompanyData.Phone1Display</a> أو عبر زر واتساب بالأسفل.</div>
+                            <div>@T.Html("Contact.Form.SendError", Html.Raw($"<a href=\"tel:{CompanyData.Phone1}\" dir=\"ltr\">{CompanyData.Phone1Display}</a>"))</div>
                         </div>
                     }
 
@@ -71,7 +74,7 @@
                     {
                         <div class="alert alert-info d-none gap-2 align-items-start" role="alert" id="previewNotice">
                             <i class="bi bi-info-circle-fill fs-5"></i>
-                            <div>هذه نسخة عرض تجريبية من الموقع، لذلك لا يتم إرسال النموذج حاليًا وسيعمل بعد إطلاق الموقع رسميًا. يمكنك إرسال طلبك الآن عبر زر واتساب.</div>
+                            <div>@T["Contact.Form.PreviewNotice"]</div>
                         </div>
                     }
 
@@ -79,7 +82,7 @@
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         @* Honeypot against spam bots: hidden from visitors and screen readers *@
                         <div class="visually-hidden" aria-hidden="true">
-                            <label for="Website">اترك هذا الحقل فارغًا</label>
+                            <label for="Website">@T["Contact.Form.Honeypot"]</label>
                             <input asp-for="Website" tabindex="-1" autocomplete="off" />
                         </div>
                         <div class="row g-3">
@@ -100,27 +103,29 @@
                             </div>
                             <div class="col-md-6">
                                 <label asp-for="City" class="form-label"></label>
-                                <input asp-for="City" class="form-control" placeholder="جدة" />
+                                <input asp-for="City" class="form-control" placeholder="@T["Contact.Form.CityPlaceholder"]" />
+                                <span asp-validation-for="City" class="text-danger small"></span>
                             </div>
                             <div class="col-12">
                                 <label asp-for="Service" class="form-label"></label>
+                                @* Values are the language-neutral slugs, so a chosen service survives a language switch *@
                                 <select asp-for="Service" class="form-select">
-                                    <option value="">اختر الخدمة</option>
+                                    <option value="">@T["Contact.Form.ChooseService"]</option>
                                     @foreach (var s in CompanyData.Services)
                                     {
-                                        <option value="@s.Title">@s.Title</option>
+                                        <option value="@s.Slug">@s.Title</option>
                                     }
-                                    <option value="أخرى">أخرى</option>
+                                    <option value="@ContactViewModel.OtherService">@T["Contact.Form.OtherService"]</option>
                                 </select>
                             </div>
                             <div class="col-12">
                                 <label asp-for="Message" class="form-label"></label>
-                                <textarea asp-for="Message" class="form-control" rows="5" placeholder="اكتب نوع المبنى، المساحة التقريبية، ونوع الخدمة المطلوبة..."></textarea>
+                                <textarea asp-for="Message" class="form-control" rows="5" placeholder="@T["Contact.Form.MessagePlaceholder"]"></textarea>
                                 <span asp-validation-for="Message" class="text-danger small"></span>
                             </div>
                             <div class="col-12 d-flex flex-wrap gap-2">
-                                <button type="submit" class="btn btn-success btn-lg"><i class="bi bi-send"></i> إرسال الطلب</button>
-                                <button type="button" class="btn btn-outline-success btn-lg" id="sendWhatsApp" data-wa="@CompanyData.WhatsApp"><i class="bi bi-whatsapp"></i> إرسال عبر واتساب</button>
+                                <button type="submit" class="btn btn-success btn-lg"><i class="bi bi-send"></i> @T["Contact.Form.Submit"]</button>
+                                <button type="button" class="btn btn-outline-success btn-lg" id="sendWhatsApp" data-wa="@CompanyData.WhatsApp"><i class="bi bi-whatsapp"></i> @T["Contact.Form.SendWhatsApp"]</button>
                             </div>
                         </div>
                     </form>
@@ -128,15 +133,15 @@
             </div>
             <div class="col-lg-5">
                 <div class="eda-map">
-                    <iframe src="@CompanyData.MapEmbedUrl" title="موقع شركة إيدا على الخريطة" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+                    <iframe src="@CompanyData.MapEmbedUrl" title="@T["Contact.MapTitle"]" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
                 </div>
                 <div class="eda-hours mt-4">
-                    <h3><i class="bi bi-info-circle"></i> لماذا تتواصل معنا؟</h3>
+                    <h3><i class="bi bi-info-circle"></i> @T["Contact.Why.Title"]</h3>
                     <ul class="eda-checklist mb-0">
-                        <li>معاينة ودراسة الموقع وحساب الأحمال الحرارية</li>
-                        <li>عروض أسعار مناسبة وواضحة</li>
-                        <li>عقود صيانة سنوية للفلل والأبراج والمطاعم</li>
-                        <li>مهندسون وفنيون على أعلى مستوى وخدمة سريعة في التنفيذ</li>
+                        @foreach (var reason in Translations.List("Contact.Why.Points"))
+                        {
+                            <li>@reason</li>
+                        }
                     </ul>
                 </div>
             </div>

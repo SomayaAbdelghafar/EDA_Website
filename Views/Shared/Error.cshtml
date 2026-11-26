@@ -1,19 +1,20 @@
 ﻿@model ErrorViewModel
 @{
-    ViewData["Title"] = "حدث خطأ";
+    ViewData["Title"] = T["Errors.General.Title"].Value;
+    ViewData["NoIndex"] = true;
 }
 <section class="eda-section">
     <div class="container text-center eda-error">
         <i class="bi bi-exclamation-triangle"></i>
-        <h1>عذرًا، حدث خطأ غير متوقع</h1>
-        <p class="lead">نعتذر عن الإزعاج، يرجى المحاولة مرة أخرى بعد قليل أو التواصل معنا مباشرة.</p>
+        <h1>@T["Errors.General.Heading"]</h1>
+        <p class="lead">@T["Errors.General.Text"]</p>
         @if (Model?.ShowRequestId == true)
         {
             <p class="text-secondary small" dir="ltr">Request ID: <code>@Model.RequestId</code></p>
         }
         <div class="d-flex justify-content-center flex-wrap gap-3 mt-4">
-            <a class="btn btn-primary" asp-controller="Home" asp-action="Index">العودة للرئيسية</a>
-            <a class="btn btn-outline-success" href="tel:@CompanyData.Phone2">اتصل بنا</a>
+            <a class="btn btn-primary" asp-controller="Home" asp-action="Index">@T["Errors.BackHome"]</a>
+            <a class="btn btn-outline-success" href="tel:@CompanyData.Phone2">@T["Errors.CallUs"]</a>
         </div>
     </div>
 </section>

@@ -1,0 +1,26 @@
+{
+  // Projects list and project pages (Views/Projects). Project and category text is in Data.Projects.json and Data.ProjectCategories.json.
+  "Heading": "Our Air Conditioning and Maintenance Projects",
+  "SeoTitle": "Projects: Central AC & TRANE Maintenance Work | EDA",
+  "Subtitle": "Air conditioning, refrigeration and maintenance projects we have delivered in cities across the Kingdom.",
+  "Description": "EDA Air Conditioning & Refrigeration's portfolio: central AC projects, TRANE-warranted maintenance, and maintenance for malls and shops in Jeddah, Makkah, Madinah, Jazan and Taif.",
+  "FilterLabel": "Project categories",
+  "All": "All",
+  "Details": {
+    // {0} = project name (short form when it has one), {1} = city
+    "SeoTitle": "{0} – {1} | EDA Air Conditioning",
+    // {0} = project name, {1} = photo number
+    "PhotoAlt": "{0} – photo {1}",
+    "ShowAllPhotos": "Show all photos ({0})",
+    "About": "About the Project",
+    "Location": "Location",
+    "Category": "Category",
+    "Photos": "Photos",
+    "Contractor": "Contractor",
+    "RequestSimilar": "Request a Similar Project",
+    "PrevNextLabel": "Browse projects",
+    "Previous": "Previous project",
+    "Next": "Next project",
+    "Similar": "Similar Projects"
+  }
+}

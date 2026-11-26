@@ -1,0 +1,15 @@
+{
+  // Error pages (Views/Shared/NotFound.cshtml and Error.cshtml)
+  "NotFound": {
+    "Title": "الصفحة غير موجودة",
+    "Text": "ربما تم نقل الصفحة أو أن الرابط غير صحيح."
+  },
+  "General": {
+    "Title": "حدث خطأ",
+    "Heading": "عذرًا، حدث خطأ غير متوقع",
+    "Text": "نعتذر عن الإزعاج، يرجى المحاولة مرة أخرى بعد قليل أو التواصل معنا مباشرة."
+  },
+  "BackHome": "العودة للرئيسية",
+  "BrowseProjects": "تصفح مشاريعنا",
+  "CallUs": "اتصل بنا"
+}

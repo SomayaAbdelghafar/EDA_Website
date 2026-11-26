@@ -1,0 +1,21 @@
+{
+  // Project categories, keyed by their URL slug (/projects?category=…)
+  "ac-projects": {
+    "Title": "Air Conditioning & Refrigeration Projects",
+    "Description": "Complete air conditioning and refrigeration projects, covering design, installation and site supervision to the highest quality standards and approved technical specifications, ensuring operational efficiency and optimal performance in all types of facilities.",
+    "SeoTitle": "Central AC Projects: Design & Installation | EDA Air Conditioning",
+    "MetaDescription": "Air conditioning projects delivered by EDA: palaces and villas in Jeddah, mosques in Makkah and Madinah, Al Murjan Company resorts, and the SNB branch at Red Sea Mall."
+  },
+  "trane-maintenance": {
+    "Title": "Maintenance Under TRANE Warranty",
+    "Description": "Complete air conditioning and refrigeration projects covering design, installation and maintenance, together with site supervision to the highest quality standards and the technical specifications approved by TRANE.",
+    "SeoTitle": "AC Maintenance Projects Under TRANE Warranty | EDA",
+    "MetaDescription": "Central AC maintenance and repair projects under TRANE warranty: IKEA Madinah, Jarir Bookstore Jazan, Muvi Cinemas Jeddah, the Al-Lith desalination plant and more."
+  },
+  "maintenance": {
+    "Title": "Company Maintenance Work",
+    "Description": "Complete air conditioning and refrigeration maintenance work managed and supervised by the company, meeting the highest quality standards and technical specifications to ensure efficient operation and optimal performance.",
+    "SeoTitle": "AC Maintenance for Shops in Jeddah Malls | EDA Air Conditioning",
+    "MetaDescription": "Comprehensive maintenance of AC units for ALDO, OXXO and Spring stores at Al Andalus Mall, Al Yasmin Mall and Haifa Mall in Jeddah, managed and supervised by EDA."
+  }
+}

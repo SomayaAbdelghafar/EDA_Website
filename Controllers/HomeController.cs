@@ -4,6 +4,7 @@ using System.Text.Json;
 using System.Text.Unicode;
 using Microsoft.AspNetCore.Mvc;
 using EDA_Website.Data;
+using EDA_Website.Localization;
 using EDA_Website.Models;
 using EDA_Website.Services;
 
@@ -25,12 +26,19 @@ public class HomeController(ILogger<HomeController> logger, IWebHostEnvironment 
     [Route("services")]
     public IActionResult Services() => View();
 
+    /// <summary>One page per service, so each can rank for its own searches (e.g. صيانة تكييف مركزي جدة).</summary>
+    [Route("services/{slug}")]
+    public IActionResult ServiceDetails(string slug)
+    {
+        var service = CompanyData.FindService(slug);
+        return service is null ? NotFound() : View(service);
+    }
+
+    /// <summary>?service={slug} (from a service's "request this service" button) preselects that service.</summary>
     [HttpGet("contact")]
     public IActionResult Contact(string? service)
     {
-        var model = new ContactViewModel();
-        if (CompanyData.Services.Any(s => s.Title == service))
-            model.Service = service;
+        var model = new ContactViewModel { Service = CompanyData.FindService(service)?.Slug };
         return View(model);
     }
 
@@ -77,7 +85,11 @@ public class HomeController(ILogger<HomeController> logger, IWebHostEnvironment 
         {
             var dir = Path.Combine(env.ContentRootPath, "App_Data");
             Directory.CreateDirectory(dir);
-            var line = JsonSerializer.Serialize(new { ReceivedAt = receivedAt, model.Name, model.Phone, model.Email, model.Service, model.City, model.Message, Spam = isSpam }, JsonOptions);
+            var line = JsonSerializer.Serialize(new
+            {
+                ReceivedAt = receivedAt, model.Name, model.Phone, model.Email, model.Service, model.City, model.Message,
+                Language = SiteLanguages.Current.Code, Spam = isSpam
+            }, JsonOptions);
             await FileLock.WaitAsync();
             try { await System.IO.File.AppendAllTextAsync(Path.Combine(dir, "contact-messages.jsonl"), line + Environment.NewLine); }
             finally { FileLock.Release(); }
