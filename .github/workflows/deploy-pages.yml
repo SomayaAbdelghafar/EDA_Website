@@ -45,10 +45,14 @@ jobs:
         run: |
           nohup dotnet EDA_Website.dll --urls http://127.0.0.1:5080 > ../server.log 2>&1 &
           for i in $(seq 1 30); do
-            curl -sf -o /dev/null http://127.0.0.1:5080/ && exit 0
+            code=$(curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:5080/ || true)
+            echo "attempt $i: HTTP $code"
+            if [ "$code" != "000" ] && [ "$code" -lt 400 ]; then exit 0; fi
             sleep 1
           done
-          cat ../server.log
+          echo "---- is process alive? ----"; pgrep -af EDA_Website.dll || echo "process is dead"
+          echo "---- server.log ----"; cat ../server.log
+          echo "---- response body ----"; curl -s http://127.0.0.1:5080/ | head -50 || true
           exit 1
 
       - name: Export static pages
